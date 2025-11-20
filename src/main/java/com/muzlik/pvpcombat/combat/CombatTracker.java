@@ -82,9 +82,9 @@ public class CombatTracker {
         data.incrementWins();
         data.incrementCombats();
         data.updateLastActivity(System.currentTimeMillis());
-
-        // Performance-aware decision: could adjust win/loss statistics based on lag
-        // For now, just ensure ping data is current
+        
+        // Log for debugging
+        System.out.println("[COMBAT] " + winner.getName() + " won! Total wins: " + data.getWins());
     }
 
     /**
@@ -95,9 +95,9 @@ public class CombatTracker {
         data.incrementLosses();
         data.incrementCombats();
         data.updateLastActivity(System.currentTimeMillis());
-
-        // Performance-aware decision: could adjust win/loss statistics based on lag
-        // For now, just ensure ping data is current
+        
+        // Log for debugging
+        System.out.println("[COMBAT] " + loser.getName() + " lost! Total losses: " + data.getLosses());
     }
 
     /**

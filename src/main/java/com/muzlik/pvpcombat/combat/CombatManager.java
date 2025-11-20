@@ -142,19 +142,15 @@ public class CombatManager implements ICombatManager {
                 attackerData.addCombatTime(combatDuration);
                 defenderData.addCombatTime(combatDuration);
                 
-                // Increment total combats for both players
-                attackerData.incrementCombats();
-                defenderData.incrementCombats();
-                
                 // Update last combat timestamp
                 java.time.LocalDateTime now = java.time.LocalDateTime.now();
                 attackerData.setLastCombat(now);
                 defenderData.setLastCombat(now);
                 
                 // Log the combat data for debugging
-                plugin.getLogger().info(String.format("Combat ended - %s: %.1f damage dealt, %d total combats | %s: %.1f damage dealt, %d total combats",
-                    session.getAttacker().getName(), attackerData.getTotalDamageDealt(), attackerData.getTotalCombats(),
-                    session.getDefender().getName(), defenderData.getTotalDamageDealt(), defenderData.getTotalCombats()));
+                plugin.getLogger().info(String.format("[COMBAT END] %s: %.1f dmg dealt, %d wins, %d losses | %s: %.1f dmg dealt, %d wins, %d losses",
+                    session.getAttacker().getName(), attackerData.getTotalDamageDealt(), attackerData.getWins(), attackerData.getLosses(),
+                    session.getDefender().getName(), defenderData.getTotalDamageDealt(), defenderData.getWins(), defenderData.getLosses()));
 
                 // Remove from cache
                 String cacheKey = session.getAttacker().getUniqueId() + ":" + session.getDefender().getUniqueId();
@@ -329,8 +325,8 @@ public class CombatManager implements ICombatManager {
         };
 
         // Run every second (20 ticks)
-        timerTask.runTaskTimer(plugin, 0L, 20L);
-        sessionTimers.put(sessionId, (BukkitTask) timerTask);
+        BukkitTask task = timerTask.runTaskTimer(plugin, 0L, 20L);
+        sessionTimers.put(sessionId, task);
     }
 
     /**

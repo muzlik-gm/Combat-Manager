@@ -97,9 +97,10 @@ public class CombatEventListener implements Listener {
             combatTracker.recordDamageDealt(attacker, damage);
             combatTracker.recordDamageReceived(defender, damage);
             
-            // Debug logging
-            plugin.getLogger().fine(String.format("Damage tracked: %s dealt %.1f to %s", 
-                attacker.getName(), damage, defender.getName()));
+            // Debug logging - use info level so it shows in console
+            plugin.getLogger().info(String.format("[DAMAGE] %s dealt %.1f to %s (Total: %.1f)", 
+                attacker.getName(), damage, defender.getName(),
+                combatTracker.getPlayerData(attacker.getUniqueId()).getTotalDamageDealt()));
 
             // Log damage event asynchronously
             if (combatManager.isInCombat(attacker)) {
