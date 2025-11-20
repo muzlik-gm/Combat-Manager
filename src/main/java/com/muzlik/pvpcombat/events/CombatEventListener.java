@@ -277,7 +277,7 @@ public class CombatEventListener implements Listener {
                player.getInventory().getChestplate().getType() == Material.ELYTRA;
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onBlockBreak(org.bukkit.event.block.BlockBreakEvent event) {
         Player player = event.getPlayer();
 
@@ -291,6 +291,11 @@ public class CombatEventListener implements Listener {
             return;
         }
 
+        // Check if restrictions are enabled first
+        if (!plugin.getConfig().getBoolean("restrictions.blocks.enabled", false)) {
+            return; // Restrictions disabled, allow all block actions
+        }
+
         // Check if block breaking is allowed
         if (!restrictionManager.canBreakBlocks(player)) {
             event.setCancelled(true);
@@ -298,7 +303,7 @@ public class CombatEventListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onBlockPlace(org.bukkit.event.block.BlockPlaceEvent event) {
         Player player = event.getPlayer();
 
@@ -310,6 +315,11 @@ public class CombatEventListener implements Listener {
         // Only check restrictions if player is in combat
         if (!combatManager.isInCombat(player)) {
             return;
+        }
+
+        // Check if restrictions are enabled first
+        if (!plugin.getConfig().getBoolean("restrictions.blocks.enabled", false)) {
+            return; // Restrictions disabled, allow all block actions
         }
 
         // Check if block placing is allowed

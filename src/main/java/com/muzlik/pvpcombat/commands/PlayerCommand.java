@@ -141,11 +141,44 @@ public class PlayerCommand {
      */
     private boolean handleSummaryCommand(Player player) {
         try {
+            // Get player's combat data
+            com.muzlik.pvpcombat.data.PlayerCombatData combatData = 
+                ((com.muzlik.pvpcombat.combat.CombatManager) plugin.getCombatManager())
+                    .getCombatTracker().getPlayerData(player.getUniqueId());
+
+            if (combatData == null) {
+                player.sendMessage("§cNo combat data found. Engage in combat first!");
+                return true;
+            }
+
+            // Display summary
             player.sendMessage("§6=== Combat Summary ===");
-            player.sendMessage("§eSummary feature coming soon!");
+            player.sendMessage(String.format("§eTotal Combats: §f%d", combatData.getTotalCombats()));
+            player.sendMessage(String.format("§eWins: §a%d §7| §eLosses: §c%d", 
+                combatData.getWins(), combatData.getLosses()));
+            
+            // Calculate win rate
+            double winRate = combatData.getTotalCombats() > 0 ? 
+                (double) combatData.getWins() / combatData.getTotalCombats() * 100.0 : 0.0;
+            player.sendMessage(String.format("§eWin Rate: §f%.1f%%", winRate));
+            
+            player.sendMessage(String.format("§eDamage Dealt: §f%.1f", combatData.getTotalDamageDealt()));
+            player.sendMessage(String.format("§eDamage Received: §f%.1f", combatData.getTotalDamageReceived()));
+            
+            // Calculate K/D ratio
+            double kdRatio = combatData.getLosses() > 0 ? 
+                (double) combatData.getWins() / combatData.getLosses() : combatData.getWins();
+            player.sendMessage(String.format("§eK/D Ratio: §f%.2f", kdRatio));
+            
+            // Show combat time
+            long totalMinutes = combatData.getTotalCombatTime() / 60000;
+            long totalSeconds = (combatData.getTotalCombatTime() % 60000) / 1000;
+            player.sendMessage(String.format("§eTotal Combat Time: §f%dm %ds", totalMinutes, totalSeconds));
+            
             return true;
         } catch (Exception e) {
             plugin.getLogger().severe("Error showing combat summary: " + e.getMessage());
+            e.printStackTrace();
             player.sendMessage("§cFailed to show combat summary.");
             return true;
         }
@@ -163,31 +196,45 @@ public class PlayerCommand {
                 availableThemes = java.util.Arrays.asList("minimal", "fire", "ice", "neon", "dark", "clean");
             }
 
-            // Get current theme from player's visual preferences
-            String currentTheme = plugin.getConfig().getString("visual.themes.default-theme", "clean");
+            // Check if player is in combat
+            if (!plugin.getCombatManager().isInCombat(player)) {
+                player.sendMessage("§cYou must be in combat to change your style!");
+                player.sendMessage("§7Available styles: §f" + String.join(", ", availableThemes));
+                return true;
+            }
+
+            // Get player's current session
+            com.muzlik.pvpcombat.data.CombatSession session = null;
+            for (com.muzlik.pvpcombat.data.CombatSession s : ((com.muzlik.pvpcombat.combat.CombatManager) plugin.getCombatManager()).getActiveSessions().values()) {
+                if (s.involvesPlayer(player)) {
+                    session = s;
+                    break;
+                }
+            }
+            
+            if (session == null) {
+                player.sendMessage("§cCould not find your combat session!");
+                return true;
+            }
+
+            // Get current theme from session
+            String currentTheme = session.getCurrentTheme();
+            if (currentTheme == null || currentTheme.isEmpty()) {
+                currentTheme = plugin.getConfig().getString("visual.themes.default-theme", "clean");
+            }
             
             // Find next theme in the list
             int currentIndex = availableThemes.indexOf(currentTheme);
+            if (currentIndex == -1) {
+                currentIndex = 0; // Default to first theme if current not found
+            }
             int nextIndex = (currentIndex + 1) % availableThemes.size();
             String nextTheme = availableThemes.get(nextIndex);
 
-            // Apply the new theme if player is in combat
-            if (plugin.getCombatManager().isInCombat(player)) {
-                com.muzlik.pvpcombat.data.CombatSession session = null;
-                for (com.muzlik.pvpcombat.data.CombatSession s : ((com.muzlik.pvpcombat.combat.CombatManager) plugin.getCombatManager()).getActiveSessions().values()) {
-                    if (s.involvesPlayer(player)) {
-                        session = s;
-                        break;
-                    }
-                }
-                
-                if (session != null) {
-                    // Apply theme to the session
-                    ((com.muzlik.pvpcombat.combat.CombatManager) plugin.getCombatManager()).getVisualManager()
-                        .getBossBarManager().applyTheme(session.getSessionId().toString(), nextTheme, true);
-                    session.setCurrentTheme(nextTheme);
-                }
-            }
+            // Apply the new theme
+            ((com.muzlik.pvpcombat.combat.CombatManager) plugin.getCombatManager()).getVisualManager()
+                .getBossBarManager().applyTheme(session.getSessionId().toString(), nextTheme, true);
+            session.setCurrentTheme(nextTheme);
 
             // Send confirmation message
             player.sendMessage("§aStyle changed to: §e" + nextTheme);
