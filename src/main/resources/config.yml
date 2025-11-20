@@ -110,11 +110,11 @@ restrictions:
 
    # Block interaction restrictions
    blocks:
-     enabled: true
+     enabled: false
      # Prevent block breaking during combat
-     block-breaking: true
+     block-breaking: false
      # Prevent block placing during combat
-     block-placing: true
+     block-placing: false
 
 # Visual Settings
 visual:

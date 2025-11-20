@@ -252,7 +252,10 @@ public class CombatLogger {
 
         // Get from memory
         if (storageType == StorageType.MEMORY || storageType == StorageType.BOTH) {
-            sessionLogs.addAll(memoryLogs.getOrDefault(sessionId, Collections.emptyList()));
+            List<CombatLogEntry> entries = memoryLogs.get(sessionId);
+            if (entries != null) {
+                sessionLogs.addAll(entries);
+            }
         }
 
         // Get from files if needed
@@ -260,7 +263,10 @@ public class CombatLogger {
             sessionLogs.addAll(loadSessionLogsFromFile(sessionId));
         }
 
-        sessionLogs.sort(Comparator.comparing(CombatLogEntry::getTimestamp));
+        if (!sessionLogs.isEmpty()) {
+            sessionLogs.sort(Comparator.comparing(CombatLogEntry::getTimestamp));
+        }
+        
         return sessionLogs;
     }
 

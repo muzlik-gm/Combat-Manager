@@ -156,10 +156,47 @@ public class PlayerCommand {
      */
     private boolean handleToggleStyleCommand(Player player) {
         try {
-            player.sendMessage("§eStyle toggle feature coming soon!");
+            // Get available themes from config
+            java.util.List<String> availableThemes = plugin.getConfig().getStringList("visual.themes.available");
+            
+            if (availableThemes.isEmpty()) {
+                availableThemes = java.util.Arrays.asList("minimal", "fire", "ice", "neon", "dark", "clean");
+            }
+
+            // Get current theme from player's visual preferences
+            String currentTheme = plugin.getConfig().getString("visual.themes.default-theme", "clean");
+            
+            // Find next theme in the list
+            int currentIndex = availableThemes.indexOf(currentTheme);
+            int nextIndex = (currentIndex + 1) % availableThemes.size();
+            String nextTheme = availableThemes.get(nextIndex);
+
+            // Apply the new theme if player is in combat
+            if (plugin.getCombatManager().isInCombat(player)) {
+                com.muzlik.pvpcombat.data.CombatSession session = null;
+                for (com.muzlik.pvpcombat.data.CombatSession s : ((com.muzlik.pvpcombat.combat.CombatManager) plugin.getCombatManager()).getActiveSessions().values()) {
+                    if (s.involvesPlayer(player)) {
+                        session = s;
+                        break;
+                    }
+                }
+                
+                if (session != null) {
+                    // Apply theme to the session
+                    ((com.muzlik.pvpcombat.combat.CombatManager) plugin.getCombatManager()).getVisualManager()
+                        .getBossBarManager().applyTheme(session.getSessionId().toString(), nextTheme, true);
+                    session.setCurrentTheme(nextTheme);
+                }
+            }
+
+            // Send confirmation message
+            player.sendMessage("§aStyle changed to: §e" + nextTheme);
+            player.sendMessage("§7Available styles: §f" + String.join(", ", availableThemes));
+            
             return true;
         } catch (Exception e) {
             plugin.getLogger().severe("Error toggling style: " + e.getMessage());
+            e.printStackTrace();
             player.sendMessage("§cFailed to toggle style.");
             return true;
         }

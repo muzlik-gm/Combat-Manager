@@ -39,6 +39,8 @@ public class CombatManager implements ICombatManager {
     private final CacheManager cacheManager;
     private int defaultTimerSeconds;
 
+    private final CombatTracker combatTracker;
+
     public CombatManager(PvPCombatPlugin plugin, CombatLogger combatLogger, NetworkSyncManager networkSyncManager,
                         PerformanceMonitor performanceMonitor, CacheManager cacheManager, IConfigManager configManager) {
         this.plugin = plugin;
@@ -46,7 +48,9 @@ public class CombatManager implements ICombatManager {
         this.sessionTimers = new ConcurrentHashMap<>();
         this.visualManager = new VisualManager(plugin, configManager);
         this.combatLogger = combatLogger;
+        this.combatTracker = new CombatTracker();
         this.lagManager = new LagManager(plugin, performanceMonitor.getTpsMonitor(), performanceMonitor);
+        this.combatTracker.setLagManager(this.lagManager);
         this.networkSyncManager = networkSyncManager;
         this.performanceMonitor = performanceMonitor;
         this.cacheManager = cacheManager;
@@ -280,12 +284,19 @@ public class CombatManager implements ICombatManager {
                         }
                     }
 
-                    // Update visual elements
+                    // Update visual elements with current time
+                    int remainingTime = session.getRemainingTime();
                     double progress = session.getTimerData().getProgress();
+                    
+                    // Update bossbar progress and title
                     visualManager.updateBossBarProgress(sessionId.toString(), progress);
+                    String title = plugin.getConfig().getString("combat.bossbar.title", "&cCombat: &f{time_left}s")
+                        .replace("{time_left}", String.valueOf(remainingTime))
+                        .replace("&", "§");
+                    visualManager.updateBossBarTitle(sessionId.toString(), title);
 
                     // Play warning sound at 5 seconds
-                    if (session.getRemainingTime() == 5) {
+                    if (remainingTime == 5) {
                         visualManager.getSoundManager().playTimerWarningSound(session.getAttacker());
                         visualManager.getSoundManager().playTimerWarningSound(session.getDefender());
                     }
@@ -358,5 +369,12 @@ public class CombatManager implements ICombatManager {
      */
     public NetworkSyncManager getNetworkSyncManager() {
         return networkSyncManager;
+    }
+
+    /**
+     * Gets the combat tracker for statistics.
+     */
+    public CombatTracker getCombatTracker() {
+        return combatTracker;
     }
 }

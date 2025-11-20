@@ -54,6 +54,13 @@ public class VisualManager implements IVisualManager {
     }
 
     /**
+     * Updates the bossbar title.
+     */
+    public void updateBossBarTitle(String sessionId, String title) {
+        bossBarManager.updateTitle(sessionId, title);
+    }
+
+    /**
      * Gets the bossbar manager for direct access.
      */
     public BossBarManager getBossBarManager() {

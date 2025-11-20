@@ -76,8 +76,13 @@ public class RestrictionManager implements IRestrictionManager {
         if (!combatManager.isInCombat(player)) {
             return true;
         }
-        // Block breaking restrictions (config.getBoolean("restrictions.block-break")).
-        return !PvPCombatPlugin.getInstance().getConfig().getBoolean("restrictions.block-break", true);
+        // Check if block restrictions are enabled
+        boolean restrictionsEnabled = PvPCombatPlugin.getInstance().getConfig().getBoolean("restrictions.blocks.enabled", false);
+        if (!restrictionsEnabled) {
+            return true;
+        }
+        // Block breaking restrictions
+        return !PvPCombatPlugin.getInstance().getConfig().getBoolean("restrictions.blocks.block-breaking", false);
     }
 
     @Override
@@ -85,8 +90,13 @@ public class RestrictionManager implements IRestrictionManager {
         if (!combatManager.isInCombat(player)) {
             return true;
         }
-        // Block placing restrictions.
-        return !PvPCombatPlugin.getInstance().getConfig().getBoolean("restrictions.block-place", true);
+        // Check if block restrictions are enabled
+        boolean restrictionsEnabled = PvPCombatPlugin.getInstance().getConfig().getBoolean("restrictions.blocks.enabled", false);
+        if (!restrictionsEnabled) {
+            return true;
+        }
+        // Block placing restrictions
+        return !PvPCombatPlugin.getInstance().getConfig().getBoolean("restrictions.blocks.block-placing", false);
     }
     public boolean canTeleport(Player player) {
         if (!combatManager.isInCombat(player)) {
