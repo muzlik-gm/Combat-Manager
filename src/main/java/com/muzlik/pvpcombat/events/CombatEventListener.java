@@ -277,8 +277,13 @@ public class CombatEventListener implements Listener {
                player.getInventory().getChestplate().getType() == Material.ELYTRA;
     }
 
-    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onBlockBreak(org.bukkit.event.block.BlockBreakEvent event) {
+        // Only process if restrictions are explicitly enabled
+        if (!plugin.getConfig().getBoolean("restrictions.blocks.enabled", false)) {
+            return;
+        }
+
         Player player = event.getPlayer();
 
         // Check if combat manager is initialized
@@ -289,11 +294,6 @@ public class CombatEventListener implements Listener {
         // Only check restrictions if player is in combat
         if (!combatManager.isInCombat(player)) {
             return;
-        }
-
-        // Check if restrictions are enabled first
-        if (!plugin.getConfig().getBoolean("restrictions.blocks.enabled", false)) {
-            return; // Restrictions disabled, allow all block actions
         }
 
         // Check if block breaking is allowed
@@ -303,8 +303,13 @@ public class CombatEventListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onBlockPlace(org.bukkit.event.block.BlockPlaceEvent event) {
+        // Only process if restrictions are explicitly enabled
+        if (!plugin.getConfig().getBoolean("restrictions.blocks.enabled", false)) {
+            return;
+        }
+
         Player player = event.getPlayer();
 
         // Check if combat manager is initialized
@@ -315,11 +320,6 @@ public class CombatEventListener implements Listener {
         // Only check restrictions if player is in combat
         if (!combatManager.isInCombat(player)) {
             return;
-        }
-
-        // Check if restrictions are enabled first
-        if (!plugin.getConfig().getBoolean("restrictions.blocks.enabled", false)) {
-            return; // Restrictions disabled, allow all block actions
         }
 
         // Check if block placing is allowed
