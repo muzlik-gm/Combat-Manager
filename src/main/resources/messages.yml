@@ -1,0 +1,130 @@
+# PvP Combat System Messages
+# This file contains all localized messages for the PvP Combat plugin
+
+# Combat Status Messages
+combat:
+  status:
+    in-combat: "&cYou are in combat with &f{opponent}&c! Time left: &f{time_left}s"
+    not-in-combat: "&aYou are not in combat."
+    cooldown: "&eCombat cooldown: &f{time_left}s"
+    interference: "&cCombat blocked due to third-party interference!"
+
+  start:
+    player: "&cCombat started with &f{opponent}&c!"
+    broadcast: "&7{attacker} &cis now in combat with &7{defender}&c!"
+
+  end:
+    normal: "&aCombat ended. You are safe now."
+    death: "&cCombat ended due to death."
+    disconnect: "&cCombat ended due to player disconnect."
+    timeout: "&aCombat timer expired. You are safe now."
+
+  summary:
+    header: "&6=== Combat Summary ==="
+    duration: "&eDuration: &f{duration}s"
+    hits: "&eHits: &f{attacker_hits} (you) vs {defender_hits} (opponent)"
+    damage: "&eDamage: &f{attacker_damage} (you) vs {defender_damage} (opponent)"
+    winner: "&aWinner: &f{winner}"
+    draw: "&eCombat ended in a draw"
+
+# Command Messages
+commands:
+  combat:
+    usage: "&cUsage: /combat <status|reload>"
+    reloaded: "&aConfiguration reloaded successfully!"
+    no-permission: "&cYou don't have permission to use this command."
+
+  combatadmin:
+    usage: "&cUsage: /combatadmin <reload|stats|clear>"
+    reloaded: "&aPlugin reloaded successfully!"
+    stats-cleared: "&aAll combat statistics cleared!"
+    sessions-cleared: "&aAll active combat sessions cleared!"
+    no-permission: "&cYou don't have permission to use this command."
+
+  errors:
+    player-not-found: "&cPlayer not found."
+    invalid-args: "&cInvalid command arguments."
+    player-only: "&cThis command can only be used by players."
+
+# Restriction Messages
+restrictions:
+  enderpearl:
+    blocked: "&cYou cannot use ender pearls during combat!"
+    cooldown: "&cEnder pearl on cooldown: &f{time_left}s"
+    disabled: "&cEnder pearls are disabled during combat."
+
+  elytra:
+    blocked: "&cYou cannot glide during combat!"
+    disabled: "&cElytra gliding is disabled during combat."
+
+  teleport:
+    blocked: "&cYou cannot teleport during combat!"
+    command-blocked: "&cCommand &f{command} &cis blocked during combat."
+
+# Visual Messages
+visual:
+  bossbar:
+    default: "&cCombat: &f{time_left}s"
+    warning: "&4Combat: &c{time_left}s"
+
+  actionbar:
+    default: "&cCombat with &f{opponent} &c- &f{time_left}s"
+    warning: "&4Combat with &c{opponent} &4- &c{time_left}s"
+
+# Error Messages
+errors:
+  general: "&cAn error occurred. Please try again."
+  config-load: "&cFailed to load configuration. Using defaults."
+  database: "&cDatabase error. Some features may not work correctly."
+  permission: "&cYou don't have permission to do that."
+  disabled: "&cThis feature is currently disabled."
+
+# Admin Messages
+admin:
+  combat-started: "&7Combat started between &f{attacker} &7and &f{defender}&7."
+  combat-ended: "&7Combat ended between &f{attacker} &7and &f{defender}&7."
+  interference-detected: "&cInterference detected in combat between &f{attacker} &7and &f{defender}&7!"
+  session-limit: "&cCombat session limit reached. Cannot start new combat."
+  cleanup: "&aCleaned up &f{count} &ainactive combat sessions."
+
+# PlaceholderAPI Messages (for placeholders)
+placeholders:
+  combat_status: "In Combat"
+  combat_status_false: "Safe"
+  combat_time_left: "{time_left}s"
+  combat_opponent: "{opponent}"
+  combat_opponent_none: "None"
+  combat_duration: "{duration}s"
+  combat_hits: "{hits}"
+  combat_damage: "{damage}"
+
+# Debug Messages (only shown in debug mode)
+debug:
+  combat-start: "[DEBUG] Combat started: {session_id}"
+  combat-end: "[DEBUG] Combat ended: {session_id}"
+  damage-logged: "[DEBUG] Damage logged: {damage} by {player}"
+  timer-reset: "[DEBUG] Timer reset for session: {session_id}"
+  interference-check: "[DEBUG] Interference check: {percentage}%"
+
+# Welcome Messages
+welcome:
+  enabled: "&aPvP Combat System enabled!"
+  disabled: "&cPvP Combat System disabled!"
+  version: "&7Running PvP Combat v{version}"
+
+# Statistics Messages
+statistics:
+  player:
+    header: "&6=== Your Combat Statistics ==="
+    combats: "&eTotal Combats: &f{total}"
+    wins: "&aWins: &f{wins}"
+    losses: "&cLosses: &f{losses}"
+    winrate: "&eWin Rate: &f{winrate}%"
+    total-time: "&eTotal Combat Time: &f{time}"
+    avg-duration: "&eAverage Duration: &f{duration}s"
+
+  global:
+    header: "&6=== Server Combat Statistics ==="
+    active-sessions: "&eActive Sessions: &f{active}"
+    total-combats: "&eTotal Combats: &f{total}"
+    most-active: "&eMost Active Player: &f{player} &e({combats} combats)"

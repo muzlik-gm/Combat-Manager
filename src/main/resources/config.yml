@@ -1,0 +1,507 @@
+# PvP Combat System Configuration
+# This file contains all configuration options for the PvP Combat plugin
+
+# General Settings
+general:
+  enabled: true
+  debug-mode: false
+  language: "en"
+
+# Commands Configuration
+commands:
+  # Enable/disable specific commands
+  enabled:
+    status: true
+    summary: true
+    toggle-style: true
+    inspect: true
+    reload: true
+    debug: true
+
+  # Permission requirements
+  permissions:
+    status: "pvpcombat.command.status"
+    summary: "pvpcombat.command.summary"
+    toggle-style: "pvpcombat.command.toggle-style"
+    inspect: "pvpcombat.admin.inspect"
+    reload: "pvpcombat.admin"
+    debug: "pvpcombat.admin.debug"
+
+  # Admin features
+  admin:
+    # GUI update interval (seconds)
+    gui-update-interval: 5
+    # Debug verbosity levels (LOW, MEDIUM, HIGH)
+    debug-verbosity: "MEDIUM"
+    # Enable real-time monitoring
+    real-time-monitoring: true
+    # Maximum admin inspection range (blocks, 0 = unlimited)
+    inspection-range: 50
+
+# Combat Settings
+combat:
+  # Combat duration in seconds (resets on damage)
+  duration: 30
+  # Cooldown period after combat ends (seconds)
+  cooldown: 10
+  # Maximum combat sessions (0 = unlimited)
+  max-sessions: 100
+
+  # Damage settings
+  damage:
+    # Reset timer on any damage taken/received
+    reset-on-damage: true
+    # Minimum damage to trigger combat
+    min-damage-trigger: 0.5
+
+  # Bossbar settings
+  bossbar:
+    enabled: true
+    update-interval: 1  # seconds
+    title: "&cCombat: &f{time_left}s"
+    color: "RED"
+    style: "SOLID"
+
+# Movement Restrictions
+restrictions:
+   # Ender pearl restrictions
+   enderpearl:
+     enabled: true
+     # Cooldown after throwing pearl (seconds)
+     cooldown: 10
+     # Cooldown multiplier during combat (multiplier)
+     combat-cooldown-multiplier: 2.0
+     # Prevent pearl usage entirely during combat
+     block-usage: false
+
+   # Elytra restrictions
+   elytra:
+     enabled: true
+     # Prevent glide activation during combat
+     block-glide: true
+     # Prevent rocket boosting during combat
+     block-boosting: true
+     # Prevent takeoff during combat
+     block-takeoff: true
+     # Allow falling below certain height
+     min-safe-height: 10
+     # Boost cooldown during combat (seconds)
+     boost-cooldown: 30
+     # Altitude-based restrictions per world
+     worlds:
+       # Example: world_nether: {min-safe-height: 20, block-glide: false}
+     # Time-based restrictions
+     time-restrictions:
+       # Block during night time (18000-6000 ticks)
+       block-at-night: false
+       # Block during day time (6000-18000 ticks)
+       block-at-day: false
+
+   # Teleport restrictions
+   teleport:
+     enabled: true
+     # Commands that trigger teleport check
+     blocked-commands:
+       - "/tp"
+       - "/teleport"
+       - "/warp"
+       - "/home"
+       - "/spawn"
+
+   # Block interaction restrictions
+   blocks:
+     enabled: true
+     # Prevent block breaking during combat
+     block-breaking: true
+     # Prevent block placing during combat
+     block-placing: true
+
+# Visual Settings
+visual:
+   # Theme settings
+   themes:
+     # Default theme selection
+     default-theme: "clean"
+     # Allow custom themes from config
+     allow-custom: true
+     # Available themes
+     available:
+       - "minimal"
+       - "fire"
+       - "ice"
+       - "neon"
+       - "dark"
+       - "clean"
+
+   # Animation settings
+   animations:
+     enabled: true
+     theme-transition-duration: 20  # ticks
+     theme-transition-steps: 5
+
+   # Bossbar settings
+   bossbar:
+     enabled: true
+     update-interval: 1  # seconds
+     # Default formats with HEX color support and placeholders
+     formats:
+       default: "&cCombat Timer: &f{time_left}s"
+       minimal: "&7{time_left}"
+       fire: "&c🔥 &f{time_left}s &c🔥"
+       ice: "&b❄ &f{time_left}s &b❄"
+       neon: "&d✨ &f{time_left}s &d✨"
+       dark: "&8{time_left}s"
+       clean: "&aCombat: &f{time_left}s"
+     # Custom bossbar configurations
+     custom:
+       # Example: custom_theme: {color: "RED", style: "SOLID"}
+
+   # Action bar messages
+   actionbar:
+     enabled: true
+     # Show opponent name
+     show-opponent: true
+     # Update interval (ticks)
+     update-interval: 20
+     # Default formats with HEX color support and placeholders
+     formats:
+       default: "&cCombat with &f{opponent} &c- &f{time_left}s"
+       minimal: "&7Combat - {time_left}s"
+       detailed: "&c[COMBAT] &fFighting &e{opponent} &f- &a{time_left}s &fremaining"
+       funny: "&d⚔ &eLOL! &fFighting &b{opponent} &f- &c{time_left}s ⚔"
+       medieval: "&6[&4BATTLE&6] &fvs &c{opponent} &f- &e{time_left}s"
+       competitive: "&c[&4RANKED&c] &fvs &4{opponent} &f- &c{time_left}s"
+
+   # Sound profiles
+   sounds:
+     enabled: true
+     # Default sound profile
+     profile: "default"
+     # Sound profiles with theme-based audio cues
+     profiles:
+       default:
+         events:
+           combat_start:
+             sound: "BLOCK_ANVIL_LAND"
+             volume: 1.0
+             pitch: 1.0
+           combat_end:
+             sound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+             volume: 1.0
+             pitch: 1.0
+           timer_warning:
+             sound: "BLOCK_NOTE_BLOCK_PLING"
+             volume: 1.0
+             pitch: 2.0
+           timer_reset:
+             sound: "BLOCK_LEVER_CLICK"
+             volume: 0.5
+             pitch: 1.5
+           interference:
+             sound: "ENTITY_VILLAGER_NO"
+             volume: 1.0
+             pitch: 1.0
+       subtle:
+         events:
+           combat_start:
+             sound: "BLOCK_STONE_BUTTON_CLICK_ON"
+             volume: 0.7
+             pitch: 1.2
+           combat_end:
+             sound: "ENTITY_ITEM_PICKUP"
+             volume: 0.5
+             pitch: 1.0
+           timer_warning:
+             sound: "BLOCK_BAMBOO_BREAK"
+             volume: 0.6
+             pitch: 1.8
+           timer_reset:
+             sound: "BLOCK_STONE_BUTTON_CLICK_OFF"
+             volume: 0.4
+             pitch: 1.0
+           interference:
+             sound: "BLOCK_ANVIL_BREAK"
+             volume: 0.3
+             pitch: 0.8
+       intense:
+         events:
+           combat_start:
+             sound: "ENTITY_WITHER_SPAWN"
+             volume: 1.5
+             pitch: 0.8
+           combat_end:
+             sound: "ENTITY_GENERIC_EXPLODE"
+             volume: 1.2
+             pitch: 1.0
+           timer_warning:
+             sound: "ENTITY_ENDER_DRAGON_GROWL"
+             volume: 1.0
+             pitch: 0.5
+           timer_reset:
+             sound: "ENTITY_IRON_GOLEM_HURT"
+             volume: 1.0
+             pitch: 0.7
+           interference:
+             sound: "ENTITY_BLAZE_DEATH"
+             volume: 1.0
+             pitch: 1.0
+       calm:
+         events:
+           combat_start:
+             sound: "BLOCK_ENCHANTMENT_TABLE_USE"
+             volume: 0.8
+             pitch: 1.5
+           combat_end:
+             sound: "ENTITY_ITEM_PICKUP"
+             volume: 0.6
+             pitch: 2.0
+           timer_warning:
+             sound: "BLOCK_BELL_USE"
+             volume: 0.7
+             pitch: 1.2
+           timer_reset:
+             sound: "BLOCK_CONDUIT_ACTIVATE"
+             volume: 0.5
+             pitch: 1.8
+           interference:
+             sound: "ENTITY_VILLAGER_TRADE"
+             volume: 0.4
+             pitch: 0.6
+       electronic:
+         events:
+           combat_start:
+             sound: "BLOCK_BEACON_ACTIVATE"
+             volume: 1.0
+             pitch: 1.5
+           combat_end:
+             sound: "BLOCK_BEACON_DEACTIVATE"
+             volume: 0.8
+             pitch: 0.8
+           timer_warning:
+             sound: "BLOCK_REDSTONE_TORCH_BURNOUT"
+             volume: 1.0
+             pitch: 2.0
+           timer_reset:
+             sound: "BLOCK_COMPARATOR_CLICK"
+             volume: 0.6
+             pitch: 1.0
+           interference:
+             sound: "BLOCK_ANVIL_BREAK"
+             volume: 0.8
+             pitch: 1.2
+       clean:
+         events:
+           combat_start:
+             sound: "UI_BUTTON_CLICK"
+             volume: 0.8
+             pitch: 1.0
+           combat_end:
+             sound: "UI_TOAST_IN"
+             volume: 0.7
+             pitch: 1.2
+           timer_warning:
+             sound: "UI_TOAST_CHALLENGE_COMPLETE"
+             volume: 0.9
+             pitch: 1.5
+           timer_reset:
+             sound: "UI_BUTTON_CLICK"
+             volume: 0.5
+             pitch: 0.8
+           interference:
+             sound: "UI_TOAST_OUT"
+             volume: 0.6
+             pitch: 0.5
+
+   # Message styles
+   messages:
+     # Default message style
+     default-style: "minimal"
+     # Custom message format strings
+     formats:
+       minimal: "&7{time_left}s remaining"
+       detailed: "&cCombat with &f{opponent}&c - &f{time_left}s &cleft &f(Health: &a{health}&f/&a{max_health}&f)"
+       funny: "&d⚔ &eGet rekt &b{opponent}&e! &c{time_left}s &eleft! ⚔"
+       medieval: "&6[&4BATTLE&6] &fThou fighteth &c{opponent} &f- &e{time_left} &fseconds remaineth"
+       competitive: "&c[&4RANKED&c] &fElite duel vs &4{opponent} &f- &c{time_left}s"
+
+# Performance Settings
+performance:
+  # Lag-aware combat adjustments
+  lag:
+    # Enable lag-aware timer adjustments
+    enabled: true
+    # TPS threshold for lag detection (below this = lag)
+    tps-threshold: 18.0
+    # Ping threshold for player lag detection (ms)
+    ping-threshold: 200
+    # Base number of seconds to extend timers during lag
+    base-extension-seconds: 5
+    # Extension multiplier based on lag severity
+    extension-multiplier: 1.5
+    # How often to update ping data (milliseconds)
+    ping-update-interval-ms: 1000
+    # How long to keep ping data for inactive players (milliseconds)
+    ping-cleanup-threshold-ms: 300000
+    # TPS history length for averaging (samples)
+    tps-history-length: 60
+    # Cleanup interval for lag adjustments (ticks)
+    cleanup-interval-ticks: 1200
+
+  # Async task settings
+  async:
+    enabled: true
+    # Thread pool size
+    thread-pool-size: 4
+
+  # Caching settings
+  cache:
+    # Player data TTL (minutes)
+    player-data-ttl: 30
+    # Session cleanup interval (seconds)
+    cleanup-interval: 60
+
+  # Maximum event buffer size
+  max-event-buffer: 1000
+
+# Integration Settings
+integration:
+  placeholderapi:
+    enabled: true
+
+  # Cross-server combat sync settings (for BungeeCord/Velocity)
+  cross-server-sync:
+    enabled: false
+    # Platform selection (BUNGEE, VELOCITY, AUTO)
+    platform: "AUTO"
+    # Sync channel name
+    channel: "pvpcombat:sync"
+    # Broadcast notifications
+    broadcast:
+      enabled: false
+      format: "&6[Network] &e{attacker} &fis now in combat with &e{defender} &fon &b{server}"
+    # Server switching prevention
+    prevent-server-switch:
+      enabled: true
+      message: "&cCannot switch servers while in combat! Time remaining: {time}s"
+    # Sync intervals (seconds)
+    sync-interval: 30
+    # Network timeout (seconds)
+    timeout: 5
+    # Connection pooling
+    connection-pool:
+      enabled: true
+      max-connections: 10
+      idle-timeout: 300
+
+  # Legacy network settings (deprecated, use cross-server-sync instead)
+  network:
+    enabled: false
+    # Server identifier
+    server-id: "server1"
+
+# Logging Settings
+logging:
+  enabled: true
+  # Log level (INFO, DEBUG, WARNING)
+  level: "INFO"
+  # Maximum log files to keep
+  max-files: 5
+  # File size limit (MB)
+  max-size-mb: 10
+
+  # Combat logging configuration
+  combat:
+    # Enable detailed combat logging
+    detailed:
+      enabled: true
+    # Storage type (FILE, MEMORY, BOTH)
+    storage:
+      type: "BOTH"
+    # Summary delivery method (CHAT, GUI, STORAGE, NONE)
+    summary:
+      delivery: "CHAT"
+    # Log retention period (days)
+    retention:
+      days: 30
+    # Maximum entries in memory (for MEMORY/BOTH storage)
+    memory:
+      max-entries: 10000
+    # Statistics to include in summaries
+    include-stats:
+      - "hits_landed"
+      - "damage_dealt"
+      - "accuracy"
+      - "knockback_exchanges"
+      - "combat_duration"
+
+# Anti-cheat Settings
+anticheat:
+  # Interference detection
+  interference:
+    enabled: true
+    # Maximum allowed third-party damage during combat (%)
+    max-interference-percentage: 10.0
+    # Time window for interference check (seconds)
+    interference-window: 5
+    # Block interfering hits (false = notify only)
+    block-hits: false
+    # Action bar message format
+    message: "&c{interferer} cannot interfere: &f{target} &cis already in combat with &f{opponent}!"
+    # Sound effects for interference
+    sound:
+      enabled: true
+      sound: "ENTITY_VILLAGER_NO"
+      volume: 1.0
+      pitch: 1.0
+    # Per-world settings (override global if specified)
+    worlds:
+      # Example: world_nether: {enabled: false}
+
+# Statistics Settings
+statistics:
+  enabled: true
+  # Track detailed hit data
+  track-hits: true
+  # Save interval (minutes)
+  save-interval: 5
+  # Maximum replay events per session
+  max-replay-events: 500
+
+# Replay System Settings
+replay:
+  # Enable combat replay system
+  enabled: true
+  # Storage format (MEMORY, COMPRESSED_FILE, HYBRID)
+  storage:
+    format: "HYBRID"
+  # Timeline settings
+  timeline:
+    # Timeline buffer capacity (events per session)
+    capacity: 1000
+    # Maximum age for timeline events (seconds)
+    max_age_seconds: 600
+  # Cache settings
+  cache:
+    # Maximum age for cached replays (minutes)
+    max_age_minutes: 30
+  # Access control
+  access:
+    # Admin-only access to replay commands
+    admin_only: true
+    # Allowed admin players (UUIDs or names)
+    allowed_admins:
+      - "admin-player-uuid"
+      - "admin-player-name"
+  # GUI settings
+  gui:
+    # Enable GUI replay interface
+    enabled: true
+    # Maximum events to display per page
+    page_size: 50
+    # Auto-play settings
+    autoplay:
+      enabled: false
+      # Speed multiplier (1.0 = real-time)
+      speed: 1.0
+      # Interval between events (ticks)
+      interval: 4

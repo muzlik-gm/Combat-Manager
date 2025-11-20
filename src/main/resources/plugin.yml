@@ -1,0 +1,86 @@
+name: PvPCombat
+version: 1.0.0
+main: com.muzlik.pvpcombat.core.PvPCombatPlugin
+api-version: 1.21
+description: A comprehensive PvP combat management plugin for Minecraft servers
+author: muzlik
+website: https://muzlik.vercel.app
+
+commands:
+  combat:
+    description: Main combat command with player and admin features
+    usage: /combat <status|summary|toggle-style|inspect|reload|debug>
+    permission: pvpcombat.command.combat
+    aliases: [pvpcombat, pvp]
+
+  combatadmin:
+    description: Administrative combat commands
+    usage: /combatadmin <reload|stats|clear>
+    permission: pvpcombat.admin
+    aliases: [combatadm, pvpadmin]
+
+  replay:
+    description: Admin replay command for viewing combat replays
+    usage: /replay view <session-uuid> [stats|clear]
+    permission: pvpcombat.admin
+    aliases: []
+
+permissions:
+  pvpcombat.command.combat:
+    description: Allows access to basic combat commands
+    default: true
+
+  pvpcombat.admin:
+    description: Allows access to administrative commands
+    default: op
+
+  pvpcombat.bypass.combatlog:
+    description: Allows bypassing combat logging restrictions
+    default: op
+
+  pvpcombat.bypass.restrictions:
+    description: Allows bypassing movement restrictions during combat
+    default: op
+
+  pvpcombat.network.sync:
+    description: Allows cross-server combat synchronization
+    default: op
+
+  pvpcombat.network.broadcast:
+    description: Allows receiving cross-server combat broadcast notifications
+    default: true
+
+  pvpcombat.command.status:
+    description: Allows access to /combat status command
+    default: true
+
+  pvpcombat.command.summary:
+    description: Allows access to /combat summary command
+    default: true
+
+  pvpcombat.command.toggle-style:
+    description: Allows access to /combat toggle-style command
+    default: true
+
+  pvpcombat.admin.inspect:
+    description: Allows access to /combat inspect command
+    default: op
+
+  pvpcombat.admin.debug:
+    description: Allows access to /combat debug command
+    default: op
+
+  pvpcombat.bypass.server-switch:
+    description: Allows bypassing server switching prevention during combat
+    default: op
+
+softdepend:
+  - PlaceholderAPI
+  - WorldGuard
+  - Citizens
+  - CombatLogX
+  - MythicMobs
+
+# Network dependencies (for cross-server sync)
+# Note: These are optional and only needed for network functionality
+# bungeecord or velocity should be in the classpath when using cross-server sync
