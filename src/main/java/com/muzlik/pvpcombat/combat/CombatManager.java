@@ -132,6 +132,17 @@ public class CombatManager implements ICombatManager {
             if (session != null) {
                 UUID sessionId = session.getSessionId();
 
+                // Calculate combat duration
+                long combatDuration = System.currentTimeMillis() - session.getStartTime();
+                
+                // Update combat tracker with combat time for both players
+                combatTracker.getPlayerData(session.getAttacker().getUniqueId()).addCombatTime(combatDuration);
+                combatTracker.getPlayerData(session.getDefender().getUniqueId()).addCombatTime(combatDuration);
+                
+                // Increment total combats for both players
+                combatTracker.getPlayerData(session.getAttacker().getUniqueId()).incrementCombats();
+                combatTracker.getPlayerData(session.getDefender().getUniqueId()).incrementCombats();
+
                 // Remove from cache
                 String cacheKey = session.getAttacker().getUniqueId() + ":" + session.getDefender().getUniqueId();
                 cacheManager.remove("combat-states", cacheKey);
@@ -184,7 +195,7 @@ public class CombatManager implements ICombatManager {
                     combatLogger.generateSummary(session.getSessionId(), session.getDefender());
                 }, "combat-processing");
 
-                plugin.getLogger().info("Combat ended for player " + playerId);
+                plugin.getLogger().info("Combat ended for player " + playerId + " (Duration: " + (combatDuration / 1000) + "s)");
                 return true;
             }
             return false;

@@ -92,11 +92,9 @@ public class CombatEventListener implements Listener {
                 return;
             }
 
-            // Record damage asynchronously
-            AsyncUtils.runAsync(plugin, () -> {
-                combatTracker.recordDamageDealt(attacker, event.getFinalDamage());
-                combatTracker.recordDamageReceived(defender, event.getFinalDamage());
-            }, "combat-processing");
+            // Record damage synchronously to ensure it's tracked
+            combatTracker.recordDamageDealt(attacker, event.getFinalDamage());
+            combatTracker.recordDamageReceived(defender, event.getFinalDamage());
 
             // Log damage event asynchronously
             if (combatManager.isInCombat(attacker)) {
