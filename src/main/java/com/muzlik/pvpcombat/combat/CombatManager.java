@@ -136,12 +136,25 @@ public class CombatManager implements ICombatManager {
                 long combatDuration = System.currentTimeMillis() - session.getStartTime();
                 
                 // Update combat tracker with combat time for both players
-                combatTracker.getPlayerData(session.getAttacker().getUniqueId()).addCombatTime(combatDuration);
-                combatTracker.getPlayerData(session.getDefender().getUniqueId()).addCombatTime(combatDuration);
+                com.muzlik.pvpcombat.data.PlayerCombatData attackerData = combatTracker.getPlayerData(session.getAttacker().getUniqueId());
+                com.muzlik.pvpcombat.data.PlayerCombatData defenderData = combatTracker.getPlayerData(session.getDefender().getUniqueId());
+                
+                attackerData.addCombatTime(combatDuration);
+                defenderData.addCombatTime(combatDuration);
                 
                 // Increment total combats for both players
-                combatTracker.getPlayerData(session.getAttacker().getUniqueId()).incrementCombats();
-                combatTracker.getPlayerData(session.getDefender().getUniqueId()).incrementCombats();
+                attackerData.incrementCombats();
+                defenderData.incrementCombats();
+                
+                // Update last combat timestamp
+                java.time.LocalDateTime now = java.time.LocalDateTime.now();
+                attackerData.setLastCombat(now);
+                defenderData.setLastCombat(now);
+                
+                // Log the combat data for debugging
+                plugin.getLogger().info(String.format("Combat ended - %s: %.1f damage dealt, %d total combats | %s: %.1f damage dealt, %d total combats",
+                    session.getAttacker().getName(), attackerData.getTotalDamageDealt(), attackerData.getTotalCombats(),
+                    session.getDefender().getName(), defenderData.getTotalDamageDealt(), defenderData.getTotalCombats()));
 
                 // Remove from cache
                 String cacheKey = session.getAttacker().getUniqueId() + ":" + session.getDefender().getUniqueId();

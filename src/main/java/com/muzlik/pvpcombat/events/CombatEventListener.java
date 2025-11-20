@@ -93,8 +93,13 @@ public class CombatEventListener implements Listener {
             }
 
             // Record damage synchronously to ensure it's tracked
-            combatTracker.recordDamageDealt(attacker, event.getFinalDamage());
-            combatTracker.recordDamageReceived(defender, event.getFinalDamage());
+            double damage = event.getFinalDamage();
+            combatTracker.recordDamageDealt(attacker, damage);
+            combatTracker.recordDamageReceived(defender, damage);
+            
+            // Debug logging
+            plugin.getLogger().fine(String.format("Damage tracked: %s dealt %.1f to %s", 
+                attacker.getName(), damage, defender.getName()));
 
             // Log damage event asynchronously
             if (combatManager.isInCombat(attacker)) {
@@ -144,13 +149,13 @@ public class CombatEventListener implements Listener {
             Player deceased = event.getEntity();
 
             if (combatManager.isInCombat(deceased)) {
-                // Record stats asynchronously
+                // Record stats synchronously to ensure they're saved
                 Player opponent = combatManager.getOpponent(deceased);
                 if (opponent != null) {
-                    AsyncUtils.runAsync(plugin, () -> {
-                        combatTracker.recordWin(opponent);
-                        combatTracker.recordLoss(deceased);
-                    }, "combat-processing");
+                    combatTracker.recordWin(opponent);
+                    combatTracker.recordLoss(deceased);
+                    
+                    plugin.getLogger().info("Combat ended - Winner: " + opponent.getName() + ", Loser: " + deceased.getName());
                 }
 
                 // End combat - keep on main thread for thread safety
