@@ -277,50 +277,45 @@ public class CombatEventListener implements Listener {
                player.getInventory().getChestplate().getType() == Material.ELYTRA;
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockBreak(org.bukkit.event.block.BlockBreakEvent event) {
         Player player = event.getPlayer();
 
         // Check if combat manager is initialized
-        if (combatManager == null) {
+        if (combatManager == null || restrictionManager == null) {
             return;
         }
 
-        // Check for block break restrictions
-        if (combatManager.isInCombat(player)) {
-            if (restrictionManager != null && !restrictionManager.canBreakBlocks(player)) {
-                event.setCancelled(true);
-                
-                // Send block update to client to prevent "ghost air" visual glitch
-                player.sendBlockChange(event.getBlock().getLocation(), event.getBlock().getBlockData());
-                
-                player.sendMessage("§cYou cannot break blocks while in combat!");
-                return;
-            }
+        // Only check restrictions if player is in combat
+        if (!combatManager.isInCombat(player)) {
+            return;
+        }
+
+        // Check if block breaking is allowed
+        if (!restrictionManager.canBreakBlocks(player)) {
+            event.setCancelled(true);
+            player.sendMessage("§cYou cannot break blocks while in combat!");
         }
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockPlace(org.bukkit.event.block.BlockPlaceEvent event) {
         Player player = event.getPlayer();
 
         // Check if combat manager is initialized
-        if (combatManager == null) {
+        if (combatManager == null || restrictionManager == null) {
             return;
         }
 
-        // Check for block place restrictions
-        if (combatManager.isInCombat(player)) {
-            if (restrictionManager != null && !restrictionManager.canPlaceBlocks(player)) {
-                event.setCancelled(true);
-                
-                // Send block update to client to prevent "ghost block" visual glitch
-                player.sendBlockChange(event.getBlock().getLocation(), event.getBlockReplacedState().getBlockData());
-                player.updateInventory();
-                
-                player.sendMessage("§cYou cannot place blocks while in combat!");
-                return;
-            }
+        // Only check restrictions if player is in combat
+        if (!combatManager.isInCombat(player)) {
+            return;
+        }
+
+        // Check if block placing is allowed
+        if (!restrictionManager.canPlaceBlocks(player)) {
+            event.setCancelled(true);
+            player.sendMessage("§cYou cannot place blocks while in combat!");
         }
     }
 }
