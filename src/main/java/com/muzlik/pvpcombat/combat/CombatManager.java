@@ -197,11 +197,13 @@ public class CombatManager implements ICombatManager {
                 }
 
                 // Log combat end and generate summaries asynchronously
+                // Pass session data before it's removed
+                final CombatSession finalSession = session;
                 AsyncUtils.runAsync(plugin, () -> {
-                    combatLogger.logCombatEnd(session.getSessionId(), session.getAttacker(),
-                                              session.getDefender(), "Combat ended");
-                    combatLogger.generateSummary(session.getSessionId(), session.getAttacker());
-                    combatLogger.generateSummary(session.getSessionId(), session.getDefender());
+                    combatLogger.logCombatEnd(finalSession.getSessionId(), finalSession.getAttacker(),
+                                              finalSession.getDefender(), "Combat ended");
+                    combatLogger.generateSummary(finalSession.getSessionId(), finalSession.getAttacker(), finalSession);
+                    combatLogger.generateSummary(finalSession.getSessionId(), finalSession.getDefender(), finalSession);
                 }, "combat-processing");
 
                 plugin.getLogger().info("Combat ended for player " + playerId + " (Duration: " + (combatDuration / 1000) + "s)");

@@ -106,6 +106,18 @@ public class MessageFormatter {
      * Adds default placeholders for combat messages.
      */
     private void addDefaultPlaceholders(Map<String, Object> placeholders, Player player) {
+        if (player == null) {
+            // Set default values when player is null
+            placeholders.putIfAbsent("player", "Unknown");
+            placeholders.putIfAbsent("display_name", "Unknown");
+            placeholders.putIfAbsent("world", "Unknown");
+            placeholders.putIfAbsent("time_left", "30");
+            placeholders.putIfAbsent("opponent", "Unknown");
+            placeholders.putIfAbsent("health", "0.0");
+            placeholders.putIfAbsent("max_health", "20.0");
+            return;
+        }
+        
         placeholders.putIfAbsent("player", player.getName());
         placeholders.putIfAbsent("display_name", player.getDisplayName());
         placeholders.putIfAbsent("world", player.getWorld().getName());

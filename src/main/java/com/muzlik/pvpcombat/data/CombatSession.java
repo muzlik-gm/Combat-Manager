@@ -23,6 +23,14 @@ public class CombatSession {
     private String currentTheme;
     private boolean visualsEnabled;
     private InterferenceData interferenceData;
+    
+    // Session-specific damage tracking
+    private double attackerDamageDealt;
+    private double defenderDamageDealt;
+    
+    // Session-specific hit tracking
+    private int attackerHitsLanded;
+    private int defenderHitsLanded;
 
     public CombatSession(UUID sessionId, Player attacker, Player defender, int initialTimer) {
         this.sessionId = sessionId;
@@ -37,6 +45,10 @@ public class CombatSession {
         this.currentTheme = "default";
         this.visualsEnabled = true;
         this.interferenceData = new InterferenceData();
+        this.attackerDamageDealt = 0.0;
+        this.defenderDamageDealt = 0.0;
+        this.attackerHitsLanded = 0;
+        this.defenderHitsLanded = 0;
     }
 
     // Getters and setters
@@ -170,5 +182,54 @@ public class CombatSession {
      */
     public boolean isInactive(long maxInactiveTimeMs) {
         return (System.currentTimeMillis() - lastActivityTime.get()) > maxInactiveTimeMs;
+    }
+    
+    /**
+     * Records damage dealt by a player in this session.
+     */
+    public void recordDamage(Player damager, double damage) {
+        if (damager.equals(attacker)) {
+            attackerDamageDealt += damage;
+            attackerHitsLanded++;
+        } else if (damager.equals(defender)) {
+            defenderDamageDealt += damage;
+            defenderHitsLanded++;
+        }
+    }
+    
+    /**
+     * Gets hits landed by a specific player in this session.
+     */
+    public int getHitsLanded(Player player) {
+        if (player.equals(attacker)) {
+            return attackerHitsLanded;
+        } else if (player.equals(defender)) {
+            return defenderHitsLanded;
+        }
+        return 0;
+    }
+    
+    /**
+     * Gets damage dealt by a specific player in this session.
+     */
+    public double getDamageDealt(Player player) {
+        if (player.equals(attacker)) {
+            return attackerDamageDealt;
+        } else if (player.equals(defender)) {
+            return defenderDamageDealt;
+        }
+        return 0.0;
+    }
+    
+    /**
+     * Gets damage received by a specific player in this session.
+     */
+    public double getDamageReceived(Player player) {
+        if (player.equals(attacker)) {
+            return defenderDamageDealt; // Attacker received damage from defender
+        } else if (player.equals(defender)) {
+            return attackerDamageDealt; // Defender received damage from attacker
+        }
+        return 0.0;
     }
 }

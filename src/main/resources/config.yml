@@ -63,9 +63,11 @@ combat:
     style: "SOLID"
 
 # Movement Restrictions
+# TRUE for each type of restriction means the Restriction functionality is enabled
 restrictions:
    # Ender pearl restrictions
    enderpearl:
+     # If TRUE then you would have some restrictions in combat
      enabled: true
      # Cooldown after throwing pearl (seconds)
      cooldown: 10
@@ -74,8 +76,31 @@ restrictions:
      # Prevent pearl usage entirely during combat
      block-usage: false
 
+   # Golden apple restrictions
+   golden-apple:
+     # If TRUE then you would have some restrictions in combat
+     enabled: true
+     # Cooldown after eating golden apple (seconds)
+     cooldown: 3
+     # Cooldown multiplier during combat
+     combat-cooldown-multiplier: 1.5
+     # Prevent usage entirely during combat
+     block-usage: false
+
+   # Enchanted golden apple restrictions
+   enchanted-golden-apple:
+     # If TRUE then you would have some restrictions in combat
+     enabled: true
+     # Cooldown after eating enchanted golden apple (seconds)
+     cooldown: 8
+     # Cooldown multiplier during combat
+     combat-cooldown-multiplier: 2.0
+     # Prevent usage entirely during combat
+     block-usage: false
+
    # Elytra restrictions
    elytra:
+     # If TRUE then you cannot use elytra in combat
      enabled: true
      # Prevent glide activation during combat
      block-glide: true
@@ -107,6 +132,7 @@ restrictions:
        - "/warp"
        - "/home"
        - "/spawn"
+       - "/warps"
 
    # Block interaction restrictions
    blocks:
@@ -439,6 +465,7 @@ anticheat:
   # Interference detection
   interference:
     enabled: true
+    
     # Maximum allowed third-party damage during combat (%)
     max-interference-percentage: 10.0
     # Time window for interference check (seconds)

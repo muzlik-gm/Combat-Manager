@@ -30,6 +30,36 @@ public class CombatSummary {
         this.endTime = findEndTime();
         calculateStatistics();
     }
+    
+    /**
+     * Constructor with session data for accurate damage tracking.
+     */
+    public CombatSummary(List<CombatLogEntry> entries, com.muzlik.pvpcombat.data.CombatSession session, org.bukkit.entity.Player player) {
+        this.entries = entries;
+        this.startTime = findStartTime();
+        this.endTime = findEndTime();
+        calculateStatistics();
+        
+        // Override values with session data
+        if (session != null && player != null) {
+            this.totalDamageDealt = session.getDamageDealt(player);
+            this.totalDamageReceived = session.getDamageReceived(player);
+            this.hitsLanded = session.getHitsLanded(player);
+            
+            // Calculate total hits exchanged (both players)
+            int opponentHits = session.getHitsLanded(session.getOpponent(player));
+            this.totalAttacks = this.hitsLanded + opponentHits;
+            
+            // Calculate actual combat duration from session
+            long durationMs = System.currentTimeMillis() - session.getStartTime();
+            this.combatDurationSeconds = durationMs / 1000;
+            
+            // Calculate accuracy (your hits / total hits exchanged)
+            if (this.totalAttacks > 0) {
+                this.accuracy = ((double) this.hitsLanded / this.totalAttacks) * 100.0;
+            }
+        }
+    }
 
     /**
      * Finds the combat start time.

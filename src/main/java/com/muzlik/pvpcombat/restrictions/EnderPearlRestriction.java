@@ -37,11 +37,19 @@ public class EnderPearlRestriction {
      */
     public void onEnderPearlUsed(Player player, RestrictionData restrictionData) {
         // Calculate cooldown based on combat status and configuration
-        int cooldown = calculateCooldown(player);
+        int cooldownSeconds = calculateCooldown(player);
 
-        if (cooldown > 0) {
-            restrictionData.setCooldown("ender_pearl", cooldown);
-            restrictionManager.applyCooldown(player, "ender_pearl", cooldown);
+        if (cooldownSeconds > 0) {
+            restrictionData.setCooldown("ender_pearl", cooldownSeconds);
+            restrictionManager.applyCooldown(player, "ender_pearl", cooldownSeconds);
+            
+            // Apply actual Minecraft cooldown to the player
+            // Convert seconds to ticks (20 ticks = 1 second)
+            int cooldownTicks = cooldownSeconds * 20;
+            player.setCooldown(org.bukkit.Material.ENDER_PEARL, cooldownTicks);
+            
+            // Send message to player
+            player.sendMessage(org.bukkit.ChatColor.YELLOW + "Ender Pearl cooldown: " + cooldownSeconds + " seconds");
         }
 
         restrictionData.setLastEnderPearlUse(java.time.LocalDateTime.now());

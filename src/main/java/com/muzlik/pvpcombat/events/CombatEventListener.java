@@ -98,6 +98,14 @@ public class CombatEventListener implements Listener {
             combatManager.getCombatTracker().recordDamageDealt(attacker, damage);
             combatManager.getCombatTracker().recordDamageReceived(defender, damage);
             
+            // Also record damage in the session for per-combat tracking
+            CombatSession damageSession = combatManager.getActiveSessions().values().stream()
+                .filter(s -> s.involvesPlayer(attacker))
+                .findFirst().orElse(null);
+            if (damageSession != null) {
+                damageSession.recordDamage(attacker, damage);
+            }
+            
             // Debug logging - use info level so it shows in console
             plugin.getLogger().info(String.format("[DAMAGE] %s dealt %.1f to %s (Total: %.1f)", 
                 attacker.getName(), damage, defender.getName(),
@@ -108,13 +116,13 @@ public class CombatEventListener implements Listener {
                 Player opponent = combatManager.getOpponent(attacker);
                 if (opponent != null && opponent.equals(defender)) {
                     AsyncUtils.runAsync(plugin, () -> {
-                        CombatSession session = combatManager.getActiveSessions().values().stream()
+                        CombatSession logSession = combatManager.getActiveSessions().values().stream()
                             .filter(s -> s.getAttacker().equals(attacker) || s.getDefender().equals(attacker))
                             .findFirst().orElse(null);
-                        if (session != null) {
+                        if (logSession != null) {
                             String weaponType = attacker.getInventory().getItemInMainHand().getType().toString();
                             double distance = attacker.getLocation().distance(defender.getLocation());
-                            combatLogger.logDamageDealt(session.getSessionId(), attacker, defender, event.getFinalDamage(),
+                            combatLogger.logDamageDealt(logSession.getSessionId(), attacker, defender, event.getFinalDamage(),
                                                        true, distance, weaponType);
                         }
                     }, "combat-processing");
@@ -128,13 +136,13 @@ public class CombatEventListener implements Listener {
             } else {
                 // Reset timer for existing combat - run on main thread
                 AsyncUtils.runSync(plugin, () -> {
-                    CombatSession session = combatManager.getActiveSessions().values().stream()
+                    CombatSession timerSession = combatManager.getActiveSessions().values().stream()
                         .filter(s -> s.getAttacker().equals(attacker) || s.getDefender().equals(attacker))
                         .findFirst().orElse(null);
-                    if (session != null) {
+                    if (timerSession != null) {
                         // Reset timer to default duration
                         int defaultDuration = plugin.getConfig().getInt("combat.duration", 30);
-                        session.getTimerData().setRemainingSeconds(defaultDuration);
+                        timerSession.getTimerData().setRemainingSeconds(defaultDuration);
                     }
                 });
             }
@@ -177,6 +185,28 @@ public class CombatEventListener implements Listener {
             Player player = event.getPlayer();
 
             if (combatManager.isInCombat(player)) {
+                // Record a loss for leaving combat
+                combatManager.getCombatTracker().recordLoss(player);
+                
+                // Get opponent and record a win for them
+                Player opponent = combatManager.getOpponent(player);
+                String forfeitMessage = ChatColor.RED + player.getName() + ChatColor.YELLOW + " forfeited by logging out during combat and died!";
+                
+                if (opponent != null) {
+                    combatManager.getCombatTracker().recordWin(opponent);
+                    plugin.getLogger().info(player.getName() + " forfeited combat. " + opponent.getName() + " wins!");
+                    
+                    // Notify opponent with better message
+                    opponent.sendMessage(ChatColor.GREEN + "You won! " + ChatColor.YELLOW + player.getName() + " forfeited by logging out.");
+                }
+                
+                // Broadcast forfeit to all players
+                plugin.getServer().broadcastMessage(forfeitMessage);
+                
+                // Kill the player immediately (this will trigger death and inventory drop naturally)
+                player.setHealth(0.0);
+                plugin.getLogger().info(player.getName() + " was killed for combat logging.");
+                
                 // End combat due to logout - keep on main thread for thread safety
                 AsyncUtils.runSync(plugin, () -> combatManager.endCombat(player.getUniqueId()));
             }
@@ -210,33 +240,57 @@ public class CombatEventListener implements Listener {
 
         // Apply ender pearl restrictions
         RestrictionData restrictionData = restrictionManager.getOrCreateRestrictionData(player);
-        restrictionManager.getEnderPearlRestriction().onEnderPearlUsed(player, restrictionData);
+        
+        // Schedule cooldown application for next tick to override Minecraft's default cooldown
+        org.bukkit.scheduler.BukkitRunnable task = new org.bukkit.scheduler.BukkitRunnable() {
+            @Override
+            public void run() {
+                restrictionManager.getEnderPearlRestriction().onEnderPearlUsed(player, restrictionData);
+            }
+        };
+        task.runTaskLater(plugin, 1L);
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerToggleGlide(org.bukkit.event.entity.EntityToggleGlideEvent event) {
+        // Check if it's a player
+        if (!(event.getEntity() instanceof Player)) {
+            return;
+        }
+        
+        Player player = (Player) event.getEntity();
+        
+        // Only check when player is starting to glide (not stopping)
+        if (!event.isGliding()) {
+            return;
+        }
+        
+        // Check if player is in combat and elytra is restricted
+        if (combatManager.isInCombat(player)) {
+            boolean elytraEnabled = plugin.getConfig().getBoolean("restrictions.elytra.enabled", true);
+            boolean blockGlide = plugin.getConfig().getBoolean("restrictions.elytra.block-glide", true);
+            
+            if (elytraEnabled && blockGlide) {
+                event.setCancelled(true);
+                player.sendMessage(ChatColor.RED + "You cannot use Elytra during combat!");
+                return;
+            }
+        }
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
-        // Check for elytra glide start
-        if (player.isGliding() && !event.getFrom().toVector().equals(event.getTo().toVector())) {
-            // Player started gliding
-            RestrictionData restrictionData = restrictionManager.getOrCreateRestrictionData(player);
-
-            if (!restrictionManager.canUseElytra(player)) {
-                // Cancel gliding
+        // Additional check - if somehow they're gliding during combat, stop them
+        if (player.isGliding() && combatManager.isInCombat(player)) {
+            boolean elytraEnabled = plugin.getConfig().getBoolean("restrictions.elytra.enabled", true);
+            boolean blockGlide = plugin.getConfig().getBoolean("restrictions.elytra.block-glide", true);
+            
+            if (elytraEnabled && blockGlide) {
                 player.setGliding(false);
                 player.sendMessage(ChatColor.RED + "Elytra gliding is restricted during combat!");
-                return;
             }
-
-            // Track glide start
-            restrictionManager.getElytraRestriction().onGlideStart(player, restrictionData);
-        }
-
-        // Check for elytra takeoff attempt (sneaking while wearing elytra and not on ground)
-        if (event.getPlayer().isSneaking() && hasElytraEquipped(player) && !player.getLocation().getBlock().getRelative(0, -1, 0).getType().isSolid()) {
-            RestrictionData restrictionData = restrictionManager.getOrCreateRestrictionData(player);
-            restrictionManager.getElytraRestriction().onTakeoffAttempt(player, restrictionData);
         }
     }
 
@@ -272,6 +326,70 @@ public class CombatEventListener implements Listener {
         Object combatState = cacheManager.get("combat-state", player.getUniqueId().toString());
         if (combatState != null) {
             player.sendMessage(ChatColor.GREEN + "Combat session resumed from previous session!");
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerConsume(org.bukkit.event.player.PlayerItemConsumeEvent event) {
+        Player player = event.getPlayer();
+        Material item = event.getItem().getType();
+
+        // Get restriction data once
+        RestrictionData restrictionData = restrictionManager.getOrCreateRestrictionData(player);
+
+        // Check for golden apple consumption
+        if (item == Material.GOLDEN_APPLE) {
+            // Check if player is on cooldown
+            if (restrictionData.isOnCooldown("golden_apple")) {
+                event.setCancelled(true);
+                
+                // Get remaining cooldown
+                int remainingSeconds = 0;
+                java.time.LocalDateTime expiry = restrictionData.getActiveCooldowns().get("golden_apple");
+                if (expiry != null) {
+                    remainingSeconds = (int) java.time.Duration.between(java.time.LocalDateTime.now(), expiry).getSeconds();
+                }
+                
+                player.sendMessage(ChatColor.RED + "You cannot use Golden Apples yet! Cooldown: " + remainingSeconds + "s");
+                return;
+            }
+
+            // Check if usage is blocked during combat
+            if (!restrictionManager.canUseGoldenApple(player)) {
+                event.setCancelled(true);
+                player.sendMessage(ChatColor.RED + "You cannot use Golden Apples during combat!");
+                return;
+            }
+
+            // Apply golden apple cooldown immediately (not on next tick)
+            restrictionManager.getGoldenAppleRestriction().onGoldenAppleUsed(player, restrictionData);
+        }
+        // Check for enchanted golden apple consumption
+        else if (item == Material.ENCHANTED_GOLDEN_APPLE) {
+            // Check if player is on cooldown
+            if (restrictionData.isOnCooldown("enchanted_golden_apple")) {
+                event.setCancelled(true);
+                
+                // Get remaining cooldown
+                int remainingSeconds = 0;
+                java.time.LocalDateTime expiry = restrictionData.getActiveCooldowns().get("enchanted_golden_apple");
+                if (expiry != null) {
+                    remainingSeconds = (int) java.time.Duration.between(java.time.LocalDateTime.now(), expiry).getSeconds();
+                }
+                
+                player.sendMessage(ChatColor.RED + "You cannot use Enchanted Golden Apples yet! Cooldown: " + remainingSeconds + "s");
+                return;
+            }
+
+            // Check if usage is blocked during combat
+            if (!restrictionManager.canUseEnchantedGoldenApple(player)) {
+                event.setCancelled(true);
+                player.sendMessage(ChatColor.RED + "You cannot use Enchanted Golden Apples during combat!");
+                return;
+            }
+
+            // Apply enchanted golden apple cooldown immediately (not on next tick)
+            restrictionManager.getGoldenAppleRestriction().onEnchantedGoldenAppleUsed(player, restrictionData);
         }
     }
 

@@ -15,6 +15,8 @@ public class RestrictionData {
     private LocalDateTime lastEnderPearlUse;
     private LocalDateTime lastElytraBoost;
     private LocalDateTime lastGlideStart;
+    private LocalDateTime lastGoldenAppleUse;
+    private LocalDateTime lastEnchantedGoldenAppleUse;
     private double altitudeAtGlideStart;
 
     public RestrictionData(UUID playerId) {
@@ -57,12 +59,20 @@ public class RestrictionData {
     public double getAltitudeAtGlideStart() { return altitudeAtGlideStart; }
     public void setAltitudeAtGlideStart(double altitude) { this.altitudeAtGlideStart = altitude; }
 
+    public LocalDateTime getLastGoldenAppleUse() { return lastGoldenAppleUse; }
+    public void setLastGoldenAppleUse(LocalDateTime lastUse) { this.lastGoldenAppleUse = lastUse; }
+
+    public LocalDateTime getLastEnchantedGoldenAppleUse() { return lastEnchantedGoldenAppleUse; }
+    public void setLastEnchantedGoldenAppleUse(LocalDateTime lastUse) { this.lastEnchantedGoldenAppleUse = lastUse; }
+
     public void clearAllRestrictions() {
         activeCooldowns.clear();
         elytraGlideBlocked = false;
         lastEnderPearlUse = null;
         lastElytraBoost = null;
         lastGlideStart = null;
+        lastGoldenAppleUse = null;
+        lastEnchantedGoldenAppleUse = null;
         altitudeAtGlideStart = 0.0;
     }
 }

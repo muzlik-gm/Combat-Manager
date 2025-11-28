@@ -30,11 +30,15 @@ public class ActionBarManager {
      * Sends an action bar message to a player.
      */
     public void sendActionBar(Player player, String message) {
+        if (player == null || !player.isOnline()) {
+            return;
+        }
+        
         if (!plugin.getConfig().getBoolean("visual.actionbar.enabled", true)) {
             return;
         }
 
-        String formattedMessage = formatMessage(message);
+        String formattedMessage = formatMessage(message, player);
         player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(formattedMessage));
     }
 
@@ -51,15 +55,19 @@ public class ActionBarManager {
         BukkitRunnable task = new BukkitRunnable() {
             @Override
             public void run() {
-                if (!plugin.getCombatManager().isInCombat(player1) ||
+                // Check if players are still online and in combat
+                if (player1 == null || player2 == null || 
+                    !player1.isOnline() || !player2.isOnline() ||
+                    !plugin.getCombatManager().isInCombat(player1) ||
                     !plugin.getCombatManager().isInCombat(player2)) {
                     cancel();
                     return;
                 }
 
-                String message = buildActionBarMessage(player1, player2);
-                sendActionBar(player1, message);
-                sendActionBar(player2, message);
+                String message1 = buildActionBarMessage(player1, player2);
+                String message2 = buildActionBarMessage(player2, player1);
+                sendActionBar(player1, message1);
+                sendActionBar(player2, message2);
             }
         };
 
@@ -93,25 +101,18 @@ public class ActionBarManager {
     /**
      * Builds the action bar message with opponent and time information.
      */
-    private String buildActionBarMessage(Player player1, Player player2) {
+    private String buildActionBarMessage(Player player, Player opponent) {
         String format = plugin.getConfig().getString("visual.actionbar.format",
             "&cCombat with &f{opponent} &c- &f{time_left}s");
 
-        Player opponent1 = plugin.getCombatManager().getOpponent(player1);
-        Player opponent2 = plugin.getCombatManager().getOpponent(player2);
+        int timeLeft = getCombatTimeLeft(player);
 
-        int timeLeft = getCombatTimeLeft(player1);
+        Map<String, Object> placeholders = new java.util.HashMap<>();
+        placeholders.put("opponent", opponent != null ? opponent.getName() : "Unknown");
+        placeholders.put("time_left", String.valueOf(timeLeft));
 
-        String message1 = format
-            .replace("{opponent}", opponent1 != null ? opponent1.getName() : "Unknown")
-            .replace("{time_left}", String.valueOf(timeLeft));
-
-        String message2 = format
-            .replace("{opponent}", opponent2 != null ? opponent2.getName() : "Unknown")
-            .replace("{time_left}", String.valueOf(timeLeft));
-
-        // Return the same message since both players see the same info
-        return message1;
+        MessageFormatter formatter = new MessageFormatter(plugin);
+        return formatter.formatMessage(format, player, placeholders);
     }
 
     /**
@@ -131,9 +132,9 @@ public class ActionBarManager {
     /**
      * Formats message with HEX color support and placeholders using MessageFormatter.
      */
-    private String formatMessage(String message) {
+    private String formatMessage(String message, Player player) {
         MessageFormatter formatter = new MessageFormatter(plugin);
-        return formatter.formatMessage(message, null, new java.util.HashMap<>());
+        return formatter.formatMessage(message, player, new java.util.HashMap<>());
     }
 
     /**

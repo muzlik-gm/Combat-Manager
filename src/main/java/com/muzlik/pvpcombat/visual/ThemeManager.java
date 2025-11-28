@@ -25,6 +25,8 @@ public class ThemeManager {
         this.logger = logger;
         this.themes = new HashMap<>();
         this.defaultTheme = createDefaultTheme();
+        // Load themes on initialization
+        loadThemes();
     }
 
     /**
@@ -33,16 +35,18 @@ public class ThemeManager {
     public void loadThemes() {
         themes.clear();
 
-        // Load themes from config
-        ConfigurationSection themeSection = configManager.getMainConfig().getConfigurationSection("visual.themes");
-        if (themeSection != null) {
-            ConfigurationSection customSection = themeSection.getConfigurationSection("custom");
-            if (customSection != null) {
-                for (String themeName : customSection.getKeys(false)) {
-                    ConfigurationSection themeConfig = customSection.getConfigurationSection(themeName);
-                    if (themeConfig != null) {
-                        Theme theme = loadThemeFromConfig(themeName, themeConfig);
-                        themes.put(themeName, theme);
+        // Load themes from config if available
+        if (configManager != null && configManager.getMainConfig() != null) {
+            ConfigurationSection themeSection = configManager.getMainConfig().getConfigurationSection("visual.themes");
+            if (themeSection != null) {
+                ConfigurationSection customSection = themeSection.getConfigurationSection("custom");
+                if (customSection != null) {
+                    for (String themeName : customSection.getKeys(false)) {
+                        ConfigurationSection themeConfig = customSection.getConfigurationSection(themeName);
+                        if (themeConfig != null) {
+                            Theme theme = loadThemeFromConfig(themeName, themeConfig);
+                            themes.put(themeName, theme);
+                        }
                     }
                 }
             }

@@ -48,6 +48,22 @@ public interface IRestrictionManager {
     boolean canPlaceBlocks(Player player);
 
     /**
+     * Checks if a player can use golden apple.
+     *
+     * @param player The player to check
+     * @return true if allowed, false otherwise
+     */
+    boolean canUseGoldenApple(Player player);
+
+    /**
+     * Checks if a player can use enchanted golden apple.
+     *
+     * @param player The player to check
+     * @return true if allowed, false otherwise
+     */
+    boolean canUseEnchantedGoldenApple(Player player);
+
+    /**
      * Applies a cooldown for restricted actions.
      *
      * @param player The player
@@ -55,4 +71,12 @@ public interface IRestrictionManager {
      * @param cooldownSeconds The cooldown duration
      */
     void applyCooldown(Player player, String actionType, int cooldownSeconds);
+
+    /**
+     * Gets or creates restriction data for a player.
+     *
+     * @param player The player
+     * @return The restriction data
+     */
+    com.muzlik.pvpcombat.data.RestrictionData getOrCreateRestrictionData(Player player);
 }

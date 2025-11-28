@@ -52,26 +52,91 @@ public class CombatInspector {
      * Shows player combat summary.
      */
     public void showPlayerSummary(Player inspector, Player target) {
-        inspector.sendMessage("§6=== Combat Summary: " + target.getName() + " ===");
+        try {
+            // Get player's combat data from the CombatManager's tracker
+            com.muzlik.pvpcombat.data.PlayerCombatData combatData = 
+                ((com.muzlik.pvpcombat.combat.CombatManager) plugin.getCombatManager())
+                    .getCombatTracker().getPlayerData(target.getUniqueId());
 
-        // Placeholder for combat statistics
-        inspector.sendMessage("§eTotal Combats: §fUnknown §7(Statistics pending)");
-        inspector.sendMessage("§eWins/Losses: §fUnknown §7(Statistics pending)");
-        inspector.sendMessage("§eTotal Damage Dealt: §fUnknown §7(Statistics pending)");
-        inspector.sendMessage("§eLast Combat: §fUnknown §7(Statistics pending)");
+            inspector.sendMessage("§6=== Combat Summary for " + target.getName() + " ===");
 
-        inspector.sendMessage("§7Detailed combat history available in future updates.");
+            if (combatData == null || (combatData.getTotalCombats() == 0 && combatData.getTotalDamageDealt() == 0)) {
+                inspector.sendMessage("§eNo combat statistics yet. Player needs to fight to generate data!");
+                return;
+            }
+
+            // Display summary
+            inspector.sendMessage(String.format("§eTotal Combats: §f%d", combatData.getTotalCombats()));
+            
+            if (combatData.getTotalCombats() > 0) {
+                inspector.sendMessage(String.format("§eWins: §a%d §7| §eLosses: §c%d", 
+                    combatData.getWins(), combatData.getLosses()));
+                
+                // Calculate win rate
+                double winRate = (double) combatData.getWins() / combatData.getTotalCombats() * 100.0;
+                inspector.sendMessage(String.format("§eWin Rate: §f%.1f%%", winRate));
+                
+                // Calculate K/D ratio
+                double kdRatio = combatData.getLosses() > 0 ? 
+                    (double) combatData.getWins() / combatData.getLosses() : combatData.getWins();
+                inspector.sendMessage(String.format("§eK/D Ratio: §f%.2f", kdRatio));
+            }
+            
+            inspector.sendMessage(String.format("§eDamage Dealt: §c%.1f ❤", combatData.getTotalDamageDealt()));
+            inspector.sendMessage(String.format("§eDamage Received: §c%.1f ❤", combatData.getTotalDamageReceived()));
+            
+            // Calculate damage ratio
+            if (combatData.getTotalDamageReceived() > 0) {
+                double damageRatio = combatData.getTotalDamageDealt() / combatData.getTotalDamageReceived();
+                inspector.sendMessage(String.format("§eDamage Ratio: §f%.2f", damageRatio));
+            }
+            
+            // Show combat time
+            if (combatData.getTotalCombatTime() > 0) {
+                long totalMinutes = combatData.getTotalCombatTime() / 60000;
+                long totalSeconds = (combatData.getTotalCombatTime() % 60000) / 1000;
+                inspector.sendMessage(String.format("§eTotal Combat Time: §f%dm %ds", totalMinutes, totalSeconds));
+            }
+            
+            // Show last combat time
+            if (combatData.getLastCombat() != null) {
+                inspector.sendMessage("§7Last Combat: §f" + combatData.getLastCombat().toString());
+            }
+            
+        } catch (Exception e) {
+            plugin.getLogger().severe("Error showing player summary: " + e.getMessage());
+            e.printStackTrace();
+            inspector.sendMessage("§cFailed to show player summary.");
+        }
     }
 
     /**
      * Shows real-time combat statistics.
      */
     private void showCombatStats(Player inspector, Player target) {
-        inspector.sendMessage("§e=== Real-time Stats ===");
-        inspector.sendMessage("§eHits Traded: §fUnknown §7(Live tracking pending)");
-        inspector.sendMessage("§eTime in Combat: §fUnknown §7(Timer tracking pending)");
-        inspector.sendMessage("§eCombat State: §fActive §7(State tracking pending)");
-        inspector.sendMessage("§eRestrictions: §fNone §7(Restriction tracking pending)");
+        try {
+            // Get player's combat data from the CombatManager's tracker
+            com.muzlik.pvpcombat.data.PlayerCombatData combatData = 
+                ((com.muzlik.pvpcombat.combat.CombatManager) plugin.getCombatManager())
+                    .getCombatTracker().getPlayerData(target.getUniqueId());
+
+            inspector.sendMessage("§e=== Real-time Stats ===");
+            
+            if (combatData != null) {
+                inspector.sendMessage(String.format("§eDamage Dealt: §c%.1f ❤", combatData.getTotalDamageDealt()));
+                inspector.sendMessage(String.format("§eDamage Received: §c%.1f ❤", combatData.getTotalDamageReceived()));
+                inspector.sendMessage(String.format("§eWins: §a%d §7| §eLosses: §c%d", 
+                    combatData.getWins(), combatData.getLosses()));
+            } else {
+                inspector.sendMessage("§eNo combat data available yet.");
+            }
+            
+            inspector.sendMessage("§eCombat State: §fActive");
+            inspector.sendMessage("§eRestrictions: §fNone §7(Restriction tracking pending)");
+        } catch (Exception e) {
+            plugin.getLogger().warning("Error showing combat stats: " + e.getMessage());
+            inspector.sendMessage("§cFailed to load combat statistics.");
+        }
     }
 
     /**

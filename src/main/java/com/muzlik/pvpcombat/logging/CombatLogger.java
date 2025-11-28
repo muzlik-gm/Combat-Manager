@@ -218,14 +218,22 @@ public class CombatLogger {
     /**
      * Generates and delivers a combat summary.
      */
-    public void generateSummary(UUID sessionId, Player player) {
+    public void generateSummary(UUID sessionId, Player player, com.muzlik.pvpcombat.data.CombatSession session) {
         if (summaryDelivery == SummaryDelivery.NONE) {
             return;
         }
 
         AsyncUtils.runAsync(plugin, () -> {
             List<CombatLogEntry> sessionLogs = getSessionLogs(sessionId);
-            CombatSummary summary = new CombatSummary(sessionLogs);
+            CombatSummary summary;
+            
+            if (session != null) {
+                // Create summary with session damage data
+                summary = new CombatSummary(sessionLogs, session, player);
+            } else {
+                // Fallback to log-based summary
+                summary = new CombatSummary(sessionLogs);
+            }
 
             AsyncUtils.runSync(plugin, () -> {
                 switch (summaryDelivery) {
@@ -431,11 +439,14 @@ public class CombatLogger {
      * Sends combat summary via chat.
      */
     private void sendChatSummary(Player player, CombatSummary summary) {
+        // Get the actual combat data from tracker for accurate per-session stats
+        // Note: We need to get the damage BEFORE it's added to cumulative totals
+        // So we use the session data from the summary
         player.sendMessage("§6=== Combat Summary ===");
         player.sendMessage(String.format("§eHits Landed: §f%d/%d (%.1f%%)",
             summary.getHitsLanded(), summary.getTotalAttacks(), summary.getAccuracy()));
-        player.sendMessage(String.format("§eDamage Dealt: §f%.1f", summary.getTotalDamageDealt()));
-        player.sendMessage(String.format("§eDamage Received: §f%.1f", summary.getTotalDamageReceived()));
+        player.sendMessage(String.format("§eDamage Dealt: §c%.1f ❤", summary.getTotalDamageDealt()));
+        player.sendMessage(String.format("§eDamage Received: §c%.1f ❤", summary.getTotalDamageReceived()));
         player.sendMessage(String.format("§eKnockback Exchanges: §f%d", summary.getKnockbackExchanges()));
         player.sendMessage(String.format("§eCombat Duration: §f%s", summary.getFormattedDuration()));
     }

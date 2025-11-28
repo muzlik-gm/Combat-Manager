@@ -18,6 +18,7 @@ public class RestrictionManager implements IRestrictionManager {
     private final CombatManager combatManager;
     private final EnderPearlRestriction enderPearlRestriction;
     private final ElytraRestriction elytraRestriction;
+    private final GoldenAppleRestriction goldenAppleRestriction;
     private final Map<Player, RestrictionData> playerRestrictions;
     private final CacheManager cacheManager;
 
@@ -26,6 +27,7 @@ public class RestrictionManager implements IRestrictionManager {
         this.cacheManager = cacheManager;
         this.enderPearlRestriction = new EnderPearlRestriction(this);
         this.elytraRestriction = new ElytraRestriction(this);
+        this.goldenAppleRestriction = new GoldenAppleRestriction(this);
         this.playerRestrictions = new ConcurrentHashMap<>();
     }
 
@@ -139,8 +141,43 @@ public class RestrictionManager implements IRestrictionManager {
         }
     }
 
+    @Override
+    public boolean canUseGoldenApple(Player player) {
+        if (!combatManager.isInCombat(player)) {
+            return true;
+        }
+
+        String cacheKey = player.getUniqueId() + ":goldenapple";
+        Boolean cached = (Boolean) cacheManager.get("restriction-data", cacheKey);
+        if (cached != null) {
+            return cached;
+        }
+
+        boolean canUse = goldenAppleRestriction.canUseGoldenApple(player);
+        cacheManager.put("restriction-data", cacheKey, canUse);
+        return canUse;
+    }
+
+    @Override
+    public boolean canUseEnchantedGoldenApple(Player player) {
+        if (!combatManager.isInCombat(player)) {
+            return true;
+        }
+
+        String cacheKey = player.getUniqueId() + ":enchantedgoldenapple";
+        Boolean cached = (Boolean) cacheManager.get("restriction-data", cacheKey);
+        if (cached != null) {
+            return cached;
+        }
+
+        boolean canUse = goldenAppleRestriction.canUseEnchantedGoldenApple(player);
+        cacheManager.put("restriction-data", cacheKey, canUse);
+        return canUse;
+    }
+
     // Getters for specific restrictions
     public EnderPearlRestriction getEnderPearlRestriction() { return enderPearlRestriction; }
     public ElytraRestriction getElytraRestriction() { return elytraRestriction; }
+    public GoldenAppleRestriction getGoldenAppleRestriction() { return goldenAppleRestriction; }
     public CombatManager getCombatManager() { return combatManager; }
 }

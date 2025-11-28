@@ -1,478 +1,233 @@
 Starting Paper server...
 
 Starting org.bukkit.craftbukkit.Main
-[21:38:02 INFO]: [bootstrap] Running Java 21 (Java HotSpot(TM) 64-Bit Server VM 21.0.8+12-LTS-250; Oracle Corporation null) on Windows 11 10.0 (amd64)
-[21:38:02 INFO]: [bootstrap] Loading Paper 1.21.10-113-main@9fc21bc (2025-11-14T16:11:13Z) for Minecraft 1.21.10
-[21:38:03 INFO]: [PluginInitializerManager] Initializing plugins...
-[21:38:04 INFO]: [PluginRemapper] Remapping plugin 'plugins\pvpcombat-1.0.0-SNAPSHOT.jar'...
-[21:38:06 INFO]: [PluginRemapper] Done remapping plugin 'plugins\pvpcombat-1.0.0-SNAPSHOT.jar' in 1725ms.
-[21:38:06 INFO]: [PluginInitializerManager] Initialized 4 plugins
-[21:38:06 INFO]: [PluginInitializerManager] Bukkit plugins (4):
+[11:41:23 INFO]: [bootstrap] Running Java 21 (Java HotSpot(TM) 64-Bit Server VM 21.0.8+12-LTS-250; Oracle Corporation null) on Windows 11 10.0 (amd64)
+[11:41:23 INFO]: [bootstrap] Loading Paper 1.21.10-113-main@9fc21bc (2025-11-14T16:11:13Z) for Minecraft 1.21.10
+[11:41:25 INFO]: [PluginInitializerManager] Initializing plugins...
+[11:41:25 INFO]: [PluginRemapper] Remapping plugin 'plugins\PvPCombat.jar'...
+[11:41:28 INFO]: [PluginRemapper] Done remapping plugin 'plugins\PvPCombat.jar' in 2459ms.
+[11:41:29 INFO]: [PluginInitializerManager] Initialized 4 plugins
+[11:41:29 INFO]: [PluginInitializerManager] Bukkit plugins (4):
  - PlaceholderAPI (2.11.7), PvPCombat (1.0.0), ViaBackwards (5.5.1), ViaVersion (5.5.1)
-[21:38:16 INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
-[21:38:20 INFO]: Loaded 1461 recipes
-[21:38:20 INFO]: Loaded 1574 advancements
-[21:38:20 INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Initialising converters for DataConverter...
-[21:38:20 INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Finished initialising converters for DataConverter in 695.6ms
-[21:38:21 INFO]: Starting minecraft server version 1.21.10
-[21:38:21 INFO]: Loading properties
-[21:38:21 INFO]: This server is running Paper version 1.21.10-113-main@9fc21bc (2025-11-14T16:11:13Z) (Implementing API version 1.21.10-R0.1-SNAPSHOT)
-[21:38:21 INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
-[21:38:21 INFO]: Server Ping Player Sample Count: 12
-[21:38:21 INFO]: Using 4 threads for Netty based IO
-[21:38:22 INFO]: [MoonriseCommon] Paper is using 2 worker threads, 1 I/O threads
-[21:38:23 INFO]: Default game type: SURVIVAL
-[21:38:23 INFO]: Generating keypair
-[21:38:23 INFO]: Starting Minecraft server on *:25565
-[21:38:23 INFO]: Using default channel type
-[21:38:23 INFO]: Paper: Using Java compression from Velocity.
-[21:38:23 INFO]: Paper: Using Java cipher from Velocity.
-[21:38:24 INFO]: [ViaVersion] Loading server plugin ViaVersion v5.5.1
-[21:38:24 INFO]: [ViaVersion] ViaVersion 5.5.1 is now loaded. Registering protocol transformers and injecting...
-[21:38:25 INFO]: [ViaVersion] Loading block connection mappings ...
-[21:38:26 INFO]: [ViaVersion] Using FastUtil Long2ObjectOpenHashMap for block connections
-[21:38:27 INFO]: [ViaBackwards] Loading translations...
-[21:38:27 INFO]: [ViaBackwards] Registering protocols...
-[21:38:28 INFO]: [PlaceholderAPI] Loading server plugin PlaceholderAPI v2.11.7
-[21:38:28 INFO]: [ViaBackwards] Loading server plugin ViaBackwards v5.5.1
-[21:38:28 INFO]: [PvPCombat] Loading server plugin PvPCombat v1.0.0
-[21:38:28 INFO]: Server permissions file permissions.yml is empty, ignoring it
-[21:38:28 WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
-[21:38:28 WARN]: The server will make no attempt to authenticate usernames. Beware.
-[21:38:28 WARN]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
-[21:38:28 WARN]: To change this, set "online-mode" to "true" in the server.properties file.
-[21:38:28 INFO]: Preparing level "world"
-[21:38:29 INFO]: Loading 0 persistent chunks for world 'minecraft:overworld'...
-[21:38:29 INFO]: Preparing spawn area: 100%
-[21:38:29 INFO]: Prepared spawn area in 11 ms
-[21:38:29 INFO]: Loading 0 persistent chunks for world 'minecraft:the_nether'...
-[21:38:29 INFO]: Prepared spawn area in 9 ms
-[21:38:29 INFO]: Loading 0 persistent chunks for world 'minecraft:the_end'...
-[21:38:29 INFO]: Prepared spawn area in 14 ms
-[21:38:29 INFO]: Done preparing level "world" (0.961s)
-[21:38:29 INFO]: [ViaVersion] Enabling ViaVersion v5.5.1
-[21:38:29 INFO]: [ViaVersion] ViaVersion detected server version: 1.21.9-1.21.10 (773)
-[21:38:29 INFO]: [PlaceholderAPI] Enabling PlaceholderAPI v2.11.7
-[21:38:30 INFO]: [PlaceholderAPI] Fetching available expansion information...
-[21:38:30 INFO]: [ViaBackwards] Enabling ViaBackwards v5.5.1
-[21:38:30 INFO]: [PvPCombat] Enabling PvPCombat v1.0.0
-[21:38:30 INFO]: [PvPCombat] CombatReplayManager initialized with format: HYBRID
-[21:38:30 INFO]: [PvPCombat] Replay system initialized
-[21:38:30 INFO]: [PvPCombat] CombatLogger initialized with storage type: BOTH
-[21:38:30 INFO]: [PvPCombat] Plugin managers initialized successfully.
-[21:38:30 INFO]: [PvPCombat] Configuration validation warnings:
-[21:38:30 INFO]: [PvPCombat] WARNING: [performance.thread-pool-size] Missing configuration value, using default: 4
-[21:38:30 INFO]: [PvPCombat] Configuration loaded successfully
-[21:38:30 INFO]: [PvPCombat] CombatReplayManager initialized with format: HYBRID
-[21:38:30 INFO]: [PvPCombat] Replay system initialized
-[21:38:30 INFO]: [PvPCombat] CombatLogger initialized with storage type: BOTH
-[21:38:30 INFO]: [PvPCombat] Event listeners registered.
-[21:38:30 INFO]: [PvPCombat] CombatReplayManager initialized with format: HYBRID
-[21:38:30 INFO]: [PvPCombat] Replay system initialized
-[21:38:30 INFO]: [PvPCombat] CombatLogger initialized with storage type: BOTH
-[21:38:30 INFO]: [PvPCombat] Commands registered successfully.
-[21:38:30 INFO]: [PvPCombat] PvPCombat plugin has been enabled!
-[21:38:30 INFO]: [spark] Starting background profiler...
-[21:38:30 INFO]: [spark] The async-profiler engine is not supported for your os/arch (windows11/amd64), so the built-in Java engine will be used instead.
-[21:38:31 INFO]: [PlaceholderAPI] Placeholder expansion registration initializing...
-[21:38:31 INFO]: 0 placeholder hook(s) registered!
-[21:38:31 INFO]: Running delayed init tasks
-[21:38:31 INFO]: Done (29.769s)! For help, type "help"
-[21:38:31 INFO]: [ViaVersion] Finished mapping loading, shutting down loader executor.
-[21:38:32 WARN]: [PvPCombat] Server-wide lag detected: TPS 0.64 (threshold: 18.00)
-[21:39:54 INFO]: UUID of player EmulsionOP is 5135cc36-015e-30dd-a6f3-4e6aef0e6b9b
-[21:39:58 INFO]: EmulsionOP joined the game
-[21:39:58 INFO]: EmulsionOP[/127.0.0.1:9441] logged in with entity id 16 at ([world]-521.5, 65.0, 235.5)
-[21:39:59 INFO]: UUID of player Muzlik_Gamer is 638257d1-bbfc-3e2d-8ea3-fb3bcd255dd8
-[21:40:00 INFO]: Muzlik_Gamer joined the game
-[21:40:00 INFO]: Muzlik_Gamer[/127.0.0.1:58581] logged in with entity id 94 at ([world]-490.1574330195563, 64.0, 253.20411150759347)
-[21:40:17 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 1.5)
-[21:40:17 INFO]: [PvPCombat] Combat started between Muzlik_Gamer and EmulsionOP
-[21:40:17 WARN]: [PvPCombat] Task #13 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+[11:41:40 INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[11:41:45 INFO]: Loaded 1461 recipes
+[11:41:45 INFO]: Loaded 1574 advancements
+[11:41:45 INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Initialising converters for DataConverter...
+[11:41:46 INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Finished initialising converters for DataConverter in 694.5ms
+[11:41:46 INFO]: Starting minecraft server version 1.21.10
+[11:41:46 INFO]: Loading properties
+[11:41:46 INFO]: This server is running Paper version 1.21.10-113-main@9fc21bc (2025-11-14T16:11:13Z) (Implementing API version 1.21.10-R0.1-SNAPSHOT)
+[11:41:46 INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
+[11:41:46 INFO]: Server Ping Player Sample Count: 12
+[11:41:46 INFO]: Using 4 threads for Netty based IO
+[11:41:48 INFO]: [MoonriseCommon] Paper is using 2 worker threads, 1 I/O threads
+[11:41:48 INFO]: Default game type: SURVIVAL
+[11:41:48 INFO]: Generating keypair
+[11:41:48 INFO]: Starting Minecraft server on *:25565
+[11:41:48 INFO]: Using default channel type
+[11:41:48 INFO]: Paper: Using Java compression from Velocity.
+[11:41:48 INFO]: Paper: Using Java cipher from Velocity.
+[11:41:49 INFO]: [ViaVersion] Loading server plugin ViaVersion v5.5.1
+[11:41:49 INFO]: [ViaVersion] ViaVersion 5.5.1 is now loaded. Registering protocol transformers and injecting...
+[11:41:51 INFO]: [ViaVersion] Loading block connection mappings ...
+[11:41:51 INFO]: [ViaVersion] Using FastUtil Long2ObjectOpenHashMap for block connections
+[11:41:52 INFO]: [ViaBackwards] Loading translations...
+[11:41:52 INFO]: [ViaBackwards] Registering protocols...
+[11:41:53 INFO]: [PlaceholderAPI] Loading server plugin PlaceholderAPI v2.11.7
+[11:41:53 INFO]: [ViaBackwards] Loading server plugin ViaBackwards v5.5.1
+[11:41:53 INFO]: [PvPCombat] Loading server plugin PvPCombat v1.0.0
+[11:41:53 INFO]: Server permissions file permissions.yml is empty, ignoring it
+[11:41:53 WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[11:41:53 WARN]: The server will make no attempt to authenticate usernames. Beware.
+[11:41:53 WARN]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[11:41:53 WARN]: To change this, set "online-mode" to "true" in the server.properties file.
+[11:41:53 INFO]: Preparing level "world"
+[11:41:54 INFO]: Loading 0 persistent chunks for world 'minecraft:overworld'...
+[11:41:54 INFO]: Preparing spawn area: 100%
+[11:41:54 INFO]: Prepared spawn area in 16 ms
+[11:41:54 INFO]: Loading 0 persistent chunks for world 'minecraft:the_nether'...
+[11:41:54 INFO]: Prepared spawn area in 11 ms
+[11:41:54 INFO]: Loading 0 persistent chunks for world 'minecraft:the_end'...
+[11:41:54 INFO]: Prepared spawn area in 12 ms
+[11:41:54 INFO]: Done preparing level "world" (1.011s)
+[11:41:54 INFO]: [ViaVersion] Enabling ViaVersion v5.5.1
+[11:41:54 INFO]: [ViaVersion] ViaVersion detected server version: 1.21.9-1.21.10 (773)
+[11:41:54 INFO]: [PlaceholderAPI] Enabling PlaceholderAPI v2.11.7
+[11:41:55 INFO]: [PlaceholderAPI] Fetching available expansion information...
+[11:41:55 INFO]: [ViaBackwards] Enabling ViaBackwards v5.5.1
+[11:41:55 INFO]: [PvPCombat] Enabling PvPCombat v1.0.0
+[11:41:55 INFO]: [PvPCombat] CombatReplayManager initialized with format: HYBRID
+[11:41:55 INFO]: [PvPCombat] Replay system initialized
+[11:41:55 INFO]: [PvPCombat] CombatLogger initialized with storage type: BOTH
+[11:41:55 INFO]: [PvPCombat] Plugin managers initialized successfully.
+[11:41:55 INFO]: [PvPCombat] Configuration validation warnings:
+[11:41:55 INFO]: [PvPCombat] WARNING: [performance.thread-pool-size] Missing configuration value, using default: 4
+[11:41:55 INFO]: [PvPCombat] Configuration loaded successfully
+[11:41:55 INFO]: [PvPCombat] CombatReplayManager initialized with format: HYBRID
+[11:41:55 INFO]: [PvPCombat] Replay system initialized
+[11:41:55 INFO]: [PvPCombat] CombatLogger initialized with storage type: BOTH
+[11:41:55 INFO]: [PvPCombat] Event listeners registered.
+[11:41:55 INFO]: [PvPCombat] CombatReplayManager initialized with format: HYBRID
+[11:41:55 INFO]: [PvPCombat] Replay system initialized
+[11:41:55 INFO]: [PvPCombat] CombatLogger initialized with storage type: BOTH
+[11:41:55 INFO]: [PvPCombat] Commands registered successfully.
+[11:41:55 INFO]: [PvPCombat] PvPCombat plugin has been enabled!
+[11:41:56 INFO]: [spark] Starting background profiler...
+[11:41:56 INFO]: [spark] The async-profiler engine is not supported for your os/arch (windows11/amd64), so the built-in Java engine will be used instead.
+[11:41:56 INFO]: [PlaceholderAPI] Placeholder expansion registration initializing...
+[11:41:56 INFO]: 0 placeholder hook(s) registered!
+[11:41:56 INFO]: Running delayed init tasks
+[11:41:56 INFO]: Done (33.750s)! For help, type "help"
+[11:41:56 INFO]: [ViaVersion] Finished mapping loading, shutting down loader executor.
+[11:41:57 WARN]: [PvPCombat] Server-wide lag detected: TPS 0.62 (threshold: 18.00)
+[11:47:38 INFO]: UUID of player Muzlik_Gamer is 638257d1-bbfc-3e2d-8ea3-fb3bcd255dd8
+[11:47:39 INFO]: UUID of player EmulsionOP is 5135cc36-015e-30dd-a6f3-4e6aef0e6b9b
+[11:47:42 INFO]: EmulsionOP joined the game
+[11:47:42 INFO]: EmulsionOP[/127.0.0.1:39187] logged in with entity id 27 at ([world]-521.6999999880791, 64.0, 249.69999998807907)
+[11:47:42 INFO]: Muzlik_Gamer joined the game
+[11:47:42 INFO]: Muzlik_Gamer[/127.0.0.1:39185] logged in with entity id 28 at ([world]-520.9780788858319, 64.0, 248.92137111881536)
+[11:50:40 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.0 to EmulsionOP (Total: 1.0)
+[11:50:40 INFO]: [PvPCombat] Combat started between Muzlik_Gamer and EmulsionOP
+[11:50:42 ERROR]: Could not pass event PlayerItemConsumeEvent to PvPCombat v1.0.0
+java.lang.NullPointerException: Cannot invoke "com.muzlik.pvpcombat.interfaces.IConfigManager.getMainConfig()" because "this.configManager" is null
+        at PvPCombat.jar/com.muzlik.pvpcombat.restrictions.GoldenAppleRestriction.canUseEnchantedGoldenApple(GoldenAppleRestriction.java:53) ~[PvPCombat.jar:?]
+        at PvPCombat.jar/com.muzlik.pvpcombat.restrictions.RestrictionManager.canUseEnchantedGoldenApple(RestrictionManager.java:174) ~[PvPCombat.jar:?]
+        at PvPCombat.jar/com.muzlik.pvpcombat.events.CombatEventListener.onPlayerConsume(CombatEventListener.java:385) ~[PvPCombat.jar:?]
+        at co.aikar.timings.TimedEventExecutor.execute(TimedEventExecutor.java:80) ~[paper-api-1.21.10-R0.1-SNAPSHOT.jar:?]
+        at org.bukkit.plugin.RegisteredListener.callEvent(RegisteredListener.java:71) ~[paper-api-1.21.10-R0.1-SNAPSHOT.jar:?]
+        at io.papermc.paper.plugin.manager.PaperEventManager.callEvent(PaperEventManager.java:54) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at io.papermc.paper.plugin.manager.PaperPluginManagerImpl.callEvent(PaperPluginManagerImpl.java:131) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at org.bukkit.plugin.SimplePluginManager.callEvent(SimplePluginManager.java:628) ~[paper-api-1.21.10-R0.1-SNAPSHOT.jar:?]
+        at net.minecraft.world.entity.LivingEntity.completeUsingItem(LivingEntity.java:4123) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.level.ServerPlayer.completeUsingItem(ServerPlayer.java:2097) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.world.entity.LivingEntity.updateUsingItem(LivingEntity.java:4012) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.level.ServerPlayer.updateUsingItem(ServerPlayer.java:2724) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.world.entity.LivingEntity.updatingUsingItem(LivingEntity.java:3957) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.world.entity.LivingEntity.tick(LivingEntity.java:3269) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.world.entity.player.Player.tick(Player.java:283) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.level.ServerPlayer.doTick(ServerPlayer.java:803) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.network.ServerGamePacketListenerImpl.tickPlayer(ServerGamePacketListenerImpl.java:371) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.network.ServerGamePacketListenerImpl.tick(ServerGamePacketListenerImpl.java:351) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.network.Connection.tick(Connection.java:597) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.network.ServerConnectionListener.tick(ServerConnectionListener.java:264) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.MinecraftServer.tickConnection(MinecraftServer.java:1857) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.dedicated.DedicatedServer.tickConnection(DedicatedServer.java:552) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1821) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:40:18 WARN]: [PvPCombat] Task #13 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+[11:50:43 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.0 to EmulsionOP (Total: 2.0)
+[11:50:43 INFO]: [PvPCombat] [STDOUT] [COMBAT] Muzlik_Gamer won! Total wins: 1
+[11:50:43 WARN]: Nag author(s): '[muzlik]' of 'PvPCombat v1.0.0' about their usage of System.out/err.print. Please use your plugin's logger instead (JavaPlugin#getLogger).
+[11:50:43 INFO]: [PvPCombat] [STDOUT] [COMBAT] EmulsionOP lost! Total losses: 1
+[11:50:43 INFO]: [PvPCombat] Combat ended - Winner: Muzlik_Gamer, Loser: EmulsionOP
+[11:50:43 INFO]: EmulsionOP was slain by Muzlik_Gamer
+[11:50:43 INFO]: [PvPCombat] [COMBAT END] Muzlik_Gamer: 2.0 dmg dealt, 1 wins, 0 losses | EmulsionOP: 0.0 dmg dealt, 0 wins, 1 losses
+[11:50:43 INFO]: [PvPCombat] Lag adjustments cleaned up for session bfe8ee14-cded-46ee-b3bd-0c1e4a44b10c: LagAdjustment{session=bfe8ee14-cded-46ee-b3bd-0c1e4a44b10c, active=false, extraSeconds=0, multiplier=1.00, totalAdjusted=0, adjustments=0}
+[11:50:43 INFO]: [PvPCombat] Combat ended for player 5135cc36-015e-30dd-a6f3-4e6aef0e6b9b (Duration: 3s)
+[11:50:43 WARN]: [PvPCombat] Failed to save replay for session bfe8ee14-cded-46ee-b3bd-0c1e4a44b10c: com.muzlik.pvpcombat.data.ReplayEvent
+[11:50:53 INFO]: [PvPCombat] [DAMAGE] EmulsionOP dealt 0.0 to Muzlik_Gamer (Total: 0.0)
+[11:50:53 INFO]: [PvPCombat] Combat started between EmulsionOP and Muzlik_Gamer
+[11:51:03 INFO]: Muzlik_Gamer issued server command: /give Muzlik_Gamer minecraft:golden_apple 14
+[11:51:03 INFO]: [Muzlik_Gamer: Gave 14 [Golden Apple] to Muzlik_Gamer]
+[11:51:07 ERROR]: Could not pass event PlayerItemConsumeEvent to PvPCombat v1.0.0
+java.lang.NullPointerException: Cannot invoke "com.muzlik.pvpcombat.interfaces.IConfigManager.getMainConfig()" because "this.configManager" is null
+        at PvPCombat.jar/com.muzlik.pvpcombat.restrictions.GoldenAppleRestriction.canUseGoldenApple(GoldenAppleRestriction.java:31) ~[PvPCombat.jar:?]
+        at PvPCombat.jar/com.muzlik.pvpcombat.restrictions.RestrictionManager.canUseGoldenApple(RestrictionManager.java:157) ~[PvPCombat.jar:?]
+        at PvPCombat.jar/com.muzlik.pvpcombat.events.CombatEventListener.onPlayerConsume(CombatEventListener.java:358) ~[PvPCombat.jar:?]
+        at co.aikar.timings.TimedEventExecutor.execute(TimedEventExecutor.java:80) ~[paper-api-1.21.10-R0.1-SNAPSHOT.jar:?]
+        at org.bukkit.plugin.RegisteredListener.callEvent(RegisteredListener.java:71) ~[paper-api-1.21.10-R0.1-SNAPSHOT.jar:?]
+        at io.papermc.paper.plugin.manager.PaperEventManager.callEvent(PaperEventManager.java:54) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at io.papermc.paper.plugin.manager.PaperPluginManagerImpl.callEvent(PaperPluginManagerImpl.java:131) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at org.bukkit.plugin.SimplePluginManager.callEvent(SimplePluginManager.java:628) ~[paper-api-1.21.10-R0.1-SNAPSHOT.jar:?]
+        at net.minecraft.world.entity.LivingEntity.completeUsingItem(LivingEntity.java:4123) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.level.ServerPlayer.completeUsingItem(ServerPlayer.java:2097) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.world.entity.LivingEntity.updateUsingItem(LivingEntity.java:4012) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.level.ServerPlayer.updateUsingItem(ServerPlayer.java:2724) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.world.entity.LivingEntity.updatingUsingItem(LivingEntity.java:3957) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.world.entity.LivingEntity.tick(LivingEntity.java:3269) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.world.entity.player.Player.tick(Player.java:283) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.level.ServerPlayer.doTick(ServerPlayer.java:803) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.network.ServerGamePacketListenerImpl.tickPlayer(ServerGamePacketListenerImpl.java:371) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.network.ServerGamePacketListenerImpl.tick(ServerGamePacketListenerImpl.java:351) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.network.Connection.tick(Connection.java:597) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.network.ServerConnectionListener.tick(ServerConnectionListener.java:264) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.MinecraftServer.tickConnection(MinecraftServer.java:1857) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.dedicated.DedicatedServer.tickConnection(DedicatedServer.java:552) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1821) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:40:18 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 3.0)
-[21:40:19 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 4.5)
-[21:40:19 WARN]: [PvPCombat] Task #13 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+[11:51:07 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.0 to EmulsionOP (Total: 3.0)
+[11:51:09 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 4.5)
+[11:51:09 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 6.0)
+[11:51:10 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 7.5)
+[11:51:12 ERROR]: Could not pass event PlayerItemConsumeEvent to PvPCombat v1.0.0
+java.lang.NullPointerException: Cannot invoke "com.muzlik.pvpcombat.interfaces.IConfigManager.getMainConfig()" because "this.configManager" is null
+        at PvPCombat.jar/com.muzlik.pvpcombat.restrictions.GoldenAppleRestriction.canUseGoldenApple(GoldenAppleRestriction.java:31) ~[PvPCombat.jar:?]
+        at PvPCombat.jar/com.muzlik.pvpcombat.restrictions.RestrictionManager.canUseGoldenApple(RestrictionManager.java:157) ~[PvPCombat.jar:?]
+        at PvPCombat.jar/com.muzlik.pvpcombat.events.CombatEventListener.onPlayerConsume(CombatEventListener.java:358) ~[PvPCombat.jar:?]
+        at co.aikar.timings.TimedEventExecutor.execute(TimedEventExecutor.java:80) ~[paper-api-1.21.10-R0.1-SNAPSHOT.jar:?]
+        at org.bukkit.plugin.RegisteredListener.callEvent(RegisteredListener.java:71) ~[paper-api-1.21.10-R0.1-SNAPSHOT.jar:?]
+        at io.papermc.paper.plugin.manager.PaperEventManager.callEvent(PaperEventManager.java:54) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at io.papermc.paper.plugin.manager.PaperPluginManagerImpl.callEvent(PaperPluginManagerImpl.java:131) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at org.bukkit.plugin.SimplePluginManager.callEvent(SimplePluginManager.java:628) ~[paper-api-1.21.10-R0.1-SNAPSHOT.jar:?]
+        at net.minecraft.world.entity.LivingEntity.completeUsingItem(LivingEntity.java:4123) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.level.ServerPlayer.completeUsingItem(ServerPlayer.java:2097) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.world.entity.LivingEntity.updateUsingItem(LivingEntity.java:4012) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.level.ServerPlayer.updateUsingItem(ServerPlayer.java:2724) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.world.entity.LivingEntity.updatingUsingItem(LivingEntity.java:3957) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.world.entity.LivingEntity.tick(LivingEntity.java:3269) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.world.entity.player.Player.tick(Player.java:283) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.level.ServerPlayer.doTick(ServerPlayer.java:803) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.network.ServerGamePacketListenerImpl.tickPlayer(ServerGamePacketListenerImpl.java:371) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.network.ServerGamePacketListenerImpl.tick(ServerGamePacketListenerImpl.java:351) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.network.Connection.tick(Connection.java:597) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.network.ServerConnectionListener.tick(ServerConnectionListener.java:264) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.MinecraftServer.tickConnection(MinecraftServer.java:1857) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.dedicated.DedicatedServer.tickConnection(DedicatedServer.java:552) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1821) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:40:20 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 6.0)
-[21:40:20 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 7.5)
-[21:40:20 WARN]: [PvPCombat] Task #13 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+[11:51:14 INFO]: [PvPCombat] [DAMAGE] EmulsionOP dealt 0.0 to Muzlik_Gamer (Total: 0.0)
+[11:51:15 INFO]: [PvPCombat] [DAMAGE] EmulsionOP dealt 0.0 to Muzlik_Gamer (Total: 0.0)
+[11:51:28 ERROR]: Could not pass event PlayerItemConsumeEvent to PvPCombat v1.0.0
+java.lang.NullPointerException: Cannot invoke "com.muzlik.pvpcombat.interfaces.IConfigManager.getMainConfig()" because "this.configManager" is null
+        at PvPCombat.jar/com.muzlik.pvpcombat.restrictions.GoldenAppleRestriction.canUseGoldenApple(GoldenAppleRestriction.java:31) ~[PvPCombat.jar:?]
+        at PvPCombat.jar/com.muzlik.pvpcombat.restrictions.RestrictionManager.canUseGoldenApple(RestrictionManager.java:157) ~[PvPCombat.jar:?]
+        at PvPCombat.jar/com.muzlik.pvpcombat.events.CombatEventListener.onPlayerConsume(CombatEventListener.java:358) ~[PvPCombat.jar:?]
+        at co.aikar.timings.TimedEventExecutor.execute(TimedEventExecutor.java:80) ~[paper-api-1.21.10-R0.1-SNAPSHOT.jar:?]
+        at org.bukkit.plugin.RegisteredListener.callEvent(RegisteredListener.java:71) ~[paper-api-1.21.10-R0.1-SNAPSHOT.jar:?]
+        at io.papermc.paper.plugin.manager.PaperEventManager.callEvent(PaperEventManager.java:54) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at io.papermc.paper.plugin.manager.PaperPluginManagerImpl.callEvent(PaperPluginManagerImpl.java:131) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at org.bukkit.plugin.SimplePluginManager.callEvent(SimplePluginManager.java:628) ~[paper-api-1.21.10-R0.1-SNAPSHOT.jar:?]
+        at net.minecraft.world.entity.LivingEntity.completeUsingItem(LivingEntity.java:4123) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.level.ServerPlayer.completeUsingItem(ServerPlayer.java:2097) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.world.entity.LivingEntity.updateUsingItem(LivingEntity.java:4012) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.level.ServerPlayer.updateUsingItem(ServerPlayer.java:2724) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.world.entity.LivingEntity.updatingUsingItem(LivingEntity.java:3957) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.world.entity.LivingEntity.tick(LivingEntity.java:3269) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.world.entity.player.Player.tick(Player.java:283) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.level.ServerPlayer.doTick(ServerPlayer.java:803) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.network.ServerGamePacketListenerImpl.tickPlayer(ServerGamePacketListenerImpl.java:371) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.network.ServerGamePacketListenerImpl.tick(ServerGamePacketListenerImpl.java:351) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.network.Connection.tick(Connection.java:597) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.network.ServerConnectionListener.tick(ServerConnectionListener.java:264) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.MinecraftServer.tickConnection(MinecraftServer.java:1857) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.dedicated.DedicatedServer.tickConnection(DedicatedServer.java:552) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
+        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1821) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
         at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:40:21 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 9.0)
-[21:40:21 WARN]: [PvPCombat] Task #13 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:40:22 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 10.5)
-[21:40:22 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 12.0)
-[21:40:22 WARN]: [PvPCombat] Task #13 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:40:23 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 13.5)
-[21:40:23 WARN]: [PvPCombat] Task #13 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:40:23 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 15.0)
-[21:40:24 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 16.5)
-[21:40:24 WARN]: [PvPCombat] Task #13 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:40:24 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 18.0)
-[21:40:25 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 19.5)
-[21:40:25 WARN]: [PvPCombat] Task #13 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:40:26 WARN]: [PvPCombat] Task #13 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:40:26 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 21.0)
-[21:40:27 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.0 to EmulsionOP (Total: 22.0)
-[21:40:27 WARN]: [PvPCombat] Task #13 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:40:28 WARN]: [PvPCombat] Task #13 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:40:28 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 23.5)
-[21:40:29 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 25.0)
-[21:40:29 WARN]: [PvPCombat] Task #13 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:40:30 INFO]: [PvPCombat] [DAMAGE] Muzlik_Gamer dealt 1.5 to EmulsionOP (Total: 26.5)
-[21:40:30 INFO]: [PvPCombat] [STDOUT] [COMBAT] Muzlik_Gamer won! Total wins: 1
-[21:40:30 WARN]: Nag author(s): '[muzlik]' of 'PvPCombat v1.0.0' about their usage of System.out/err.print. Please use your plugin's logger instead (JavaPlugin#getLogger).
-[21:40:30 INFO]: [PvPCombat] [STDOUT] [COMBAT] EmulsionOP lost! Total losses: 1
-[21:40:30 INFO]: [PvPCombat] Combat ended - Winner: Muzlik_Gamer, Loser: EmulsionOP
-[21:40:30 INFO]: EmulsionOP was slain by Muzlik_Gamer
-[21:40:30 INFO]: [PvPCombat] [COMBAT END] Muzlik_Gamer: 0.0 dmg dealt, 0 wins, 0 losses | EmulsionOP: 0.0 dmg dealt, 0 wins, 0 losses
-[21:40:30 INFO]: [PvPCombat] Lag adjustments cleaned up for session 0bc52860-c34f-4b14-bcef-3a6b2d1d9ed2: LagAdjustment{session=0bc52860-c34f-4b14-bcef-3a6b2d1d9ed2, active=false, extraSeconds=0, multiplier=1.00, totalAdjusted=0, adjustments=0}
-[21:40:30 INFO]: [PvPCombat] Combat ended for player 5135cc36-015e-30dd-a6f3-4e6aef0e6b9b (Duration: 12s)
-[21:40:30 WARN]: [PvPCombat] Failed to save replay for session 0bc52860-c34f-4b14-bcef-3a6b2d1d9ed2: com.muzlik.pvpcombat.data.ReplayEvent
-[21:40:37 INFO]: Muzlik_Gamer issued server command: /combat summary
-[21:40:44 INFO]: Muzlik_Gamer issued server command: /combat summary Muzlik_Gamer
-[21:40:58 INFO]: EmulsionOP issued server command: /combat summary
-[21:41:02 INFO]: [PvPCombat] [DAMAGE] EmulsionOP dealt 1.5 to Muzlik_Gamer (Total: 1.5)
-[21:41:02 INFO]: [PvPCombat] Combat started between EmulsionOP and Muzlik_Gamer
-[21:41:02 WARN]: [PvPCombat] Task #60 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:41:03 INFO]: [PvPCombat] [DAMAGE] EmulsionOP dealt 1.5 to Muzlik_Gamer (Total: 3.0)
-[21:41:03 WARN]: [PvPCombat] Task #60 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:41:03 INFO]: [PvPCombat] [DAMAGE] EmulsionOP dealt 1.5 to Muzlik_Gamer (Total: 4.5)
-[21:41:04 INFO]: [PvPCombat] [DAMAGE] EmulsionOP dealt 1.5 to Muzlik_Gamer (Total: 6.0)
-[21:41:04 WARN]: [PvPCombat] Task #60 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:41:05 WARN]: [PvPCombat] Task #60 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:41:05 INFO]: [PvPCombat] [DAMAGE] EmulsionOP dealt 1.5 to Muzlik_Gamer (Total: 7.5)
-[21:41:06 INFO]: [PvPCombat] [DAMAGE] EmulsionOP dealt 1.0 to Muzlik_Gamer (Total: 8.5)
-[21:41:06 WARN]: [PvPCombat] Task #60 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:41:06 INFO]: [PvPCombat] [DAMAGE] EmulsionOP dealt 1.5 to Muzlik_Gamer (Total: 10.0)
-[21:41:07 INFO]: [PvPCombat] [DAMAGE] EmulsionOP dealt 1.5 to Muzlik_Gamer (Total: 11.5)
-[21:41:07 WARN]: [PvPCombat] Task #60 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:41:08 INFO]: [PvPCombat] [DAMAGE] EmulsionOP dealt 1.5 to Muzlik_Gamer (Total: 13.0)
-[21:41:08 WARN]: [PvPCombat] Task #60 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:41:08 INFO]: [PvPCombat] [DAMAGE] EmulsionOP dealt 1.5 to Muzlik_Gamer (Total: 14.5)
-[21:41:09 INFO]: [PvPCombat] [DAMAGE] EmulsionOP dealt 1.5 to Muzlik_Gamer (Total: 16.0)
-[21:41:09 WARN]: [PvPCombat] Task #60 for PvPCombat v1.0.0 generated an exception
-java.lang.NullPointerException: Cannot invoke "org.bukkit.entity.Player.getName()" because "player" is null
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.addDefaultPlaceholders(MessageFormatter.java:109) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.replacePlaceholders(MessageFormatter.java:84) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.MessageFormatter.formatMessage(MessageFormatter.java:42) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.formatMessage(ActionBarManager.java:136) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager.sendActionBar(ActionBarManager.java:37) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at pvpcombat-1.0.0-SNAPSHOT.jar/com.muzlik.pvpcombat.visual.ActionBarManager$1.run(ActionBarManager.java:61) ~[pvpcombat-1.0.0-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at org.bukkit.craftbukkit.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:474) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:1744) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1618) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:430) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1338) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:384) ~[paper-1.21.10.jar:1.21.10-113-9fc21bc]
-        at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[21:41:09 INFO]: [PvPCombat] [DAMAGE] EmulsionOP dealt 1.5 to Muzlik_Gamer (Total: 17.5)
-[21:41:09 INFO]: [PvPCombat] [STDOUT] [COMBAT] EmulsionOP won! Total wins: 1
-[21:41:09 INFO]: [PvPCombat] [STDOUT] [COMBAT] Muzlik_Gamer lost! Total losses: 1
-[21:41:09 INFO]: [PvPCombat] Combat ended - Winner: EmulsionOP, Loser: Muzlik_Gamer
-[21:41:09 INFO]: Muzlik_Gamer was slain by EmulsionOP
-[21:41:09 INFO]: [PvPCombat] [COMBAT END] EmulsionOP: 0.0 dmg dealt, 0 wins, 0 losses | Muzlik_Gamer: 0.0 dmg dealt, 0 wins, 0 losses
-[21:41:09 INFO]: [PvPCombat] Lag adjustments cleaned up for session 9ebc4fce-5d1c-40ae-bf7b-48b68743916f: LagAdjustment{session=9ebc4fce-5d1c-40ae-bf7b-48b68743916f, active=false, extraSeconds=0, multiplier=1.00, totalAdjusted=0, adjustments=0}
-[21:41:09 INFO]: [PvPCombat] Combat ended for player 638257d1-bbfc-3e2d-8ea3-fb3bcd255dd8 (Duration: 7s)
-[21:41:09 WARN]: [PvPCombat] Failed to save replay for session 9ebc4fce-5d1c-40ae-bf7b-48b68743916f: com.muzlik.pvpcombat.data.ReplayEvent
-[21:41:12 INFO]: EmulsionOP issued server command: /combat summary
+[11:51:30 INFO]: [PvPCombat] [DAMAGE] EmulsionOP dealt 0.0 to Muzlik_Gamer (Total: 0.0)
+[11:51:30 INFO]: [PvPCombat] [DAMAGE] EmulsionOP dealt 0.0 to Muzlik_Gamer (Total: 0.0)
 >
