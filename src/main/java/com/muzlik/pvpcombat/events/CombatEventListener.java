@@ -154,7 +154,7 @@ public class CombatEventListener implements Listener {
             }
             
             // Debug logging - use info level so it shows in console
-            plugin.getLogger().info(String.format("[DAMAGE] %s dealt %.1f to %s (Total: %.1f)", 
+            plugin.getLoggingManager().log(String.format("[DAMAGE] %s dealt %.1f to %s (Total: %.1f)", 
                 attacker.getName(), damage, defender.getName(),
                 combatManager.getCombatTracker().getPlayerData(attacker.getUniqueId()).getTotalDamageDealt()));
 
@@ -223,7 +223,7 @@ public class CombatEventListener implements Listener {
                     combatManager.getCombatTracker().recordWin(opponent);
                     combatManager.getCombatTracker().recordLoss(deceased);
                     
-                    plugin.getLogger().info("Combat ended - Winner: " + opponent.getName() + ", Loser: " + deceased.getName());
+                    plugin.getLoggingManager().log("Combat ended - Winner: " + opponent.getName() + ", Loser: " + deceased.getName());
                 }
 
                 // End combat - keep on main thread for thread safety
@@ -251,7 +251,7 @@ public class CombatEventListener implements Listener {
                 
                 if (opponent != null) {
                     combatManager.getCombatTracker().recordWin(opponent);
-                    plugin.getLogger().info(player.getName() + " forfeited combat. " + opponent.getName() + " wins!");
+                    plugin.getLoggingManager().log(player.getName() + " forfeited combat. " + opponent.getName() + " wins!");
                     
                     // Notify opponent with better message
                     opponent.sendMessage(ChatColor.GREEN + "You won! " + ChatColor.YELLOW + player.getName() + " forfeited by logging out.");
@@ -262,7 +262,7 @@ public class CombatEventListener implements Listener {
                 
                 // Kill the player immediately (this will trigger death and inventory drop naturally)
                 player.setHealth(0.0);
-                plugin.getLogger().info(player.getName() + " was killed for combat logging.");
+                plugin.getLoggingManager().log(player.getName() + " was killed for combat logging.");
                 
                 // End combat due to logout - keep on main thread for thread safety
                 AsyncUtils.runSync(plugin, () -> combatManager.endCombat(player.getUniqueId()));
@@ -297,7 +297,7 @@ public class CombatEventListener implements Listener {
         if (!restrictionManager.canUseEnderPearl(player)) {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot use Ender Pearls during combat!");
-            plugin.getLogger().info("[ENDERPEARL] Blocked " + player.getName() + " from using ender pearl in combat");
+            plugin.getLoggingManager().log("[ENDERPEARL] Blocked " + player.getName() + " from using ender pearl in combat");
             return;
         }
 
@@ -332,7 +332,7 @@ public class CombatEventListener implements Listener {
         if (isInSafeZone(event.getTo())) {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot use Ender Pearls to enter safe zones during combat!");
-            plugin.getLogger().info("[ENDERPEARL] Blocked " + player.getName() + " from teleporting into safezone");
+            plugin.getLoggingManager().log("[ENDERPEARL] Blocked " + player.getName() + " from teleporting into safezone");
         }
     }
 
@@ -578,7 +578,7 @@ public class CombatEventListener implements Listener {
                 String message = plugin.getConfig().getString("restrictions.teleport.blocked-message", 
                     "&cYou cannot use teleport commands during combat!");
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
-                plugin.getLogger().info("[COMMAND BLOCK] Blocked " + player.getName() + " from using /" + baseCommand + " in combat");
+                plugin.getLoggingManager().log("[COMMAND BLOCK] Blocked " + player.getName() + " from using /" + baseCommand + " in combat");
                 return;
             }
         }
@@ -679,7 +679,7 @@ public class CombatEventListener implements Listener {
         // ALWAYS block tridents in combat (both throwing and riptide)
         event.setCancelled(true);
         player.sendMessage(ChatColor.RED + "You cannot use tridents during combat!");
-        plugin.getLogger().info("[TRIDENT] Blocked " + player.getName() + " from using trident in combat");
+        plugin.getLoggingManager().log("[TRIDENT] Blocked " + player.getName() + " from using trident in combat");
     }
     
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -751,7 +751,7 @@ public class CombatEventListener implements Listener {
         // ALWAYS block tridents in combat (both throwing and riptide)
         event.setCancelled(true);
         player.sendMessage(ChatColor.RED + "You cannot use tridents during combat!");
-        plugin.getLogger().info("[TRIDENT] Blocked " + player.getName() + " from using trident in combat");
+        plugin.getLoggingManager().log("[TRIDENT] Blocked " + player.getName() + " from using trident in combat");
     }
     
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -777,7 +777,7 @@ public class CombatEventListener implements Listener {
         // Block respawn anchor usage in combat
         event.setCancelled(true);
         player.sendMessage(ChatColor.RED + "You cannot use Respawn Anchors during combat!");
-        plugin.getLogger().info("[RESPAWN ANCHOR] Blocked " + player.getName() + " from using respawn anchor in combat");
+        plugin.getLoggingManager().log("[RESPAWN ANCHOR] Blocked " + player.getName() + " from using respawn anchor in combat");
     }
     
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -805,7 +805,7 @@ public class CombatEventListener implements Listener {
             // Block riptide usage in combat
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot use Riptide during combat!");
-            plugin.getLogger().info("[TRIDENT RIPTIDE] Blocked " + player.getName() + " from using riptide in combat");
+            plugin.getLoggingManager().log("[TRIDENT RIPTIDE] Blocked " + player.getName() + " from using riptide in combat");
         }
     }
 }
