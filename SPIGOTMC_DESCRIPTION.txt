@@ -1,0 +1,193 @@
+[CENTER][SIZE=7][B]⚔️ True Combat Manager ⚔️[/B][/SIZE]
+
+[SIZE=5][B]Professional Combat Management for Minecraft Servers[/B][/SIZE]
+[SIZE=4]Advanced tracking, smart restrictions, and stunning visuals for competitive PvP[/SIZE]
+
+[SIZE=4][B]✅ Paper & Spigot 1.18-1.21 | Java 17+[/B][/SIZE][/CENTER]
+
+[HR][/HR]
+
+[SIZE=6][B]What is True Combat Manager?[/B][/SIZE]
+
+True Combat Manager is a comprehensive combat management plugin for competitive Minecraft servers. It tracks every aspect of player fights with detailed statistics, enforces intelligent restrictions to prevent unfair advantages, protects against combat logging, and presents everything through a beautiful, customizable interface.
+
+Built for performance with async processing, intelligent lag compensation, and thread-safe architecture. Perfect for practice servers, factions, KitPvP, or any PvP-focused gameplay.
+
+[B]Why Choose This Plugin?[/B]
+• Stop combat logging with instant-death protection and inventory drops
+• Prevent unfair escapes with smart cooldowns (pearls, gapples, elytra, teleports)
+• Track player performance with lifetime statistics (wins, losses, K/D, damage)
+• Safe zone protection prevents players from entering protected areas during combat
+• Visual glass barriers show at safezone boundaries
+• Creative mode protection automatically switches creative players to survival
+• Customize everything - 6 themes, 6 sound profiles, 100+ config options
+• Lag compensation automatically adjusts timers during server performance issues
+
+[HR][/HR]
+
+[SIZE=6][B]✨ Core Features[/B][/SIZE]
+
+[SIZE=5][B]Combat Tracking & Statistics[/B][/SIZE]
+• Real-time combat detection with automatic session management
+• Lifetime statistics tracked per player:
+  - Total combats, wins, and losses
+  - Win rate percentage and K/D ratio
+  - Total damage dealt and received
+  - Damage ratio (dealt/received)
+  - Total combat time
+  - Last combat timestamp
+• Combat logging protection: instant death + full inventory drop
+• Thread-safe concurrent session handling
+
+[SIZE=5][B]Smart Restrictions[/B][/SIZE]
+• [B]Ender Pearl:[/B] 10s base cooldown, 20s during combat (2.0x multiplier)
+• [B]Golden Apple:[/B] 3s base cooldown, 4.5s in combat (1.5x multiplier)
+• [B]Enchanted Golden Apple:[/B] 8s base cooldown, 16s in combat (2.0x multiplier)
+• [B]Elytra:[/B] Block gliding, boosting, and takeoff during combat
+• [B]Teleport Blocking:[/B] Prevents /tp, /home, /warp, /spawn commands
+• [B]Safe Zone Protection:[/B] Blocks entry to WorldGuard protected regions during combat
+• [B]Visual Glass Barrier System:[/B] Client-side glass barriers appear when attempting safezone entry
+• [B]Safezone Attack Prevention:[/B] Cannot attack from or into safe zones
+• [B]Creative Mode Protection:[/B] Automatically switches creative players to survival during combat
+
+[SIZE=5][B]Visual Experience[/B][/SIZE]
+• [B]BossBar Timer:[/B] Dynamic countdown with smooth animations
+• [B]ActionBar Updates:[/B] Real-time opponent and timer information
+• [B]6 Built-in Themes:[/B] minimal, fire, ice, neon, dark, clean
+• [B]Live Theme Switching:[/B] Change visual style mid-combat with /combat toggle-style
+• [B]HEX Color Support:[/B] Full RGB color customization
+• [B]6 Sound Profiles:[/B] default, subtle, intense, calm, electronic, clean
+• [B]Event Sounds:[/B] Combat start/end, timer warning, timer reset, interference
+
+[SIZE=5][B]Performance & Optimization[/B][/SIZE]
+• [B]Async Processing:[/B] Combat logging runs off main thread with queue system
+• [B]Intelligent Lag Compensation:[/B] Auto-adjusts timers when TPS drops below 18.0
+• [B]Advanced Caching:[/B] TTL-based cache reduces database queries
+• [B]Thread-Safe Architecture:[/B] ConcurrentHashMap for session management
+• [B]Memory Efficient:[/B] Configurable max entries (default: 10,000) with automatic cleanup
+• [B]Ping Tracking:[/B] Per-player latency monitoring
+
+[HR][/HR]
+
+[SIZE=6][B]📋 Commands[/B][/SIZE]
+
+[B]Player Commands:[/B]
+[FONT=courier new]/combat status[/FONT] - View current combat status, opponent, and health
+[FONT=courier new]/combat summary[/FONT] - Display lifetime combat statistics
+[FONT=courier new]/combat toggle-style[/FONT] - Cycle through visual themes
+
+[B]Admin Commands:[/B]
+[FONT=courier new]/combat inspect <player>[/FONT] - View real-time combat data
+[FONT=courier new]/combat summary <player>[/FONT] - Access any player's statistics
+[FONT=courier new]/combat reload[/FONT] - Reload configuration without restart
+[FONT=courier new]/combat debug[/FONT] - Toggle debug mode with performance metrics
+
+[B]Permissions:[/B]
+[FONT=courier new]pvpcombat.command.status[/FONT], [FONT=courier new]pvpcombat.command.summary[/FONT], [FONT=courier new]pvpcombat.command.toggle-style[/FONT]
+[FONT=courier new]pvpcombat.admin[/FONT], [FONT=courier new]pvpcombat.admin.inspect[/FONT], [FONT=courier new]pvpcombat.admin.debug[/FONT]
+[FONT=courier new]pvpcombat.bypass.combatlog[/FONT], [FONT=courier new]pvpcombat.bypass.restrictions[/FONT]
+
+[HR][/HR]
+
+[SIZE=6][B]⚙️ Configuration[/B][/SIZE]
+
+Highly configurable with 100+ options:
+
+[CODE=yaml]
+combat:
+  duration: 30              # Combat timer (seconds)
+  cooldown: 10              # Cooldown after combat
+
+restrictions:
+  enderpearl:
+    cooldown: 10
+    cooldown-outside-combat: false
+    combat-cooldown-multiplier: 2.0
+  safezone:
+    enabled: true
+    block-entry: true
+    protected-regions:
+      - "spawn"
+      - "safezone"
+    barrier:
+      material: "GLASS"
+      height: 4
+      width: 5
+
+visual:
+  themes:
+    default-theme: "clean"
+    available: ["minimal", "fire", "ice", "neon", "dark", "clean"]
+[/CODE]
+
+[HR][/HR]
+
+[SIZE=6][B]📦 Installation[/B][/SIZE]
+
+1. Download TrueCombatManager-1.0.0.jar
+2. Place in your server's [FONT=courier new]plugins[/FONT] folder
+3. Restart your server
+4. Edit [FONT=courier new]plugins/TrueCombatManager/config.yml[/FONT] to customize
+5. Use [FONT=courier new]/combat reload[/FONT] to apply changes
+
+[B]Requirements:[/B]
+• Server: Paper or Spigot 1.18-1.21 (fully tested on 1.21.x)
+• Java: 17+ (Java 21 recommended)
+• Optional: PlaceholderAPI for placeholder support
+• Optional: WorldGuard for safe zone protection
+
+Works out of the box with default settings!
+
+[HR][/HR]
+
+[SIZE=6][B]🔌 PlaceholderAPI Support[/B][/SIZE]
+
+Full PlaceholderAPI integration for scoreboard, tab list, and chat plugins:
+
+[FONT=courier new]%pvpcombat_in_combat%[/FONT] - Combat status (true/false)
+[FONT=courier new]%pvpcombat_time_left%[/FONT] - Remaining time in seconds
+[FONT=courier new]%pvpcombat_opponent%[/FONT] - Current opponent's name
+[FONT=courier new]%pvpcombat_wins%[/FONT] - Total wins
+[FONT=courier new]%pvpcombat_losses%[/FONT] - Total losses
+[FONT=courier new]%pvpcombat_kd_ratio%[/FONT] - K/D ratio
+[FONT=courier new]%pvpcombat_win_rate%[/FONT] - Win rate percentage
+[FONT=courier new]%pvpcombat_total_damage_dealt%[/FONT] - Total damage dealt
+[FONT=courier new]%pvpcombat_total_damage_received%[/FONT] - Total damage received
+
+[HR][/HR]
+
+[SIZE=6][B]🆕 What's New in v1.0.0[/B][/SIZE]
+
+• [B]Flexible Cooldown System:[/B] Choose whether items have cooldowns outside of combat
+• [B]Safe Zone Protection:[/B] Prevent players from entering protected regions during combat
+• [B]Visual Glass Barrier System:[/B] Client-side glass barriers appear at safezone boundaries
+• [B]WorldGuard Integration:[/B] Automatic detection of safe zones and spawn areas
+• [B]Creative Mode Protection:[/B] Automatically switches creative players to survival during combat
+• [B]Safezone Attack Prevention:[/B] Cannot attack from or into safe zones
+• [B]Improved Performance:[/B] Optimized async processing and caching
+• [B]Enhanced Statistics:[/B] More detailed combat tracking and analysis
+• [B]Auto-Config Update:[/B] Automatically updates old configs to new version
+
+[HR][/HR]
+
+[SIZE=6][B]📝 License & Support[/B][/SIZE]
+
+[B]License:[/B] All Rights Reserved © 2025 muzlik
+This is proprietary software. Modification or redistribution is prohibited.
+
+[B]Support:[/B]
+• Contact via SpigotMC conversation
+• Report bugs through resource discussion
+• Feature requests welcome
+
+[B]Tested Versions:[/B]
+✅ 1.21.x series (fully tested)
+✅ 1.20.x series (compatible)
+✅ 1.19.x series (compatible)
+⚠️ 1.18.x series (basic features)
+
+[HR][/HR]
+
+[CENTER][SIZE=5][B]True Combat Manager v1.0.0[/B][/SIZE]
+Made with ❤️ for the Minecraft community
+© 2025 muzlik - All Rights Reserved[/CENTER]

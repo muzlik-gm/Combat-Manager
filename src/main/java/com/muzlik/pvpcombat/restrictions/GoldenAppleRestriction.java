@@ -62,28 +62,50 @@ public class GoldenAppleRestriction {
      * Calculates golden apple cooldown based on combat status.
      */
     private int calculateGoldenAppleCooldown(Player player) {
-        int baseCooldown = PvPCombatPlugin.getInstance().getConfig().getInt("restrictions.golden-apple.cooldown", 30);
+        int baseCooldown = PvPCombatPlugin.getInstance().getConfig().getInt("restrictions.golden-apple.cooldown", 3);
+        boolean inCombat = restrictionManager.getCombatManager().isInCombat(player);
         
-        if (restrictionManager.getCombatManager().isInCombat(player)) {
-            double multiplier = PvPCombatPlugin.getInstance().getConfig().getDouble("restrictions.golden-apple.combat-cooldown-multiplier", 1.5);
-            return (int) (baseCooldown * multiplier);
+        if (!inCombat) {
+            // Check if cooldown should apply outside combat
+            boolean cooldownOutsideCombat = PvPCombatPlugin.getInstance().getConfig()
+                .getBoolean("restrictions.golden-apple.cooldown-outside-combat", false);
+            
+            if (!cooldownOutsideCombat) {
+                return 0; // No cooldown outside combat
+            }
+            
+            return baseCooldown; // Base cooldown outside combat
         }
         
-        return baseCooldown;
+        // In combat: apply multiplier
+        double multiplier = PvPCombatPlugin.getInstance().getConfig()
+            .getDouble("restrictions.golden-apple.combat-cooldown-multiplier", 1.5);
+        return (int) (baseCooldown * multiplier);
     }
 
     /**
      * Calculates enchanted golden apple cooldown based on combat status.
      */
     private int calculateEnchantedGoldenAppleCooldown(Player player) {
-        int baseCooldown = PvPCombatPlugin.getInstance().getConfig().getInt("restrictions.enchanted-golden-apple.cooldown", 60);
+        int baseCooldown = PvPCombatPlugin.getInstance().getConfig().getInt("restrictions.enchanted-golden-apple.cooldown", 8);
+        boolean inCombat = restrictionManager.getCombatManager().isInCombat(player);
         
-        if (restrictionManager.getCombatManager().isInCombat(player)) {
-            double multiplier = PvPCombatPlugin.getInstance().getConfig().getDouble("restrictions.enchanted-golden-apple.combat-cooldown-multiplier", 2.0);
-            return (int) (baseCooldown * multiplier);
+        if (!inCombat) {
+            // Check if cooldown should apply outside combat
+            boolean cooldownOutsideCombat = PvPCombatPlugin.getInstance().getConfig()
+                .getBoolean("restrictions.enchanted-golden-apple.cooldown-outside-combat", false);
+            
+            if (!cooldownOutsideCombat) {
+                return 0; // No cooldown outside combat
+            }
+            
+            return baseCooldown; // Base cooldown outside combat
         }
         
-        return baseCooldown;
+        // In combat: apply multiplier
+        double multiplier = PvPCombatPlugin.getInstance().getConfig()
+            .getDouble("restrictions.enchanted-golden-apple.combat-cooldown-multiplier", 2.0);
+        return (int) (baseCooldown * multiplier);
     }
 
     /**

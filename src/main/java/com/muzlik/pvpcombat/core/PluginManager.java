@@ -82,6 +82,11 @@ public class PluginManager {
         );
         Bukkit.getPluginManager().registerEvents(combatListener, plugin);
         
+        // Register SafeZoneManager
+        com.muzlik.pvpcombat.restrictions.SafeZoneManager safeZoneManager = 
+            new com.muzlik.pvpcombat.restrictions.SafeZoneManager(plugin, combatManager);
+        Bukkit.getPluginManager().registerEvents(safeZoneManager, plugin);
+        
         plugin.getLogger().info("Event listeners registered.");
     }
 

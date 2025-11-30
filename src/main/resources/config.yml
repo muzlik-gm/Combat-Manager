@@ -1,11 +1,41 @@
-# PvP Combat System Configuration
-# This file contains all configuration options for the PvP Combat plugin
+# ========================================
+# True Combat Manager Configuration v2.0
+# ========================================
+# DO NOT EDIT THE CONFIG VERSION LINE BELOW
+config-version: 2
 
-# General Settings
+# ========================================
+# GENERAL SETTINGS
+# ========================================
 general:
+  # Enable/disable the entire plugin
+  # true = Plugin active | false = Plugin disabled
   enabled: true
+  
+  # Enable debug mode for detailed console logging
+  # true = Verbose logging | false = Normal logging
   debug-mode: false
+  
+  # Language for messages (currently only 'en' supported)
   language: "en"
+
+# ========================================
+# LOGGING SETTINGS
+# ========================================
+logging:
+  # Enable/disable console logging for combat events
+  # When disabled, only errors will be logged to console
+  # Use /combat logging <enabled|disabled> to toggle in-game
+  # true = Log combat events to console | false = Silent mode (only errors)
+  console-enabled: false
+  
+  # What to log when console-enabled is true:
+  # - Combat start/end events
+  # - Damage dealt/received
+  # - Newbie protection checks
+  # - Restriction blocks (trident, ender pearl, etc.)
+  # - Command blocks
+  # - Safezone interactions
 
 # Commands Configuration
 commands:
@@ -38,42 +68,110 @@ commands:
     # Maximum admin inspection range (blocks, 0 = unlimited)
     inspection-range: 50
 
-# Combat Settings
+# ========================================
+# COMBAT SETTINGS
+# ========================================
 combat:
-  # Combat duration in seconds (resets on damage)
+  # How long combat lasts after last hit (seconds)
+  # Higher = Longer combat timer | Lower = Shorter combat timer
   duration: 30
-  # Cooldown period after combat ends (seconds)
+  
+  # Cooldown after combat ends before restrictions are lifted (seconds)
+  # Higher = Longer cooldown | Lower = Shorter cooldown
   cooldown: 10
-  # Maximum combat sessions (0 = unlimited)
+  
+  # Maximum concurrent combat sessions (0 = unlimited)
+  # Higher = More sessions allowed | 0 = No limit
   max-sessions: 100
 
   # Damage settings
   damage:
-    # Reset timer on any damage taken/received
+    # Reset combat timer when damage is dealt/received
+    # true = Timer resets on damage | false = Timer doesn't reset
     reset-on-damage: true
-    # Minimum damage to trigger combat
+    
+    # Minimum damage required to start combat
+    # Higher = Harder to trigger combat | Lower = Easier to trigger
     min-damage-trigger: 0.5
 
-  # Bossbar settings
+  # BossBar timer display settings
   bossbar:
+    # Show BossBar timer during combat
+    # true = Show timer | false = Hide timer
     enabled: true
-    update-interval: 1  # seconds
+    
+    # How often to update the BossBar (seconds)
+    update-interval: 1
+    
+    # BossBar title format ({time_left} = remaining seconds)
     title: "&cCombat: &f{time_left}s"
+    
+    # BossBar color (RED, BLUE, GREEN, YELLOW, PINK, PURPLE, WHITE)
     color: "RED"
+    
+    # BossBar style (SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12, SEGMENTED_20)
     style: "SOLID"
 
-# Movement Restrictions
-# TRUE for each type of restriction means the Restriction functionality is enabled
+# ========================================
+# NEWBIE PROTECTION
+# ========================================
+newbie-protection:
+  # Protect new players who don't have armor
+  # true = Protection enabled | false = No protection
+  enabled: true
+  
+  # Prevent newbies from dealing damage to others
+  # true = Newbies can't hurt others | false = Newbies can hurt others
+  prevent-damage-dealing: true
+  
+  # Prevent newbies from receiving damage from others
+  # true = Newbies can't be hurt | false = Newbies can be hurt
+  prevent-damage-receiving: true
+  
+  # XP level threshold - players above this level lose protection even without armor
+  # Higher = More protection | 0 = Only armor matters
+  xp-level-threshold: 3
+  
+  # Check if player has ANY armor piece equipped
+  # true = Must have at least 1 armor piece | false = Must have full armor
+  require-any-armor: true
+  
+  # Message sent to newbie when they try to attack
+  newbie-attack-message: "&cYou need armor to attack other players!"
+  
+  # Message sent to attacker when they try to attack a newbie
+  attacking-newbie-message: "&cYou cannot attack players without armor!"
+  
+  # Bypass permission (players with this can ignore newbie protection)
+  bypass-permission: "pvpcombat.bypass.newbie"
+
+# ========================================
+# COMBAT RESTRICTIONS
+# ========================================
+# Each restriction can be enabled/disabled independently
 restrictions:
-   # Ender pearl restrictions
+   # ========================================
+   # ENDER PEARL RESTRICTIONS
+   # ========================================
    enderpearl:
-     # If TRUE then you would have some restrictions in combat
+     # Enable ender pearl restrictions
+     # true = Restrictions active | false = No restrictions
      enabled: true
-     # Cooldown after throwing pearl (seconds)
+     
+     # Cooldown after throwing an ender pearl (seconds)
+     # Higher = Longer cooldown | Lower = Shorter cooldown
      cooldown: 10
-     # Cooldown multiplier during combat (multiplier)
+     
+     # Apply cooldown even when NOT in combat
+     # true = Always has cooldown | false = Only cooldown in combat
+     cooldown-outside-combat: false
+     
+     # Multiply cooldown when in combat
+     # Higher = Longer combat cooldown | 1.0 = Same as base cooldown
      combat-cooldown-multiplier: 2.0
-     # Prevent pearl usage entirely during combat
+     
+     # Completely block ender pearl usage during combat
+     # true = Can't use pearls in combat | false = Can use with cooldown
      block-usage: false
 
    # Golden apple restrictions
@@ -82,6 +180,8 @@ restrictions:
      enabled: true
      # Cooldown after eating golden apple (seconds)
      cooldown: 3
+     # Apply cooldown outside of combat
+     cooldown-outside-combat: false
      # Cooldown multiplier during combat
      combat-cooldown-multiplier: 1.5
      # Prevent usage entirely during combat
@@ -93,6 +193,8 @@ restrictions:
      enabled: true
      # Cooldown after eating enchanted golden apple (seconds)
      cooldown: 8
+     # Apply cooldown outside of combat
+     cooldown-outside-combat: false
      # Cooldown multiplier during combat
      combat-cooldown-multiplier: 2.0
      # Prevent usage entirely during combat
@@ -122,17 +224,85 @@ restrictions:
        # Block during day time (6000-18000 ticks)
        block-at-day: false
 
+   # Trident restrictions
+   trident:
+     # Enable trident restrictions during combat
+     enabled: true
+     # Block trident throwing during combat
+     block-throwing: true
+     # Block riptide enchantment usage during combat
+     block-riptide: true
+     # Cooldown after throwing trident (seconds)
+     cooldown: 5
+     # Cooldown multiplier during combat
+     combat-cooldown-multiplier: 2.0
+
+   # End Crystal restrictions
+   crystal:
+     # Enable end crystal restrictions during combat
+     enabled: true
+     # Block end crystal placement during combat
+     block-placement: true
+     # Block end crystal breaking during combat (prevents crystal pvp)
+     block-breaking: false
+     # Damage radius to check for combat interference (blocks)
+     damage-radius: 6
+
+   # Respawn Anchor restrictions
+   respawn-anchor:
+     # Enable respawn anchor restrictions during combat
+     # true = Players cannot use respawn anchors in combat
+     # false = Players can use respawn anchors in combat
+     enabled: true
+     # Message when respawn anchor usage is blocked
+     blocked-message: "&cYou cannot use Respawn Anchors during combat!"
+
    # Teleport restrictions
    teleport:
      enabled: true
-     # Commands that trigger teleport check
+     # Commands that trigger teleport check (without the leading slash)
      blocked-commands:
-       - "/tp"
-       - "/teleport"
-       - "/warp"
-       - "/home"
-       - "/spawn"
-       - "/warps"
+       - "tp"
+       - "teleport"
+       - "warp"
+       - "home"
+       - "spawn"
+       - "warps"
+       - "tpa"
+       - "tpaccept"
+       - "back"
+       - "wild"
+       - "rtp"
+     # Message when teleport is blocked
+     blocked-message: "&cYou cannot use teleport commands during combat!"
+   
+   # Safe zone restrictions
+   safezone:
+     # Prevent players from entering safe zones during combat
+     enabled: true
+     # Block entry to WorldGuard regions with specific flags
+     block-entry: true
+     # Regions to check (WorldGuard region names)
+     protected-regions:
+       - "spawn"
+       - "safezone"
+       - "safe"
+     # Message when entry is blocked
+     blocked-message: "&cYou cannot enter a safe zone while in combat!"
+     # Visual barrier settings
+     barrier:
+       # Enable visual barrier rendering
+       enabled: true
+       # Material to use for barrier (GLASS, RED_STAINED_GLASS, BARRIER, etc.)
+       material: "GLASS"
+       # Height of barrier wall (blocks)
+       height: 4
+       # Width of barrier wall (blocks)
+       width: 5
+       # How long barrier stays visible (ticks, 20 ticks = 1 second)
+       duration-ticks: 6
+       # Minimum time between barrier renders (milliseconds)
+       render-cooldown-ms: 50
 
    # Block interaction restrictions
    blocks:
@@ -462,27 +632,34 @@ logging:
 
 # Anti-cheat Settings
 anticheat:
-  # Interference detection
+  # Interference detection - prevents third parties from interfering in 1v1 fights
   interference:
+    # Enable interference detection
     enabled: true
+    
+    # Block interfering hits (true = cancel damage, false = notify only)
+    block-hits: true
     
     # Maximum allowed third-party damage during combat (%)
     max-interference-percentage: 10.0
+    
     # Time window for interference check (seconds)
     interference-window: 5
-    # Block interfering hits (false = notify only)
-    block-hits: false
+    
     # Action bar message format
+    # Placeholders: {interferer}, {target}, {opponent}
     message: "&c{interferer} cannot interfere: &f{target} &cis already in combat with &f{opponent}!"
+    
     # Sound effects for interference
     sound:
       enabled: true
       sound: "ENTITY_VILLAGER_NO"
       volume: 1.0
       pitch: 1.0
+    
     # Per-world settings (override global if specified)
     worlds:
-      # Example: world_nether: {enabled: false}
+      # Example: world_nether: {enabled: false, block-hits: false}
 
 # Statistics Settings
 statistics:
@@ -496,8 +673,8 @@ statistics:
 
 # Replay System Settings
 replay:
-  # Enable combat replay system
-  enabled: true
+  # Enable combat replay system (DISABLED - Not yet ready for production)
+  enabled: false
   # Storage format (MEMORY, COMPRESSED_FILE, HYBRID)
   storage:
     format: "HYBRID"

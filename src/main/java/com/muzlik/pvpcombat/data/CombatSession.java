@@ -188,6 +188,7 @@ public class CombatSession {
      * Records damage dealt by a player in this session.
      */
     public void recordDamage(Player damager, double damage) {
+        // Update damage and hit stats
         if (damager.equals(attacker)) {
             attackerDamageDealt += damage;
             attackerHitsLanded++;

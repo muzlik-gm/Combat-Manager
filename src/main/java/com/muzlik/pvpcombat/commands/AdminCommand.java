@@ -73,6 +73,8 @@ public class AdminCommand implements CommandExecutor, TabCompleter {
                     return handleReloadCommand(player);
                 case "debug":
                     return handleDebugCommand(player, args);
+                case "logging":
+                    return handleLoggingCommand(player, args);
                 default:
                     return false; // Unknown subcommand
             }
@@ -232,6 +234,96 @@ public class AdminCommand implements CommandExecutor, TabCompleter {
         }
     }
 
+    /**
+     * Toggles console logging with enhanced UI/UX.
+     *
+     * @param player The admin player executing the command
+     * @param args The command arguments
+     * @return true if command executed successfully
+     */
+    private boolean handleLoggingCommand(Player player, String[] args) {
+        try {
+            if (args.length < 2) {
+                // Show current status
+                boolean currentStatus = plugin.getLoggingManager().isConsoleLoggingEnabled();
+                player.sendMessage("§6§l▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+                player.sendMessage("§e§lConsole Logging Status");
+                player.sendMessage("");
+                player.sendMessage("§7Current Status: " + (currentStatus ? "§a§lENABLED ✓" : "§c§lDISABLED ✗"));
+                player.sendMessage("");
+                player.sendMessage("§7When enabled, the following will be logged:");
+                player.sendMessage("  §8• §7Combat start/end events");
+                player.sendMessage("  §8• §7Damage dealt/received");
+                player.sendMessage("  §8• §7Newbie protection checks");
+                player.sendMessage("  §8• §7Restriction blocks (trident, ender pearl, etc.)");
+                player.sendMessage("  §8• §7Command blocks");
+                player.sendMessage("");
+                player.sendMessage("§7Usage: §e/combat logging <enabled|disabled>");
+                player.sendMessage("§6§l▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+                return true;
+            }
+
+            String action = args[1].toLowerCase();
+            boolean newStatus;
+
+            switch (action) {
+                case "enabled":
+                case "enable":
+                case "on":
+                case "true":
+                    plugin.getLoggingManager().enableConsoleLogging();
+                    newStatus = true;
+                    break;
+                case "disabled":
+                case "disable":
+                case "off":
+                case "false":
+                    plugin.getLoggingManager().disableConsoleLogging();
+                    newStatus = false;
+                    break;
+                default:
+                    player.sendMessage("§cInvalid option. Use: enabled or disabled");
+                    return true;
+            }
+
+            // Enhanced feedback
+            player.sendMessage("§6§l▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+            player.sendMessage("§e§lConsole Logging " + (newStatus ? "Enabled" : "Disabled"));
+            player.sendMessage("");
+            
+            if (newStatus) {
+                player.sendMessage("§a✓ Console logging has been enabled!");
+                player.sendMessage("");
+                player.sendMessage("§7The following will now be logged to console:");
+                player.sendMessage("  §8• §aCombat events (start/end)");
+                player.sendMessage("  §8• §aDamage tracking");
+                player.sendMessage("  §8• §aNewbie protection checks");
+                player.sendMessage("  §8• §aRestriction blocks");
+                player.sendMessage("  §8• §aCommand blocks");
+                player.sendMessage("");
+                player.sendMessage("§7This is useful for debugging and monitoring.");
+            } else {
+                player.sendMessage("§c✗ Console logging has been disabled!");
+                player.sendMessage("");
+                player.sendMessage("§7Combat events will no longer spam the console.");
+                player.sendMessage("§7Only errors will be logged.");
+                player.sendMessage("");
+                player.sendMessage("§7This keeps your console clean and improves performance.");
+            }
+            
+            player.sendMessage("");
+            player.sendMessage("§7Use §e/combat logging §7to check status anytime.");
+            player.sendMessage("§6§l▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+
+            return true;
+
+        } catch (Exception e) {
+            plugin.getLogger().severe("Error toggling console logging: " + e.getMessage());
+            player.sendMessage("§cFailed to toggle console logging. Check console for details.");
+            return true;
+        }
+    }
+
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         try {
@@ -248,10 +340,18 @@ public class AdminCommand implements CommandExecutor, TabCompleter {
 
             if (args.length == 1) {
                 String input = args[0].toLowerCase();
-                List<String> commands = Arrays.asList("inspect", "summary", "reload", "debug");
+                List<String> commands = Arrays.asList("inspect", "summary", "reload", "debug", "logging");
                 for (String cmd : commands) {
                     if (cmd.toLowerCase().startsWith(input)) {
                         completions.add(cmd);
+                    }
+                }
+            } else if (args.length == 2 && "logging".equals(args[0].toLowerCase())) {
+                String input = args[1].toLowerCase();
+                List<String> options = Arrays.asList("enabled", "disabled");
+                for (String opt : options) {
+                    if (opt.startsWith(input)) {
+                        completions.add(opt);
                     }
                 }
             } else if (args.length == 2) {

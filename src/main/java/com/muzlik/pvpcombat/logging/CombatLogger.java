@@ -105,10 +105,12 @@ public class CombatLogger {
      * Initializes the replay manager if replay system is enabled.
      */
     private void initializeReplayManager() {
-        boolean replayEnabled = plugin.getConfig().getBoolean("replay.enabled", true);
+        boolean replayEnabled = plugin.getConfig().getBoolean("replay.enabled", false);
         if (replayEnabled) {
             this.replayManager = new CombatReplayManager(plugin);
             logger.info("Replay system initialized");
+        } else {
+            logger.info("Replay system is disabled");
         }
     }
 

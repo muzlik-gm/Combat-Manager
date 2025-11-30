@@ -67,12 +67,24 @@ public class EnderPearlRestriction {
      * Calculates the cooldown for ender pearl usage.
      */
     private int calculateCooldown(Player player) {
-        if (!restrictionManager.getCombatManager().isInCombat(player)) {
-            return 0;
-        }
-        // Config-based cooldown multiplier.
         int baseCooldown = PvPCombatPlugin.getInstance().getConfig().getInt("restrictions.enderpearl.cooldown", 10);
-        double multiplier = PvPCombatPlugin.getInstance().getConfig().getDouble("restrictions.enderpearl.combat-cooldown-multiplier", 2.0);
+        boolean inCombat = restrictionManager.getCombatManager().isInCombat(player);
+        
+        if (!inCombat) {
+            // Check if cooldown should apply outside combat
+            boolean cooldownOutsideCombat = PvPCombatPlugin.getInstance().getConfig()
+                .getBoolean("restrictions.enderpearl.cooldown-outside-combat", false);
+            
+            if (!cooldownOutsideCombat) {
+                return 0; // No cooldown outside combat
+            }
+            
+            return baseCooldown; // Base cooldown outside combat
+        }
+        
+        // In combat: apply multiplier
+        double multiplier = PvPCombatPlugin.getInstance().getConfig()
+            .getDouble("restrictions.enderpearl.combat-cooldown-multiplier", 2.0);
         return (int) (baseCooldown * multiplier);
     }
 

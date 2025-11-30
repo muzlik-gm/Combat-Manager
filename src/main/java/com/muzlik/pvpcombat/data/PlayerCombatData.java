@@ -85,4 +85,34 @@ public class PlayerCombatData {
             restrictionData.clearAllRestrictions();
         }
     }
+    
+    /**
+     * Calculates and returns the K/D ratio.
+     */
+    public double getKDRatio() {
+        if (losses == 0) {
+            return wins;
+        }
+        return (double) wins / losses;
+    }
+    
+    /**
+     * Calculates and returns the win rate percentage.
+     */
+    public double getWinRate() {
+        if (totalCombats == 0) {
+            return 0.0;
+        }
+        return ((double) wins / totalCombats) * 100.0;
+    }
+    
+    /**
+     * Calculates and returns the damage ratio (dealt/received).
+     */
+    public double getDamageRatio() {
+        if (totalDamageReceived == 0) {
+            return totalDamageDealt > 0 ? totalDamageDealt : 0.0;
+        }
+        return totalDamageDealt / totalDamageReceived;
+    }
 }

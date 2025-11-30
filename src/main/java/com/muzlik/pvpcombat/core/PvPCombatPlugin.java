@@ -1,5 +1,6 @@
 package com.muzlik.pvpcombat.core;
 
+import com.muzlik.pvpcombat.admin.LoggingManager;
 import com.muzlik.pvpcombat.interfaces.ICombatManager;
 import com.muzlik.pvpcombat.interfaces.IConfigManager;
 import com.muzlik.pvpcombat.interfaces.IRestrictionManager;
@@ -18,6 +19,7 @@ public class PvPCombatPlugin extends JavaPlugin {
     private IVisualManager visualManager;
     private IRestrictionManager restrictionManager;
     private IConfigManager configManager;
+    private LoggingManager loggingManager;
 
     @Override
     public void onEnable() {
@@ -30,6 +32,9 @@ public class PvPCombatPlugin extends JavaPlugin {
         configManager = pluginManager.getConfigManager();
         configManager.loadConfig();
 
+        // Initialize logging manager
+        loggingManager = new LoggingManager(this);
+
         // Initialize subsystems
         combatManager = pluginManager.getCombatManager();
         visualManager = pluginManager.getVisualManager();
@@ -38,6 +43,12 @@ public class PvPCombatPlugin extends JavaPlugin {
         // Register events and commands
         pluginManager.registerEvents();
         pluginManager.registerCommands();
+        
+        // Register PlaceholderAPI expansion if available
+        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new com.muzlik.pvpcombat.integration.PvPCombatExpansion(this).register();
+            getLogger().info("PlaceholderAPI expansion registered!");
+        }
 
         getLogger().info("PvPCombat plugin has been enabled!");
     }
@@ -75,5 +86,9 @@ public class PvPCombatPlugin extends JavaPlugin {
 
     public PluginManager getPluginManager() {
         return pluginManager;
+    }
+
+    public LoggingManager getLoggingManager() {
+        return loggingManager;
     }
 }

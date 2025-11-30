@@ -74,6 +74,12 @@ public class CombatManager implements ICombatManager {
             if (isInCombat(attacker) || isInCombat(defender)) {
                 return null; // Cannot start new combat
             }
+            
+            // Check if either player is in a safe zone
+            if (isInSafeZone(attacker) || isInSafeZone(defender)) {
+                plugin.getLogger().info("Combat prevented: One or both players are in a safe zone");
+                return null; // Cannot start combat in safe zone
+            }
 
             UUID sessionId = UUID.randomUUID();
             CombatSession session = new CombatSession(sessionId, attacker, defender, defaultTimerSeconds);
@@ -391,6 +397,68 @@ public class CombatManager implements ICombatManager {
      */
     public NetworkSyncManager getNetworkSyncManager() {
         return networkSyncManager;
+    }
+    
+    /**
+     * Checks if a player is currently in a safe zone.
+     */
+    private boolean isInSafeZone(Player player) {
+        // Check if safezone protection is enabled
+        if (!plugin.getConfig().getBoolean("restrictions.safezone.enabled", true)) {
+            return false;
+        }
+        
+        // Check if WorldGuard is available
+        if (plugin.getServer().getPluginManager().getPlugin("WorldGuard") == null) {
+            return false;
+        }
+        
+        try {
+            // Get protected regions list
+            java.util.List<String> protectedRegions = plugin.getConfig().getStringList("restrictions.safezone.protected-regions");
+            if (protectedRegions.isEmpty()) {
+                return false;
+            }
+            
+            org.bukkit.Location location = player.getLocation();
+            
+            // Use reflection to check WorldGuard regions
+            Class<?> worldGuardClass = Class.forName("com.sk89q.worldguard.WorldGuard");
+            Object worldGuard = worldGuardClass.getMethod("getInstance").invoke(null);
+            Object platform = worldGuardClass.getMethod("getPlatform").invoke(worldGuard);
+            Object regionContainer = platform.getClass().getMethod("getRegionContainer").invoke(platform);
+            
+            // Get BukkitAdapter
+            Class<?> adapterClass = Class.forName("com.sk89q.worldedit.bukkit.BukkitAdapter");
+            Object adaptedWorld = adapterClass.getMethod("adapt", org.bukkit.World.class).invoke(null, location.getWorld());
+            
+            // Get RegionManager
+            Object regionManager = regionContainer.getClass().getMethod("get", 
+                Class.forName("com.sk89q.worldedit.world.World")).invoke(regionContainer, adaptedWorld);
+            
+            if (regionManager != null) {
+                // Check each protected region
+                for (String regionName : protectedRegions) {
+                    Object region = regionManager.getClass().getMethod("getRegion", String.class)
+                        .invoke(regionManager, regionName);
+                    
+                    if (region != null) {
+                        // Check if location is in region
+                        Boolean contains = (Boolean) region.getClass().getMethod("contains", int.class, int.class, int.class)
+                            .invoke(region, location.getBlockX(), location.getBlockY(), location.getBlockZ());
+                        
+                        if (contains != null && contains) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            // WorldGuard not available or error checking - assume not in safezone
+            plugin.getLogger().fine("Could not check safezone status: " + e.getMessage());
+        }
+        
+        return false;
     }
 
     /**

@@ -71,6 +71,25 @@ public class ConfigManager implements IConfigManager {
             // Load main config
             if (!mainConfigFile.exists()) {
                 plugin.saveResource("config.yml", false);
+                logger.info("Created new config.yml with version 2.0");
+            } else {
+                // Check config version
+                FileConfiguration existingConfig = YamlConfiguration.loadConfiguration(mainConfigFile);
+                int configVersion = existingConfig.getInt("config-version", 1);
+                
+                if (configVersion < 2) {
+                    logger.warning("Old config version detected (" + configVersion + "). Backing up and creating new config...");
+                    
+                    // Backup old config
+                    File backupFile = new File(plugin.getDataFolder(), "config.yml.backup");
+                    if (mainConfigFile.renameTo(backupFile)) {
+                        logger.info("Old config backed up to config.yml.backup");
+                    }
+                    
+                    // Create new config
+                    plugin.saveResource("config.yml", true);
+                    logger.info("Created new config.yml with version 2.0");
+                }
             }
             mainConfig = YamlConfiguration.loadConfiguration(mainConfigFile);
 

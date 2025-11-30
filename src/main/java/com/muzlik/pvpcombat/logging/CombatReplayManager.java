@@ -160,7 +160,8 @@ public class CombatReplayManager {
         json.append("\"events\": [");
 
         boolean first = true;
-        for (ReplayEvent event : data.getEvents()) {
+        ReplayEvent[] events = data.getEvents();
+        for (ReplayEvent event : events) {
             if (!first) json.append(",");
             json.append("{");
             json.append("\"timestamp\": \"").append(event.getTimestamp()).append("\",");
@@ -198,28 +199,76 @@ public class CombatReplayManager {
     }
 
     /**
-     * Saves replay data to compressed file.
+     * Saves replay data to compressed file with player names and timestamp.
      */
     private void saveReplayToFile(UUID sessionId) throws IOException {
         ReplayData data = timeline.getReplayData(sessionId);
         if (data == null) {
+            plugin.getLogger().warning("No replay data found for session " + sessionId);
             return;
         }
 
-        Path filePath = replayDirectory.resolve("replay_" + sessionId + ".dat");
+        // Get player names from the session
+        String player1Name = "Unknown";
+        String player2Name = "Unknown";
+        
+        try {
+            // Try to get player names from events
+            ReplayEvent[] events = data.getEvents();
+            if (events != null && events.length > 0) {
+                ReplayEvent firstEvent = events[0];
+                UUID player1Id = firstEvent.getPlayerId();
+                UUID player2Id = firstEvent.getTargetId();
+                
+                Player p1 = plugin.getServer().getPlayer(player1Id);
+                Player p2 = plugin.getServer().getPlayer(player2Id);
+                
+                if (p1 != null) player1Name = p1.getName();
+                if (p2 != null) player2Name = p2.getName();
+            }
+        } catch (Exception e) {
+            plugin.getLogger().warning("Failed to get player names for replay: " + e.getMessage());
+        }
+
+        // Create filename with player names and timestamp
+        String timestamp = java.time.LocalDateTime.now().format(
+            java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")
+        );
+        String filename = String.format("replay_%s_vs_%s_%s.dat", player1Name, player2Name, timestamp);
+        Path filePath = replayDirectory.resolve(filename);
+        
         try (FileOutputStream fos = new FileOutputStream(filePath.toFile());
              GZIPOutputStream gzipOut = new GZIPOutputStream(fos);
              DataOutputStream dos = new DataOutputStream(gzipOut)) {
 
             // Write metadata
             dos.writeUTF(sessionId.toString());
+            dos.writeUTF(player1Name);
+            dos.writeUTF(player2Name);
             dos.writeLong(data.getDurationSeconds());
             dos.writeUTF(data.getCreatedAt().toString());
 
-            // Write compressed event data
-            byte[] compressedEvents = data.getCompressedData();
-            dos.writeInt(compressedEvents.length);
-            dos.write(compressedEvents);
+            // Write event data as serialized objects
+            ReplayEvent[] events = data.getEvents();
+            dos.writeInt(events.length);
+            
+            for (ReplayEvent event : events) {
+                // Write each event field
+                dos.writeUTF(event.getPlayerId().toString());
+                dos.writeUTF(event.getTargetId() != null ? event.getTargetId().toString() : "");
+                dos.writeUTF(event.getEventType().name());
+                dos.writeUTF(event.getTimestamp().toString());
+                dos.writeDouble(event.getDamage());
+                dos.writeBoolean(event.isCritical());
+                dos.writeUTF(event.getLocation() != null ? event.getLocation() : "");
+                dos.writeUTF(event.getWeaponType() != null ? event.getWeaponType() : "");
+                dos.writeUTF(event.getAdditionalData() != null ? event.getAdditionalData() : "");
+            }
+            
+            plugin.getLogger().info("Saved replay: " + filename);
+        } catch (Exception e) {
+            plugin.getLogger().severe("Failed to save replay file: " + e.getMessage());
+            throw new IOException("Failed to save replay", e);
         }
     }
 

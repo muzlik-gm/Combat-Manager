@@ -19,6 +19,8 @@ public class RestrictionManager implements IRestrictionManager {
     private final EnderPearlRestriction enderPearlRestriction;
     private final ElytraRestriction elytraRestriction;
     private final GoldenAppleRestriction goldenAppleRestriction;
+    private final TridentRestriction tridentRestriction;
+    private final CrystalRestriction crystalRestriction;
     private final Map<Player, RestrictionData> playerRestrictions;
     private final CacheManager cacheManager;
 
@@ -28,6 +30,8 @@ public class RestrictionManager implements IRestrictionManager {
         this.enderPearlRestriction = new EnderPearlRestriction(this);
         this.elytraRestriction = new ElytraRestriction(this);
         this.goldenAppleRestriction = new GoldenAppleRestriction(this);
+        this.tridentRestriction = new TridentRestriction(this);
+        this.crystalRestriction = new CrystalRestriction(this);
         this.playerRestrictions = new ConcurrentHashMap<>();
     }
 
@@ -179,5 +183,7 @@ public class RestrictionManager implements IRestrictionManager {
     public EnderPearlRestriction getEnderPearlRestriction() { return enderPearlRestriction; }
     public ElytraRestriction getElytraRestriction() { return elytraRestriction; }
     public GoldenAppleRestriction getGoldenAppleRestriction() { return goldenAppleRestriction; }
+    public TridentRestriction getTridentRestriction() { return tridentRestriction; }
+    public CrystalRestriction getCrystalRestriction() { return crystalRestriction; }
     public CombatManager getCombatManager() { return combatManager; }
 }

@@ -1,0 +1,482 @@
+[CENTER][SIZE=7][B][FA=fas fa-lg fa-sword][/FA] True Combat Manager [FA=fas fa-lg fa-sword][/FA][/B][/SIZE]
+
+[SIZE=5][B]Professional Combat Management for Minecraft Servers[/B][/SIZE]
+[SIZE=4]Advanced tracking, smart restrictions, and stunning visuals for competitive PvP[/SIZE]
+
+[SIZE=4][B][FA=fas fa-check-circle][/FA] Paper & Spigot 1.18-1.21 | Java 17+[/B][/SIZE]
+[SIZE=3][I]( Kindly report any bugs if found )[/I][/SIZE][/CENTER]
+
+[LINE][/LINE]
+
+[SIZE=6][B][FA=fas fa-info-circle][/FA] What is True Combat Manager?[/B][/SIZE]
+
+True Combat Manager is a comprehensive combat management plugin for competitive Minecraft servers. It tracks every aspect of player fights with detailed statistics, enforces intelligent restrictions to prevent unfair advantages, protects against combat logging, and presents everything through a beautiful, customizable interface.
+
+Built for performance with async processing, intelligent lag compensation, and thread-safe architecture. Perfect for practice servers, factions, KitPvP, or any PvP-focused gameplay.
+
+[SIZE=5][B][FA=fas fa-star][/FA] Why Choose This Plugin?[/B][/SIZE]
+[LIST]
+[*][B]Stop combat logging[/B] with instant-death protection and inventory drops
+[*][B]Prevent unfair escapes[/B] with smart cooldowns (pearls, gapples, elytra, teleports)
+[*][B]Track player performance[/B] with lifetime statistics (wins, losses, K/D, damage)
+[*][B]Review fights[/B] with the combat replay system
+[*][B]Customize everything[/B] - 6 themes, 6 sound profiles, 100+ config options
+[*][B]Lag compensation[/B] automatically adjusts timers during server performance issues
+[*][B]Safe zone protection[/B] prevents players from entering protected areas during combat
+[*][B]Flexible cooldown system[/B] - enable/disable cooldowns outside of combat
+[/LIST]
+
+[ATTACH type="full" width="800px"]1117174[/ATTACH]
+[SIZE=2][I]In-game screenshot: BossBar timer and ActionBar updates during active combat[/I][/SIZE]
+
+[LINE][/LINE]
+
+[SIZE=6][B][FA=fas fa-lg fa-sparkles][/FA] Core Features[/B][/SIZE]
+
+[SIZE=5][B][FA=fas fa-chart-line][/FA] Combat Tracking & Statistics[/B][/SIZE]
+[LIST]
+[*]Real-time combat detection with automatic session management
+[*]Lifetime statistics tracked per player:
+[LIST]
+[*]Total combats, wins, and losses
+[*]Win rate percentage and K/D ratio
+[*]Total damage dealt and received
+[*]Damage ratio (dealt/received)
+[*]Total combat time
+[*]Last combat timestamp
+[/LIST]
+[*]Combat replay system with timeline playback
+[*]Combat logging protection: instant death + full inventory drop
+[*]Thread-safe concurrent session handling
+[/LIST]
+
+[ATTACH type="full" width="600px"]1117131[/ATTACH]
+[SIZE=2][I]In-game screenshot: Player viewing their combat statistics with /combat summary[/I][/SIZE]
+
+[SIZE=5][B][FA=fas fa-shield-alt][/FA] Smart Restrictions[/B][/SIZE]
+[TABLE]
+[TR]
+[TH]Item/Feature[/TH]
+[TH]Base Cooldown[/TH]
+[TH]Combat Multiplier[/TH]
+[TH]Notes[/TH]
+[/TR]
+[TR]
+[TD][B]Ender Pearl[/B][/TD]
+[TD]10s[/TD]
+[TD]2.0x (20s)[/TD]
+[TD]Configurable outside combat[/TD]
+[/TR]
+[TR]
+[TD][B]Golden Apple[/B][/TD]
+[TD]3s[/TD]
+[TD]1.5x (4.5s)[/TD]
+[TD]Configurable outside combat[/TD]
+[/TR]
+[TR]
+[TD][B]Enchanted Golden Apple[/B][/TD]
+[TD]8s[/TD]
+[TD]2.0x (16s)[/TD]
+[TD]Configurable outside combat[/TD]
+[/TR]
+[TR]
+[TD][B]Elytra[/B][/TD]
+[TD]N/A[/TD]
+[TD]Blocked[/TD]
+[TD]Prevents gliding & boosting[/TD]
+[/TR]
+[/TABLE]
+
+[B]Additional Restrictions:[/B]
+[LIST]
+[*][B]Teleport Blocking:[/B] Prevents /tp, /home, /warp, /spawn commands
+[*][B]Block Restrictions:[/B] Optional prevention of block placement/breaking
+[*][B]Anti-Interference:[/B] Prevents third-party intervention in 1v1 fights
+[*][B]Safe Zone Protection:[/B] Blocks entry to WorldGuard protected regions during combat
+[*][B]Visual Barrier System:[/B] Client-side fake block barriers appear when attempting safezone entry
+[/LIST]
+
+[SIZE=5][B][FA=fas fa-palette][/FA] Visual Experience[/B][/SIZE]
+[LIST]
+[*][B]BossBar Timer:[/B] Dynamic countdown with smooth animations
+[*][B]ActionBar Updates:[/B] Real-time opponent and timer information
+[*][B]6 Built-in Themes:[/B] minimal, fire, ice, neon, dark, clean
+[*][B]Live Theme Switching:[/B] Change visual style mid-combat with [ICODE]/combat toggle-style[/ICODE]
+[*][B]HEX Color Support:[/B] Full RGB color customization
+[*][B]6 Sound Profiles:[/B] default, subtle, intense, calm, electronic, clean
+[*][B]Event Sounds:[/B] Combat start/end, timer warning, timer reset, interference
+[/LIST]
+
+[SIZE=2][I]Visual themes showcase: Different BossBar styles you can switch between during combat[/I][/SIZE]
+[ATTACH type="full" width="300px"]1117149[/ATTACH]
+[ATTACH type="full" width="300px"]1117153[/ATTACH]
+[ATTACH type="full" width="300px"]1117144[/ATTACH]
+[ATTACH type="full" width="300px"]1117148[/ATTACH]
+
+[SIZE=5][B][FA=fas fa-tachometer-alt][/FA] Performance & Optimization[/B][/SIZE]
+[LIST]
+[*][B]Async Processing:[/B] Combat logging runs off main thread with queue system
+[*][B]Intelligent Lag Compensation:[/B] Auto-adjusts timers when TPS drops below 18.0
+[*][B]Advanced Caching:[/B] TTL-based cache reduces database queries
+[*][B]Thread-Safe Architecture:[/B] ConcurrentHashMap for session management
+[*][B]Memory Efficient:[/B] Configurable max entries (default: 10,000) with automatic cleanup
+[*][B]Ping Tracking:[/B] Per-player latency monitoring
+[/LIST]
+
+[LINE][/LINE]
+
+[SIZE=6][B][FA=fas fa-terminal][/FA] Commands[/B][/SIZE]
+
+[SIZE=5][B]Player Commands:[/B][/SIZE]
+[TABLE]
+[TR]
+[TH]Command[/TH]
+[TH]Description[/TH]
+[/TR]
+[TR]
+[TD][ICODE]/combat status[/ICODE][/TD]
+[TD]View current combat status, opponent, and health[/TD]
+[/TR]
+[TR]
+[TD][ICODE]/combat summary[/ICODE][/TD]
+[TD]Display lifetime combat statistics[/TD]
+[/TR]
+[TR]
+[TD][ICODE]/combat toggle-style[/ICODE][/TD]
+[TD]Cycle through visual themes[/TD]
+[/TR]
+[/TABLE]
+
+[SIZE=5][B]Admin Commands:[/B][/SIZE]
+[TABLE]
+[TR]
+[TH]Command[/TH]
+[TH]Description[/TH]
+[/TR]
+[TR]
+[TD][ICODE]/combat inspect <player>[/ICODE][/TD]
+[TD]View real-time combat data[/TD]
+[/TR]
+[TR]
+[TD][ICODE]/combat summary <player>[/ICODE][/TD]
+[TD]Access any player's statistics[/TD]
+[/TR]
+[TR]
+[TD][ICODE]/combat reload[/ICODE][/TD]
+[TD]Reload configuration without restart[/TD]
+[/TR]
+[TR]
+[TD][ICODE]/combat debug[/ICODE][/TD]
+[TD]Toggle debug mode with performance metrics[/TD]
+[/TR]
+[TR]
+[TD][ICODE]/replay <player>[/ICODE][/TD]
+[TD]View combat replay timeline[/TD]
+[/TR]
+[TR]
+[TD][ICODE]/combatadmin <reload|stats|clear>[/ICODE][/TD]
+[TD]Administrative functions[/TD]
+[/TR]
+[/TABLE]
+
+[SIZE=5][B]Permissions:[/B][/SIZE]
+[ICODE]pvpcombat.command.status[/ICODE], [ICODE]pvpcombat.command.summary[/ICODE], [ICODE]pvpcombat.command.toggle-style[/ICODE]
+[ICODE]pvpcombat.admin[/ICODE], [ICODE]pvpcombat.admin.inspect[/ICODE], [ICODE]pvpcombat.admin.debug[/ICODE]
+[ICODE]pvpcombat.bypass.combatlog[/ICODE], [ICODE]pvpcombat.bypass.restrictions[/ICODE], [ICODE]pvpcombat.bypass.server-switch[/ICODE]
+
+[LINE][/LINE]
+
+[SIZE=6][B][FA=fas fa-cog][/FA] Configuration[/B][/SIZE]
+
+Highly configurable with 100+ options:
+
+[CODE=yaml]
+combat:
+  duration: 30              # Combat timer (seconds)
+  cooldown: 10              # Cooldown after combat
+  max-sessions: 100         # Max concurrent sessions
+
+restrictions:
+  enderpearl:
+    cooldown: 10
+    cooldown-outside-combat: false  # NEW: No cooldown outside combat
+    combat-cooldown-multiplier: 2.0
+  golden-apple:
+    cooldown: 3
+    cooldown-outside-combat: false  # NEW: No cooldown outside combat
+    combat-cooldown-multiplier: 1.5
+  enchanted-golden-apple:
+    cooldown: 8
+    cooldown-outside-combat: false  # NEW: No cooldown outside combat
+    combat-cooldown-multiplier: 2.0
+  safezone:                         # NEW: Safe zone protection
+    enabled: true
+    block-entry: true
+    protected-regions:
+      - "spawn"
+      - "safezone"
+      - "safe"
+    barrier:                        # NEW: Visual barrier system
+      enabled: true
+      material: "BARRIER"           # BARRIER, GLASS, RED_STAINED_GLASS
+      height: 4
+      width: 5
+      duration-ticks: 6
+
+visual:
+  themes:
+    default-theme: "clean"
+    available: ["minimal", "fire", "ice", "neon", "dark", "clean"]
+  sounds:
+    profile: "default"
+
+performance:
+  lag:
+    enabled: true
+    tps-threshold: 18.0
+  async:
+    enabled: true
+    thread-pool-size: 4
+
+logging:
+  storage:
+    type: "BOTH"  # FILE, MEMORY, or BOTH
+  summary:
+    delivery: "CHAT"  # CHAT, GUI, STORAGE, or NONE
+[/CODE]
+
+[LINE][/LINE]
+
+[SIZE=6][B][FA=fas fa-download][/FA] Installation[/B][/SIZE]
+
+[LIST=1]
+[*]Download TrueCombatManager-1.0.0.jar
+[*]Place in your server's [ICODE]plugins[/ICODE] folder
+[*]Restart your server
+[*]Edit [ICODE]plugins/TrueCombatManager/config.yml[/ICODE] to customize
+[*]Use [ICODE]/combat reload[/ICODE] to apply changes
+[/LIST]
+
+[SIZE=5][B]Requirements:[/B][/SIZE]
+[TABLE]
+[TR]
+[TH]Component[/TH]
+[TH]Version/Details[/TH]
+[TH]Status[/TH]
+[/TR]
+[TR]
+[TD][B]Server[/B][/TD]
+[TD]Paper or Spigot 1.18-1.21[/TD]
+[TD][COLOR=#00FF00]Required[/COLOR][/TD]
+[/TR]
+[TR]
+[TD][B]Java[/B][/TD]
+[TD]17+ (Java 21 recommended)[/TD]
+[TD][COLOR=#00FF00]Required[/COLOR][/TD]
+[/TR]
+[TR]
+[TD][B]PlaceholderAPI[/B][/TD]
+[TD]For placeholder support[/TD]
+[TD][COLOR=#FFA500]Optional[/COLOR][/TD]
+[/TR]
+[TR]
+[TD][B]WorldGuard[/B][/TD]
+[TD]For safe zone protection[/TD]
+[TD][COLOR=#FFA500]Optional[/COLOR][/TD]
+[/TR]
+[/TABLE]
+
+[CENTER][SIZE=4][B][FA=fas fa-check-circle][/FA] Works out of the box with default settings![/B][/SIZE][/CENTER]
+
+[LINE][/LINE]
+
+[SIZE=6][B][FA=fas fa-chart-bar][/FA] Combat Statistics[/B][/SIZE]
+
+Players can view their lifetime combat statistics with [ICODE]/combat summary[/ICODE]:
+
+[CODE]
+=== Combat Summary for PlayerName ===
+Total Combats: 47
+Wins: 32 | Losses: 15
+Win Rate: 68.1%
+K/D Ratio: 2.13
+Damage Dealt: 587.5 ❤
+Damage Received: 275.0 ❤
+Damage Ratio: 2.14
+Total Combat Time: 23m 45s
+Last Combat: 2025-11-21T15:30:00
+[/CODE]
+
+[SIZE=5][B]Tracked Statistics:[/B][/SIZE]
+[LIST]
+[*]Total combats participated in
+[*]Wins and losses
+[*]Win rate percentage
+[*]Kill/Death (K/D) ratio
+[*]Total damage dealt and received
+[*]Damage ratio (offensive effectiveness)
+[*]Total time spent in combat
+[*]Last combat timestamp
+[/LIST]
+
+[LINE][/LINE]
+
+[SIZE=6][B][FA=fas fa-ban][/FA] Combat Logging Protection[/B][/SIZE]
+
+Players who disconnect during combat face consequences:
+[LIST]
+[*][FA=fas fa-bolt][/FA] Instant death upon logout
+[*][FA=fas fa-skull][/FA] Full inventory drop at logout location
+[*][FA=fas fa-chart-line-down][/FA] Loss recorded in statistics
+[*][FA=fas fa-trophy][/FA] Opponent receives win automatically
+[*][FA=fas fa-bullhorn][/FA] Server-wide broadcast of the forfeit
+[/LIST]
+
+[CENTER][SIZE=4][B]This prevents unfair combat escapes and maintains server integrity.[/B][/SIZE][/CENTER]
+
+[ATTACH type="full" width="600px"]1117182[/ATTACH]
+[SIZE=2][I]In-game screenshot: Combat log death message and server broadcast[/I][/SIZE]
+
+[LINE][/LINE]
+
+[SIZE=6][B][FA=fas fa-plug][/FA] PlaceholderAPI Support[/B][/SIZE]
+
+Full PlaceholderAPI integration for scoreboard, tab list, and chat plugins:
+
+[TABLE]
+[TR]
+[TH]Placeholder[/TH]
+[TH]Description[/TH]
+[/TR]
+[TR]
+[TD][ICODE]%pvpcombat_in_combat%[/ICODE][/TD]
+[TD]Combat status (true/false)[/TD]
+[/TR]
+[TR]
+[TD][ICODE]%pvpcombat_time_left%[/ICODE][/TD]
+[TD]Remaining time in seconds[/TD]
+[/TR]
+[TR]
+[TD][ICODE]%pvpcombat_opponent%[/ICODE][/TD]
+[TD]Current opponent's name[/TD]
+[/TR]
+[TR]
+[TD][ICODE]%pvpcombat_wins%[/ICODE][/TD]
+[TD]Total wins[/TD]
+[/TR]
+[TR]
+[TD][ICODE]%pvpcombat_losses%[/ICODE][/TD]
+[TD]Total losses[/TD]
+[/TR]
+[TR]
+[TD][ICODE]%pvpcombat_kd_ratio%[/ICODE][/TD]
+[TD]K/D ratio[/TD]
+[/TR]
+[TR]
+[TD][ICODE]%pvpcombat_win_rate%[/ICODE][/TD]
+[TD]Win rate percentage[/TD]
+[/TR]
+[TR]
+[TD][ICODE]%pvpcombat_total_damage_dealt%[/ICODE][/TD]
+[TD]Total damage dealt[/TD]
+[/TR]
+[TR]
+[TD][ICODE]%pvpcombat_total_damage_received%[/ICODE][/TD]
+[TD]Total damage received[/TD]
+[/TR]
+[/TABLE]
+
+[LINE][/LINE]
+
+[SIZE=6][B][FA=fas fa-rocket][/FA] Advanced Features[/B][/SIZE]
+
+[LIST]
+[*][B]Combat Replay System:[/B] Timeline recording with compressed file storage
+[*][B]Admin GUI:[/B] Real-time viewer for active combat sessions
+[*][B]Combat Inspector:[/B] Live combat data inspection tool
+[*][B]Debug Manager:[/B] Performance metrics and troubleshooting
+[*][B]Cross-Server Sync:[/B] BungeeCord/Velocity support (experimental)
+[*][B]Network Sync:[/B] Prevent server switching during combat
+[*][B]Performance Monitor:[/B] TPS tracking and operation timing
+[*][B]Flexible Storage:[/B] FILE, MEMORY, or BOTH storage modes
+[*][B]Summary Delivery:[/B] CHAT, GUI, STORAGE, or NONE options
+[*][B]WorldGuard Integration:[/B] Safe zone protection during combat
+[*][B]Visual Barrier Renderer:[/B] Client-side fake blocks for safezone boundaries
+[/LIST]
+
+[HR][/HR]
+
+[SIZE=6][B]🆕 What's New in v1.0.0[/B][/SIZE]
+
+• [B]Flexible Cooldown System:[/B] Choose whether items have cooldowns outside of combat
+• [B]Safe Zone Protection:[/B] Prevent players from entering protected regions during combat
+• [B]Visual Barrier System:[/B] Client-side fake block barriers appear when attempting safezone entry (no world modification)
+• [B]WorldGuard Integration:[/B] Automatic detection of safe zones and spawn areas
+• [B]Improved Performance:[/B] Optimized async processing and caching
+• [B]Enhanced Statistics:[/B] More detailed combat tracking and analysis
+
+[LINE][/LINE]
+
+[SIZE=6][B][FA=fas fa-star][/FA] What's New in v1.0.0[/B][/SIZE]
+
+[LIST]
+[*][B]Flexible Cooldown System:[/B] Choose whether items have cooldowns outside of combat
+[*][B]Safe Zone Protection:[/B] Prevent players from entering protected regions during combat
+[*][B]Visual Glass Barrier System:[/B] Client-side glass barriers appear at safezone boundaries (no world modification)
+[*][B]WorldGuard Integration:[/B] Automatic detection of safe zones and spawn areas
+[*][B]Creative Mode Protection:[/B] Automatically switches creative players to survival during combat
+[*][B]Safezone Attack Prevention:[/B] Cannot attack from or into safe zones
+[*][B]Improved Performance:[/B] Optimized async processing and caching
+[*][B]Enhanced Statistics:[/B] Detailed combat tracking and analysis
+[*][B]Auto-Config Update:[/B] Automatically updates old configs to new version
+[/LIST]
+
+[LINE][/LINE]
+
+[SIZE=6][B][FA=fas fa-file-contract][/FA] License & Support[/B][/SIZE]
+
+[SIZE=5][B][FA=fas fa-copyright][/FA] License:[/B][/SIZE]
+All Rights Reserved © 2025 muzlik
+This is proprietary software. Modification or redistribution is prohibited.
+
+[SIZE=5][B][FA=fas fa-life-ring][/FA] Support:[/B][/SIZE]
+[LIST]
+[*]Contact via BuiltByBit message
+[*]Report bugs through support ticket
+[*]Feature requests welcome
+[/LIST]
+
+[SIZE=5][B][FA=fas fa-check-double][/FA] Tested Versions:[/B][/SIZE]
+[TABLE]
+[TR]
+[TH]Version Range[/TH]
+[TH]Status[/TH]
+[TH]Details[/TH]
+[/TR]
+[TR]
+[TD][B]1.21.x[/B][/TD]
+[TD][COLOR=#00FF00][FA=fas fa-check-circle][/FA] Fully Tested[/COLOR][/TD]
+[TD]1.21.0 - 1.21.10[/TD]
+[/TR]
+[TR]
+[TD][B]1.20.x[/B][/TD]
+[TD][COLOR=#00FF00][FA=fas fa-check][/FA] Compatible[/COLOR][/TD]
+[TD]All features supported[/TD]
+[/TR]
+[TR]
+[TD][B]1.19.x[/B][/TD]
+[TD][COLOR=#00FF00][FA=fas fa-check][/FA] Compatible[/COLOR][/TD]
+[TD]All features supported[/TD]
+[/TR]
+[TR]
+[TD][B]1.18.x[/B][/TD]
+[TD][COLOR=#FFA500][FA=fas fa-exclamation-triangle][/FA] Basic[/COLOR][/TD]
+[TD]Core features only[/TD]
+[/TR]
+[/TABLE]
+
+[LINE][/LINE]
+
+[CENTER][SIZE=5][B][FA=fas fa-sword][/FA] True Combat Manager v1.0.0 [FA=fas fa-sword][/FA][/B][/SIZE]
+[SIZE=4]Made with [FA=fas fa-heart][/FA] for the Minecraft community[/SIZE]
+[SIZE=3]© 2025 muzlik - All Rights Reserved[/SIZE][/CENTER]

@@ -1,4 +1,4 @@
-name: PvPCombat
+name: TrueCombatManager
 version: 1.0.0
 main: com.muzlik.pvpcombat.core.PvPCombatPlugin
 api-version: 1.21
@@ -74,9 +74,14 @@ permissions:
     description: Allows bypassing server switching prevention during combat
     default: op
 
+  pvpcombat.bypass.newbie:
+    description: Allows bypassing newbie protection system
+    default: op
+
 softdepend:
   - PlaceholderAPI
   - WorldGuard
+  - ProtocolLib
   - Citizens
   - CombatLogX
   - MythicMobs

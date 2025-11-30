@@ -25,7 +25,10 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.ChatColor;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Main event listener handling all combat-related events.
@@ -40,6 +43,7 @@ public class CombatEventListener implements Listener {
     private final CombatLogger combatLogger;
     private final PerformanceMonitor performanceMonitor;
     private final CacheManager cacheManager;
+    private final com.muzlik.pvpcombat.protection.NewbieProtection newbieProtection;
 
     public CombatEventListener(PvPCombatPlugin plugin, CombatManager combatManager,
                                 CombatTracker combatTracker, AntiInterferenceManager antiInterferenceManager,
@@ -53,9 +57,10 @@ public class CombatEventListener implements Listener {
         this.combatLogger = combatLogger;
         this.performanceMonitor = performanceMonitor;
         this.cacheManager = cacheManager;
+        this.newbieProtection = new com.muzlik.pvpcombat.protection.NewbieProtection(plugin);
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onEntityDamage(EntityDamageByEntityEvent event) {
         performanceMonitor.startOperation("entity-damage-event");
 
@@ -67,6 +72,48 @@ public class CombatEventListener implements Listener {
 
             Player attacker = (Player) event.getDamager();
             Player defender = (Player) event.getEntity();
+            
+            // Check newbie protection FIRST (before any other checks, even before cancelled check)
+            if (newbieProtection.isEnabled()) {
+                // Check if attacker is a newbie trying to deal damage
+                if (newbieProtection.isNewbie(attacker)) {
+                    if (!newbieProtection.canNewbieDealDamage(attacker)) {
+                        event.setCancelled(true);
+                        attacker.sendMessage(newbieProtection.getNewbieAttackMessage());
+                        plugin.getLoggingManager().log("[NEWBIE PROTECTION] Blocked " + attacker.getName() + " (newbie) from attacking " + defender.getName());
+                        return;
+                    }
+                }
+                
+                // Check if defender is a newbie who can't receive damage
+                if (newbieProtection.isNewbie(defender)) {
+                    if (!newbieProtection.canNewbieReceiveDamage(defender)) {
+                        event.setCancelled(true);
+                        attacker.sendMessage(newbieProtection.getAttackingNewbieMessage());
+                        plugin.getLoggingManager().log("[NEWBIE PROTECTION] Blocked " + attacker.getName() + " from attacking " + defender.getName() + " (newbie)");
+                        return;
+                    }
+                }
+            }
+            
+            // Check if damage is actually being dealt (not cancelled or 0 damage)
+            if (event.isCancelled() || event.getFinalDamage() <= 0) {
+                return;
+            }
+            
+            // Check if attacker is in a safe zone - prevent hitting from safezone
+            if (isInSafeZone(attacker)) {
+                event.setCancelled(true);
+                attacker.sendMessage(ChatColor.RED + "You cannot attack players from a safe zone!");
+                return;
+            }
+            
+            // Check if defender is in a safe zone - prevent hitting players in safezone
+            if (isInSafeZone(defender)) {
+                event.setCancelled(true);
+                attacker.sendMessage(ChatColor.RED + "You cannot attack players in a safe zone!");
+                return;
+            }
 
             // Check cache for interference data first
             String interferenceKey = attacker.getUniqueId() + ":" + defender.getUniqueId();
@@ -131,6 +178,16 @@ public class CombatEventListener implements Listener {
 
             // Start or reset combat asynchronously
             if (!combatManager.isInCombat(attacker) && !combatManager.isInCombat(defender)) {
+                // Switch creative mode players to survival
+                if (attacker.getGameMode() == org.bukkit.GameMode.CREATIVE) {
+                    attacker.setGameMode(org.bukkit.GameMode.SURVIVAL);
+                    attacker.sendMessage(ChatColor.YELLOW + "You have been switched to Survival mode for combat!");
+                }
+                if (defender.getGameMode() == org.bukkit.GameMode.CREATIVE) {
+                    defender.setGameMode(org.bukkit.GameMode.SURVIVAL);
+                    defender.sendMessage(ChatColor.YELLOW + "You have been switched to Survival mode for combat!");
+                }
+                
                 // Start new combat - run on main thread for thread safety
                 AsyncUtils.runSync(plugin, () -> combatManager.startCombat(attacker, defender));
             } else {
@@ -215,7 +272,7 @@ public class CombatEventListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onProjectileLaunch(ProjectileLaunchEvent event) {
         Projectile projectile = event.getEntity();
 
@@ -231,10 +288,16 @@ public class CombatEventListener implements Listener {
 
         Player player = (Player) projectile.getShooter();
 
+        // Check if player is in combat
+        if (!combatManager.isInCombat(player)) {
+            return;
+        }
+
         // Check if player can use ender pearl
         if (!restrictionManager.canUseEnderPearl(player)) {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot use Ender Pearls during combat!");
+            plugin.getLogger().info("[ENDERPEARL] Blocked " + player.getName() + " from using ender pearl in combat");
             return;
         }
 
@@ -249,6 +312,28 @@ public class CombatEventListener implements Listener {
             }
         };
         task.runTaskLater(plugin, 1L);
+    }
+    
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onEnderPearlTeleport(org.bukkit.event.player.PlayerTeleportEvent event) {
+        // Only check ender pearl teleports
+        if (event.getCause() != org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.ENDER_PEARL) {
+            return;
+        }
+        
+        Player player = event.getPlayer();
+        
+        // Check if player is in combat
+        if (!combatManager.isInCombat(player)) {
+            return;
+        }
+        
+        // Check if teleporting into safezone
+        if (isInSafeZone(event.getTo())) {
+            event.setCancelled(true);
+            player.sendMessage(ChatColor.RED + "You cannot use Ender Pearls to enter safe zones during combat!");
+            plugin.getLogger().info("[ENDERPEARL] Blocked " + player.getName() + " from teleporting into safezone");
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -450,6 +535,277 @@ public class CombatEventListener implements Listener {
         if (!restrictionManager.canPlaceBlocks(player)) {
             event.setCancelled(true);
             player.sendMessage("§cYou cannot place blocks while in combat!");
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onPlayerCommand(PlayerCommandPreprocessEvent event) {
+        Player player = event.getPlayer();
+
+        // Check if player is in combat
+        if (!combatManager.isInCombat(player)) {
+            return;
+        }
+
+        // Check if player has bypass permission
+        if (player.hasPermission("pvpcombat.bypass.restrictions")) {
+            return;
+        }
+
+        // Check if teleport blocking is enabled
+        boolean teleportBlocking = plugin.getConfig().getBoolean("restrictions.teleport.enabled", true);
+        if (!teleportBlocking) {
+            return;
+        }
+
+        // Get the command (without the leading slash)
+        String command = event.getMessage().toLowerCase().substring(1);
+        String[] args = command.split(" ");
+        String baseCommand = args[0];
+
+        // Get blocked commands from config
+        List<String> blockedCommands = plugin.getConfig().getStringList("restrictions.teleport.blocked-commands");
+        
+        // Default blocked commands if not in config
+        if (blockedCommands.isEmpty()) {
+            blockedCommands = Arrays.asList("tp", "teleport", "home", "spawn", "warp", "tpa", "tpaccept", "back", "wild", "rtp");
+        }
+
+        // Check if command is blocked
+        for (String blockedCmd : blockedCommands) {
+            if (baseCommand.equalsIgnoreCase(blockedCmd) || baseCommand.startsWith(blockedCmd + ":")) {
+                event.setCancelled(true);
+                String message = plugin.getConfig().getString("restrictions.teleport.blocked-message", 
+                    "&cYou cannot use teleport commands during combat!");
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+                plugin.getLogger().info("[COMMAND BLOCK] Blocked " + player.getName() + " from using /" + baseCommand + " in combat");
+                return;
+            }
+        }
+    }
+    
+    /**
+     * Checks if a player is currently in a safe zone.
+     */
+    private boolean isInSafeZone(Player player) {
+        return isInSafeZone(player.getLocation());
+    }
+    
+    /**
+     * Checks if a location is in a safe zone.
+     */
+    private boolean isInSafeZone(org.bukkit.Location location) {
+        // Check if safezone protection is enabled
+        if (!plugin.getConfig().getBoolean("restrictions.safezone.enabled", true)) {
+            return false;
+        }
+        
+        // Check if WorldGuard is available
+        if (plugin.getServer().getPluginManager().getPlugin("WorldGuard") == null) {
+            return false;
+        }
+        
+        try {
+            // Get protected regions list
+            List<String> protectedRegions = plugin.getConfig().getStringList("restrictions.safezone.protected-regions");
+            if (protectedRegions.isEmpty()) {
+                return false;
+            }
+            
+            // Use reflection to check WorldGuard regions
+            Class<?> worldGuardClass = Class.forName("com.sk89q.worldguard.WorldGuard");
+            Object worldGuard = worldGuardClass.getMethod("getInstance").invoke(null);
+            Object platform = worldGuardClass.getMethod("getPlatform").invoke(worldGuard);
+            Object regionContainer = platform.getClass().getMethod("getRegionContainer").invoke(platform);
+            
+            // Get BukkitAdapter
+            Class<?> adapterClass = Class.forName("com.sk89q.worldedit.bukkit.BukkitAdapter");
+            Object adaptedWorld = adapterClass.getMethod("adapt", org.bukkit.World.class).invoke(null, location.getWorld());
+            
+            // Get RegionManager
+            Object regionManager = regionContainer.getClass().getMethod("get", 
+                Class.forName("com.sk89q.worldedit.world.World")).invoke(regionContainer, adaptedWorld);
+            
+            if (regionManager != null) {
+                // Check each protected region
+                for (String regionName : protectedRegions) {
+                    Object region = regionManager.getClass().getMethod("getRegion", String.class)
+                        .invoke(regionManager, regionName);
+                    
+                    if (region != null) {
+                        // Check if location is in region
+                        Boolean contains = (Boolean) region.getClass().getMethod("contains", int.class, int.class, int.class)
+                            .invoke(region, location.getBlockX(), location.getBlockY(), location.getBlockZ());
+                        
+                        if (contains != null && contains) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            // WorldGuard not available or error checking - assume not in safezone
+            plugin.getLogger().fine("Could not check safezone status: " + e.getMessage());
+        }
+        
+        return false;
+    }
+    
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onTridentThrow(ProjectileLaunchEvent event) {
+        // Check if projectile is a trident
+        if (!(event.getEntity() instanceof org.bukkit.entity.Trident)) {
+            return;
+        }
+
+        // Get the shooter (player)
+        if (!(event.getEntity().getShooter() instanceof Player)) {
+            return;
+        }
+
+        Player player = (Player) event.getEntity().getShooter();
+
+        // Only check if player is in combat
+        if (!combatManager.isInCombat(player)) {
+            return;
+        }
+
+        // Check if trident restrictions are enabled
+        boolean tridentEnabled = plugin.getConfig().getBoolean("restrictions.trident.enabled", true);
+        if (!tridentEnabled) {
+            return;
+        }
+
+        // ALWAYS block tridents in combat (both throwing and riptide)
+        event.setCancelled(true);
+        player.sendMessage(ChatColor.RED + "You cannot use tridents during combat!");
+        plugin.getLogger().info("[TRIDENT] Blocked " + player.getName() + " from using trident in combat");
+    }
+    
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onCrystalPlace(org.bukkit.event.player.PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        
+        // Check if player is placing an end crystal
+        if (event.getItem() == null || event.getItem().getType() != Material.END_CRYSTAL) {
+            return;
+        }
+        
+        if (event.getAction() != org.bukkit.event.block.Action.RIGHT_CLICK_BLOCK) {
+            return;
+        }
+
+        // Check if player can place crystal
+        if (!restrictionManager.getCrystalRestriction().canPlaceCrystal(player)) {
+            event.setCancelled(true);
+            player.sendMessage(ChatColor.RED + "You cannot place End Crystals during combat!");
+        }
+    }
+    
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onCrystalBreak(org.bukkit.event.entity.EntityDamageByEntityEvent event) {
+        // Check if entity is an end crystal
+        if (!(event.getEntity() instanceof org.bukkit.entity.EnderCrystal)) {
+            return;
+        }
+        
+        // Check if damager is a player
+        if (!(event.getDamager() instanceof Player)) {
+            return;
+        }
+        
+        Player player = (Player) event.getDamager();
+
+        // Check if player can break crystal
+        if (!restrictionManager.getCrystalRestriction().canBreakCrystal(player)) {
+            event.setCancelled(true);
+            player.sendMessage(ChatColor.RED + "You cannot break End Crystals during combat!");
+        }
+    }
+    
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onTridentLaunch(ProjectileLaunchEvent event) {
+        // Check if projectile is a trident
+        if (!(event.getEntity() instanceof org.bukkit.entity.Trident)) {
+            return;
+        }
+
+        // Get the shooter (player)
+        if (!(event.getEntity().getShooter() instanceof Player)) {
+            return;
+        }
+
+        Player player = (Player) event.getEntity().getShooter();
+
+        // Only check if player is in combat
+        if (!combatManager.isInCombat(player)) {
+            return;
+        }
+
+        // Check if trident restrictions are enabled
+        boolean tridentEnabled = plugin.getConfig().getBoolean("restrictions.trident.enabled", true);
+        if (!tridentEnabled) {
+            return;
+        }
+
+        // ALWAYS block tridents in combat (both throwing and riptide)
+        event.setCancelled(true);
+        player.sendMessage(ChatColor.RED + "You cannot use tridents during combat!");
+        plugin.getLogger().info("[TRIDENT] Blocked " + player.getName() + " from using trident in combat");
+    }
+    
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onRespawnAnchorUse(org.bukkit.event.player.PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        
+        // Check if player clicked on a respawn anchor
+        if (event.getClickedBlock() == null || event.getClickedBlock().getType() != Material.RESPAWN_ANCHOR) {
+            return;
+        }
+        
+        // Check if player is in combat
+        if (!combatManager.isInCombat(player)) {
+            return;
+        }
+        
+        // Check if respawn anchor restrictions are enabled
+        boolean anchorEnabled = plugin.getConfig().getBoolean("restrictions.respawn-anchor.enabled", true);
+        if (!anchorEnabled) {
+            return;
+        }
+        
+        // Block respawn anchor usage in combat
+        event.setCancelled(true);
+        player.sendMessage(ChatColor.RED + "You cannot use Respawn Anchors during combat!");
+        plugin.getLogger().info("[RESPAWN ANCHOR] Blocked " + player.getName() + " from using respawn anchor in combat");
+    }
+    
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerInteractTrident(org.bukkit.event.player.PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        
+        // Check if player is using a trident
+        if (event.getItem() == null || event.getItem().getType() != Material.TRIDENT) {
+            return;
+        }
+        
+        // Check if player is in combat
+        if (!combatManager.isInCombat(player)) {
+            return;
+        }
+        
+        // Check if trident restrictions are enabled
+        boolean tridentEnabled = plugin.getConfig().getBoolean("restrictions.trident.enabled", true);
+        if (!tridentEnabled) {
+            return;
+        }
+        
+        // Check if trident has riptide enchantment
+        if (event.getItem().getEnchantments().containsKey(org.bukkit.enchantments.Enchantment.RIPTIDE)) {
+            // Block riptide usage in combat
+            event.setCancelled(true);
+            player.sendMessage(ChatColor.RED + "You cannot use Riptide during combat!");
+            plugin.getLogger().info("[TRIDENT RIPTIDE] Blocked " + player.getName() + " from using riptide in combat");
         }
     }
 }
