@@ -74,11 +74,11 @@ commands:
 combat:
   # How long combat lasts after last hit (seconds)
   # Higher = Longer combat timer | Lower = Shorter combat timer
-  duration: 30
+  duration: 10
   
   # Cooldown after combat ends before restrictions are lifted (seconds)
   # Higher = Longer cooldown | Lower = Shorter cooldown
-  cooldown: 10
+  cooldown: 5
   
   # Maximum concurrent combat sessions (0 = unlimited)
   # Higher = More sessions allowed | 0 = No limit
@@ -98,7 +98,7 @@ combat:
   bossbar:
     # Show BossBar timer during combat
     # true = Show timer | false = Hide timer
-    enabled: true
+    enabled: false
     
     # How often to update the BossBar (seconds)
     update-interval: 1
@@ -160,7 +160,7 @@ restrictions:
      
      # Cooldown after throwing an ender pearl (seconds)
      # Higher = Longer cooldown | Lower = Shorter cooldown
-     cooldown: 10
+     cooldown: 6
      
      # Apply cooldown even when NOT in combat
      # true = Always has cooldown | false = Only cooldown in combat
@@ -168,7 +168,7 @@ restrictions:
      
      # Multiply cooldown when in combat
      # Higher = Longer combat cooldown | 1.0 = Same as base cooldown
-     combat-cooldown-multiplier: 2.0
+     combat-cooldown-multiplier: 1.0
      
      # Completely block ender pearl usage during combat
      # true = Can't use pearls in combat | false = Can use with cooldown
@@ -177,26 +177,26 @@ restrictions:
    # Golden apple restrictions
    golden-apple:
      # If TRUE then you would have some restrictions in combat
-     enabled: true
+     enabled: false
      # Cooldown after eating golden apple (seconds)
-     cooldown: 3
+     cooldown: 0
      # Apply cooldown outside of combat
      cooldown-outside-combat: false
      # Cooldown multiplier during combat
-     combat-cooldown-multiplier: 1.5
+     combat-cooldown-multiplier: 1
      # Prevent usage entirely during combat
      block-usage: false
 
    # Enchanted golden apple restrictions
    enchanted-golden-apple:
      # If TRUE then you would have some restrictions in combat
-     enabled: true
+     enabled: false
      # Cooldown after eating enchanted golden apple (seconds)
-     cooldown: 8
+     cooldown: 1
      # Apply cooldown outside of combat
      cooldown-outside-combat: false
      # Cooldown multiplier during combat
-     combat-cooldown-multiplier: 2.0
+     combat-cooldown-multiplier: 1
      # Prevent usage entirely during combat
      block-usage: false
 
@@ -205,7 +205,7 @@ restrictions:
      # If TRUE then you cannot use elytra in combat
      enabled: true
      # Prevent glide activation during combat
-     block-glide: true
+     block-glide: false
      # Prevent rocket boosting during combat
      block-boosting: true
      # Prevent takeoff during combat
@@ -229,7 +229,7 @@ restrictions:
      # Enable trident restrictions during combat
      enabled: true
      # Block trident throwing during combat
-     block-throwing: true
+     block-throwing: false
      # Block riptide enchantment usage during combat
      block-riptide: true
      # Cooldown after throwing trident (seconds)
@@ -273,6 +273,9 @@ restrictions:
        - "back"
        - "wild"
        - "rtp"
+       - "home"
+       - "tpahere"
+       
      # Message when teleport is blocked
      blocked-message: "&cYou cannot use teleport commands during combat!"
    
@@ -635,10 +638,10 @@ anticheat:
   # Interference detection - prevents third parties from interfering in 1v1 fights
   interference:
     # Enable interference detection
-    enabled: true
+    enabled: false
     
     # Block interfering hits (true = cancel damage, false = notify only)
-    block-hits: true
+    block-hits: false
     
     # Maximum allowed third-party damage during combat (%)
     max-interference-percentage: 10.0

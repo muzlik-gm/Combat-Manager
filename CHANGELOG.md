@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.0.1-OPTIMIZED] - 2025-11-30
+## [1.0.1] - 2025-11-30
 
-### 🎉 Major Performance Update
+### 🎉 Performance & Bug Fix Release
 
-**CRITICAL UPDATE**: This version fixes severe performance issues that were causing server lag.
+**CRITICAL UPDATE**: This version fixes severe performance issues causing server lag and resolves multiple critical bugs including command blocking and async event errors.
 
 ---
 
@@ -52,6 +52,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 ### 🛡️ Bug Fixes
+
+#### Command Blocking (CRITICAL FIX)
+- **FIXED**: Players could use any command while in combat (/warp, /home, /spawn, /tpa, etc.)
+- **ISSUE**: Event handler had wrong priority and was ignoring cancelled events
+- **SOLUTION**: Changed priority from HIGHEST to LOWEST and set ignoreCancelled to false
+- **RESULT**: All teleport commands are now properly blocked during combat
+- Added "warps" to default blocked commands list
+
+#### Async Event Error (CRITICAL FIX)
+- **FIXED**: InterferenceDetectedEvent causing IllegalStateException spam
+- **ISSUE**: Event was being called from async task but must be synchronous
+- **ERROR**: "InterferenceDetectedEvent may only be triggered synchronously"
+- **SOLUTION**: Removed async wrapper from interference handling
+- **RESULT**: No more console spam, interference detection works properly
 
 #### Newbie Protection (CRITICAL FIX)
 - **FIXED**: Newbie protection was completely broken
@@ -216,12 +230,14 @@ restrictions:
 ### 🐛 Known Issues Fixed
 
 1. ✅ Server lag from excessive logging
-2. ✅ Newbie protection not working
-3. ✅ Tridents usable in combat
-4. ✅ Ender pearls entering safezones
-5. ✅ Barriers appearing on blocks
-6. ✅ Barriers despawning/glitching
-7. ✅ Console spam even with debug disabled
+2. ✅ Command blocking not working (players could use /warp, /home, etc.)
+3. ✅ Async event errors causing console spam
+4. ✅ Newbie protection not working
+5. ✅ Tridents usable in combat
+6. ✅ Ender pearls entering safezones
+7. ✅ Barriers appearing on blocks
+8. ✅ Barriers despawning/glitching
+9. ✅ Console spam even with debug disabled
 
 ---
 
@@ -231,7 +247,7 @@ restrictions:
 
 1. **Stop your server**
 2. **Backup your config** (optional)
-3. **Replace the plugin JAR** with `TrueCombatManager-1.0.0-OPTIMIZED.jar`
+3. **Replace the plugin JAR** with `TrueCombatManager-1.0.1.jar`
 4. **Start your server**
 5. **Check console logging status**: `/combat logging`
 6. **Recommended**: Keep logging disabled for best performance
@@ -325,15 +341,16 @@ First stable release of True Combat Manager - a comprehensive, feature-rich PvP 
 - PlaceholderAPI integration
 - Cross-server support (experimental)
 
-#### Known Issues (Fixed in 1.0.0-OPTIMIZED)
+#### Known Issues (Fixed in 1.0.1)
 - ⚠️ Server lag from excessive logging
 - ⚠️ Newbie protection not working correctly
 - ⚠️ Tridents usable in combat
 - ⚠️ Barriers appearing on blocks
+- ⚠️ Ender pearls entering safezones
 
 ---
 
-**Current Version**: 1.0.0-OPTIMIZED  
+**Current Version**: 1.0.1  
 **Released**: November 30, 2025  
 **Author**: muzlik  
 **Support**: Contact author directly

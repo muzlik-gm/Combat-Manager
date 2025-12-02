@@ -1,11 +1,11 @@
 [CENTER][SIZE=7][B][COLOR=#FF6B6B]True Combat Manager[/COLOR][/B][/SIZE]
-[SIZE=4]The Ultimate PvP Combat Management Plugin[/S
+[SIZE=4]The Ultimate PvP Combat Management Plugin[/SIZE]
 [SIZE=5][B]Professional Combat Management for Minecraft Servers[/B][/SIZE]
 [SIZE=4]Advanced tracking, smart restrictions, and stunning visuals for competitive PvP[/SIZE]
 
 [SIZE=4][B]✅ Paper & Spigot 1.18-1.21 | Java 17+[/B][/SIZE][/CENTER]
 
-[HR][/HR]
+
 
 [SIZE=6][B]What is True Combat Manager?[/B][/SIZE]
 
@@ -27,7 +27,7 @@ Built for performance with async processing, intelligent lag compensation, and t
 • [B]Highly Configurable:[/B] 100+ configuration options
 • [B]Lag Compensation:[/B] Automatically adjusts timers during server lag
 
-[HR][/HR]
+
 
 [SIZE=6][B]✨ Core Features[/B][/SIZE]
 
@@ -139,7 +139,7 @@ Built for performance with async processing, intelligent lag compensation, and t
 • Network-wide broadcasts
 • Configurable sync intervals
 
-[HR][/HR]
+
 
 [SIZE=6][B]📋 Commands[/B][/SIZE]
 
@@ -171,7 +171,7 @@ Built for performance with async processing, intelligent lag compensation, and t
 [FONT=courier new]pvpcombat.bypass.newbie[/FONT] - Bypass newbie protection
 [FONT=courier new]pvpcombat.bypass.server-switch[/FONT] - Bypass server switch prevention
 
-[HR][/HR]
+
 
 [SIZE=6][B]⚙️ Configuration Highlights[/B][/SIZE]
 
@@ -301,7 +301,7 @@ replay:
   max-events: 1000
 [/CODE]
 
-[HR][/HR]
+
 
 [SIZE=6][B]📦 Installation[/B][/SIZE]
 
@@ -331,7 +331,7 @@ replay:
 
 Works out of the box with default settings!
 
-[HR][/HR]
+
 
 [SIZE=6][B]🔌 PlaceholderAPI Support[/B][/SIZE]
 
@@ -359,7 +359,7 @@ Full PlaceholderAPI integration for scoreboard, tab list, and chat plugins:
 [FONT=courier new]%pvpcombat_session_hits_landed%[/FONT] - Hits landed
 [FONT=courier new]%pvpcombat_knockback_exchanges%[/FONT] - Knockback exchanges
 
-[HR][/HR]
+
 
 [SIZE=6][B]📊 Combat Statistics Example[/B][/SIZE]
 
@@ -376,7 +376,7 @@ Damage Ratio: 2.14
 Total Combat Time: 23m 45s
 Last Combat: 2025-11-30 15:30:00[/CODE]
 
-[HR][/HR]
+
 
 [SIZE=6][B]🐛 Troubleshooting[/B][/SIZE]
 
@@ -412,7 +412,7 @@ Last Combat: 2025-11-30 15:30:00[/CODE]
 → Run [FONT=courier new]/papi reload[/FONT]
 → Check [FONT=courier new]/papi parse me %pvpcombat_in_combat%[/FONT]
 
-[HR][/HR]
+
 
 [SIZE=6][B]🎯 Tested Versions[/B][/SIZE]
 
@@ -430,7 +430,7 @@ Last Combat: 2025-11-30 15:30:00[/CODE]
 ✅ Java 21+ - Recommended
 ✅ Java 17+ - Minimum
 
-[HR][/HR]
+
 
 [SIZE=6][B]📞 Support[/B][/SIZE]
 
@@ -446,14 +446,14 @@ Need help? Contact me directly through SpigotMC conversation!
 [B]Feature Requests:[/B]
 All feature requests are welcome and considered!
 
-[HR][/HR]
+
 
 [SIZE=6][B]⭐ Leave a Review[/B][/SIZE]
 
 If you enjoy this plugin, please leave a 5-star review!
 Your feedback helps improve the plugin and helps others discover it.
 
-[HR][/HR]
+
 
 [SIZE=6][B]📜 License[/B][/SIZE]
 
@@ -462,7 +462,7 @@ All Rights Reserved © 2025 muzlik
 This is proprietary software. Unauthorized copying, distribution,
 modification, or use is strictly prohibited.
 
-[HR][/HR]
+
 
 [SIZE=6][B]🆕 Changelog - v1.0.1[/B][/SIZE]
 
@@ -484,7 +484,7 @@ modification, or use is strictly prohibited.
 • Admin tools (inspect, debug, replay viewer)
 • 100+ configuration options
 
-[HR][/HR]
+
 
 [SIZE=6][B]📝 License & Support[/B][/SIZE]
 
@@ -502,7 +502,7 @@ This is proprietary software. Modification or redistribution is prohibited.
 ✅ 1.19.x series (compatible)
 ⚠️ 1.18.x series (basic features)
 
-[HR][/HR]
+
 
 [CENTER][SIZE=5][B]True Combat Manager v1.0.1[/B][/SIZE]
 Made with ❤️ for the Minecraft community

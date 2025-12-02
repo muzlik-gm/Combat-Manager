@@ -80,7 +80,11 @@ public class CombatEventListener implements Listener {
                     if (!newbieProtection.canNewbieDealDamage(attacker)) {
                         event.setCancelled(true);
                         attacker.sendMessage(newbieProtection.getNewbieAttackMessage());
-                        plugin.getLoggingManager().log("[NEWBIE PROTECTION] Blocked " + attacker.getName() + " (newbie) from attacking " + defender.getName());
+                        
+                        // Only log if console logging is enabled
+                        if (plugin.getConfig().getBoolean("logging.console-enabled", false)) {
+                            plugin.getLoggingManager().log("[NEWBIE PROTECTION] Blocked " + attacker.getName() + " (newbie) from attacking " + defender.getName());
+                        }
                         return;
                     }
                 }
@@ -90,7 +94,11 @@ public class CombatEventListener implements Listener {
                     if (!newbieProtection.canNewbieReceiveDamage(defender)) {
                         event.setCancelled(true);
                         attacker.sendMessage(newbieProtection.getAttackingNewbieMessage());
-                        plugin.getLoggingManager().log("[NEWBIE PROTECTION] Blocked " + attacker.getName() + " from attacking " + defender.getName() + " (newbie)");
+                        
+                        // Only log if console logging is enabled
+                        if (plugin.getConfig().getBoolean("logging.console-enabled", false)) {
+                            plugin.getLoggingManager().log("[NEWBIE PROTECTION] Blocked " + attacker.getName() + " from attacking " + defender.getName() + " (newbie)");
+                        }
                         return;
                     }
                 }
@@ -129,8 +137,8 @@ public class CombatEventListener implements Listener {
 
             // Check for interference first
             if (hasInterference) {
-                AsyncUtils.runAsync(plugin, () ->
-                    antiInterferenceManager.handleInterference(attacker, defender), "combat-processing");
+                // Handle interference synchronously to avoid async event errors
+                antiInterferenceManager.handleInterference(attacker, defender);
 
                 // Cancel the event if blocking is enabled
                 if (antiInterferenceManager.shouldBlockInterference()) {
@@ -153,10 +161,12 @@ public class CombatEventListener implements Listener {
                 damageSession.recordDamage(attacker, damage);
             }
             
-            // Debug logging - use info level so it shows in console
-            plugin.getLoggingManager().log(String.format("[DAMAGE] %s dealt %.1f to %s (Total: %.1f)", 
-                attacker.getName(), damage, defender.getName(),
-                combatManager.getCombatTracker().getPlayerData(attacker.getUniqueId()).getTotalDamageDealt()));
+            // Debug logging - only if console logging is enabled
+            if (plugin.getConfig().getBoolean("logging.console-enabled", false)) {
+                plugin.getLoggingManager().log(String.format("[DAMAGE] %s dealt %.1f to %s (Total: %.1f)", 
+                    attacker.getName(), damage, defender.getName(),
+                    combatManager.getCombatTracker().getPlayerData(attacker.getUniqueId()).getTotalDamageDealt()));
+            }
 
             // Log damage event asynchronously
             if (combatManager.isInCombat(attacker)) {
@@ -538,17 +548,12 @@ public class CombatEventListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
     public void onPlayerCommand(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
 
         // Check if player is in combat
         if (!combatManager.isInCombat(player)) {
-            return;
-        }
-
-        // Check if player has bypass permission
-        if (player.hasPermission("pvpcombat.bypass.restrictions")) {
             return;
         }
 
@@ -568,7 +573,7 @@ public class CombatEventListener implements Listener {
         
         // Default blocked commands if not in config
         if (blockedCommands.isEmpty()) {
-            blockedCommands = Arrays.asList("tp", "teleport", "home", "spawn", "warp", "tpa", "tpaccept", "back", "wild", "rtp");
+            blockedCommands = Arrays.asList("tp", "teleport", "home", "spawn", "warp", "warps", "tpa", "tpaccept", "back", "wild", "rtp");
         }
 
         // Check if command is blocked
@@ -578,7 +583,11 @@ public class CombatEventListener implements Listener {
                 String message = plugin.getConfig().getString("restrictions.teleport.blocked-message", 
                     "&cYou cannot use teleport commands during combat!");
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
-                plugin.getLoggingManager().log("[COMMAND BLOCK] Blocked " + player.getName() + " from using /" + baseCommand + " in combat");
+                
+                // Only log if console logging is enabled
+                if (plugin.getConfig().getBoolean("logging.console-enabled", false)) {
+                    plugin.getLoggingManager().log("[COMMAND BLOCK] Blocked " + player.getName() + " from using /" + baseCommand + " in combat");
+                }
                 return;
             }
         }
